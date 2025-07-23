@@ -1,0 +1,496 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local title = Instance.new("TextButton")
+local Brand = Instance.new("ImageButton")
+local Close = Instance.new("TextButton")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local Fly = Instance.new("TextButton")
+local _2 = Instance.new("TextButton")
+local EzHub = Instance.new("TextButton")
+local r6NOCLIP = Instance.new("TextButton")
+local NoclipR15 = Instance.new("TextButton")
+local Dex = Instance.new("TextButton")
+local Gun = Instance.new("TextButton")
+local invisablke = Instance.new("TextButton")
+local Owlhub = Instance.new("TextButton")
+local Aimbot = Instance.new("TextButton")
+local Esp = Instance.new("TextButton")
+local God = Instance.new("TextButton")
+local JerkOff = Instance.new("TextButton")
+local Fling = Instance.new("TextButton")
+local Rape = Instance.new("TextButton")
+local Open = Instance.new("TextButton")
+
+--Properties:
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "KON Hub", -- Required
+	Text = "KON Hub has loaded sucsessfuly!", -- Required
+	Icon = "rbxassetid://117043165552834" -- Optional
+})
+
+wait(3)
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 226, 45)
+Frame.BorderSizePixel = 2
+Frame.Position = UDim2.new(0.385462552, 0, 0.170542642, 0)
+Frame.Size = UDim2.new(0, 325, 0, 457)
+Frame.Active = true
+local UserInputService = game:GetService('UserInputService')
+
+local frame = Frame
+
+local leadFrame = Instance.new('Frame') do
+	leadFrame.AnchorPoint = frame.AnchorPoint
+	leadFrame.Position = frame.Position
+	leadFrame.Size = frame.Size
+	leadFrame.Name = `Lead {frame.Name}`
+	leadFrame.Visible = false
+	leadFrame.Parent = frame.Parent
+end
+
+local screenGui = frame:FindFirstAncestorOfClass('ScreenGui')
+
+local inputChanged = nil
+local inputEnded = nil
+
+local function getBoundsRelations(guiObject : GuiObject)
+	local bounds = screenGui.AbsoluteSize
+	local topLeft = screenGui.IgnoreGuiInset and guiObject.AbsolutePosition + Vector2.new(0, 36) or guiObject.AbsolutePosition
+	local bottomRight = topLeft + guiObject.AbsoluteSize
+
+	local boundRelations = {
+		Top = topLeft.Y < 0 and math.abs(topLeft.Y) or nil,
+		Left = topLeft.X < 0 and math.abs(topLeft.X) or nil,
+		Right = bottomRight.X > bounds.X and math.abs(bottomRight.X - bounds.X) or nil,
+		Bottom = bottomRight.Y > bounds.Y and math.abs(bottomRight.Y - bounds.Y) or nil,
+	}
+
+	return (not boundRelations.Top
+		and not boundRelations.Bottom
+		and not boundRelations.Left
+		and not boundRelations.Right), boundRelations
+end
+
+frame.InputBegan:Connect(function(inputObject : InputObject)
+	if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
+
+		local lastMousePosition = UserInputService:GetMouseLocation()
+		local goalPosition = frame.Position
+
+		inputChanged = UserInputService.InputChanged:Connect(function(input : InputObject, event : boolean)
+			if input.UserInputType == Enum.UserInputType.MouseMovement then
+				local currentMousePosition = UserInputService:GetMouseLocation()
+				local mouseDelta = currentMousePosition - lastMousePosition
+
+				goalPosition += UDim2.fromOffset(mouseDelta.X, mouseDelta.Y)
+
+				leadFrame.Position = goalPosition
+
+				local isInBounds, relations = getBoundsRelations(leadFrame)
+
+				if not isInBounds then
+					local x = (relations.Left or 0) - (relations.Right or 0)
+					local y = (relations.Top or 0) - (relations.Bottom or 0)
+
+					goalPosition += UDim2.fromOffset(x, y)
+				end
+
+				frame.Position = goalPosition
+				lastMousePosition = currentMousePosition
+			end
+		end)
+
+		inputEnded = frame.InputEnded:Connect(function(input : InputObject)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 then
+				inputChanged:Disconnect()
+				inputChanged = nil
+
+				inputEnded:Disconnect()
+				inputEnded = nil
+			end
+		end)
+	end
+end)
+
+frame.Destroying:Once(function()
+
+	leadFrame = leadFrame:Destroy()
+
+	if inputChanged  then
+		inputChanged:Disconnect()
+		inputChanged = nil
+	end
+
+	if inputEnded then
+		inputEnded:Disconnect()
+		inputEnded = nil
+	end
+end)
+
+
+title.Name = "title"
+title.Parent = Frame
+title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+title.BorderColor3 = Color3.fromRGB(0, 226, 45)
+title.Size = UDim2.new(0, 325, 0, 44)
+title.Font = Enum.Font.Unknown
+title.Text = "K0Ngui"
+title.TextColor3 = Color3.fromRGB(0, 226, 45)
+title.TextScaled = true
+title.TextSize = 29.000
+title.TextWrapped = true
+title.MouseButton1Down:connect(function()
+	game:GetService("StarterGui"):SetCore("SendNotification",{
+		Title = "Drag the frame nigger!", -- Required
+		Text = "I hate niggers nigger!!", -- Required
+		Icon = "rbxassetid://117043165552834" -- Optional
+	})
+end)
+
+Brand.Name = "Brand"
+Brand.Parent = Frame
+Brand.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Brand.BackgroundTransparency = 1.000
+Brand.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Brand.BorderSizePixel = 0
+Brand.Position = UDim2.new(-0.0891763046, 0, -0.053150069, 0)
+Brand.Size = UDim2.new(0, 59, 0, 63)
+Brand.Image = "rbxassetid://117043165552834"
+Brand.ImageColor3 = Color3.fromRGB(60, 255, 0)
+
+Close.Name = "Close"
+Close.Parent = Frame
+Close.BackgroundColor3 = Color3.fromRGB(176, 0, 6)
+Close.BackgroundTransparency = 1.000
+Close.BorderColor3 = Color3.fromRGB(27, 42, 53)
+Close.BorderSizePixel = 3
+Close.Position = UDim2.new(0.875362813, 0, 0.00452488195, 0)
+Close.Size = UDim2.new(0, 40, 0, 38)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(0, 226, 45)
+Close.TextScaled = true
+Close.TextSize = 14.000
+Close.TextWrapped = true
+local Frame = Frame
+
+Close.MouseButton1Click:Connect(function()
+	Frame.Visible = false
+end)
+
+ScrollingFrame.Parent = Frame
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScrollingFrame.BackgroundTransparency = 1.000
+ScrollingFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0, 0, 0.0962800905, 0)
+ScrollingFrame.Size = UDim2.new(0, 324, 0, 413)
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 3, 0)
+ScrollingFrame.ScrollBarThickness = 3
+
+Fly.Name = "Fly"
+Fly.Parent = ScrollingFrame
+Fly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Fly.BorderColor3 = Color3.fromRGB(0, 147, 226)
+Fly.Position = UDim2.new(0.0246248599, 0, 0.0192833412, 0)
+Fly.Size = UDim2.new(0, 98, 0, 50)
+Fly.Font = Enum.Font.SourceSans
+Fly.Text = "Fly"
+Fly.TextColor3 = Color3.fromRGB(0, 226, 45)
+Fly.TextSize = 14.000
+Fly.TextWrapped = true
+Fly.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+end)
+
+_2.Name = "2"
+_2.Parent = ScrollingFrame
+_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+_2.BorderColor3 = Color3.fromRGB(11, 215, 226)
+_2.Position = UDim2.new(0.350778639, 0, 0.0192833412, 0)
+_2.Size = UDim2.new(0, 98, 0, 50)
+_2.Font = Enum.Font.SourceSans
+_2.Text = "InfJump"
+_2.TextColor3 = Color3.fromRGB(0, 226, 45)
+_2.TextSize = 14.000
+_2.TextWrapped = true
+
+EzHub.Name = "EzHub"
+EzHub.Parent = ScrollingFrame
+EzHub.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+EzHub.BorderColor3 = Color3.fromRGB(226, 0, 158)
+EzHub.Position = UDim2.new(0.673855603, 0, 0.0192833412, 0)
+EzHub.Size = UDim2.new(0, 98, 0, 50)
+EzHub.Font = Enum.Font.SourceSans
+EzHub.Text = "EzHub"
+EzHub.TextColor3 = Color3.fromRGB(0, 226, 45)
+EzHub.TextSize = 14.000
+EzHub.TextWrapped = true
+EzHub.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Ez%20Hub.lua"))()
+end)
+
+r6NOCLIP.Name = "r6NOCLIP"
+r6NOCLIP.Parent = ScrollingFrame
+r6NOCLIP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+r6NOCLIP.BorderColor3 = Color3.fromRGB(192, 0, 226)
+r6NOCLIP.Position = UDim2.new(0.0246248599, 0, 0.0640132055, 0)
+r6NOCLIP.Size = UDim2.new(0, 98, 0, 50)
+r6NOCLIP.Font = Enum.Font.SourceSans
+r6NOCLIP.Text = "Noclip (R6)"
+r6NOCLIP.TextColor3 = Color3.fromRGB(0, 226, 45)
+r6NOCLIP.TextSize = 14.000
+r6NOCLIP.TextWrapped = true
+r6NOCLIP.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
+end)
+
+NoclipR15.Name = "Noclip (R15)"
+NoclipR15.Parent = ScrollingFrame
+NoclipR15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NoclipR15.BorderColor3 = Color3.fromRGB(122, 153, 226)
+NoclipR15.Position = UDim2.new(0.350778639, 0, 0.0640132055, 0)
+NoclipR15.Size = UDim2.new(0, 98, 0, 50)
+NoclipR15.Font = Enum.Font.SourceSans
+NoclipR15.Text = "Noclip (R15)"
+NoclipR15.TextColor3 = Color3.fromRGB(0, 226, 45)
+NoclipR15.TextSize = 14.000
+NoclipR15.TextWrapped = true
+NoclipR15.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/0KHjAEbf"), true)()
+end)
+
+Dex.Name = "Dex"
+Dex.Parent = ScrollingFrame
+Dex.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Dex.BorderColor3 = Color3.fromRGB(0, 226, 45)
+Dex.Position = UDim2.new(0.673855603, 0, 0.0640132055, 0)
+Dex.Size = UDim2.new(0, 98, 0, 50)
+Dex.Font = Enum.Font.SourceSans
+Dex.Text = "Dex (studio)"
+Dex.TextColor3 = Color3.fromRGB(0, 226, 45)
+Dex.TextSize = 14.000
+Dex.TextWrapped = true
+Dex.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Dex%20Explorer.lua"))()
+end)
+
+Gun.Name = "Gun"
+Gun.Parent = ScrollingFrame
+Gun.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Gun.BorderColor3 = Color3.fromRGB(255, 213, 0)
+Gun.Position = UDim2.new(0.350778639, 0, 0.110804155, 0)
+Gun.Size = UDim2.new(0, 98, 0, 50)
+Gun.Font = Enum.Font.SourceSans
+Gun.Text = "Suicide gun (R6)"
+Gun.TextColor3 = Color3.fromRGB(0, 226, 45)
+Gun.TextSize = 14.000
+Gun.TextWrapped = true
+Gun.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
+end)
+
+invisablke.Name = "invisablke"
+invisablke.Parent = ScrollingFrame
+invisablke.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+invisablke.BorderColor3 = Color3.fromRGB(143, 0, 226)
+invisablke.Position = UDim2.new(0.673855603, 0, 0.110804155, 0)
+invisablke.Size = UDim2.new(0, 98, 0, 50)
+invisablke.Font = Enum.Font.SourceSans
+invisablke.Text = "Invisible"
+invisablke.TextColor3 = Color3.fromRGB(0, 226, 45)
+invisablke.TextSize = 14.000
+invisablke.TextWrapped = true
+invisablke.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
+end)
+
+
+Owlhub.Name = "Owlhub"
+Owlhub.Parent = ScrollingFrame
+Owlhub.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Owlhub.BorderColor3 = Color3.fromRGB(255, 115, 0)
+Owlhub.Position = UDim2.new(0.0246248599, 0, 0.110804155, 0)
+Owlhub.Size = UDim2.new(0, 98, 0, 50)
+Owlhub.Font = Enum.Font.SourceSans
+Owlhub.Text = "Owl Hub"
+Owlhub.TextColor3 = Color3.fromRGB(0, 226, 45)
+Owlhub.TextSize = 14.000
+Owlhub.TextWrapped = true
+Owlhub.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Owl%20Hub.lua"))()
+end)
+
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = ScrollingFrame
+Aimbot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Aimbot.BorderColor3 = Color3.fromRGB(255, 255, 0)
+Aimbot.Position = UDim2.new(0.0246248599, 0, 0.158444166, 0)
+Aimbot.Size = UDim2.new(0, 98, 0, 50)
+Aimbot.Font = Enum.Font.SourceSans
+Aimbot.Text = "Aimbot"
+Aimbot.TextColor3 = Color3.fromRGB(0, 226, 45)
+Aimbot.TextSize = 14.000
+Aimbot.TextWrapped = true
+Aimbot.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Universal%20ESP%20and%20Aimbot.lua"))()
+end)
+
+
+Esp.Name = "Esp"
+Esp.Parent = ScrollingFrame
+Esp.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Esp.BorderColor3 = Color3.fromRGB(255, 0, 4)
+Esp.Position = UDim2.new(0.350778639, 0, 0.158444166, 0)
+Esp.Size = UDim2.new(0, 98, 0, 50)
+Esp.Font = Enum.Font.SourceSans
+Esp.Text = "ESP"
+Esp.TextColor3 = Color3.fromRGB(0, 226, 45)
+Esp.TextSize = 14.000
+Esp.TextWrapped = true
+Esp.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
+end)
+
+God.Name = "God"
+God.Parent = ScrollingFrame
+God.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+God.BorderColor3 = Color3.fromRGB(242, 255, 0)
+God.Position = UDim2.new(0.673855603, 0, 0.158444166, 0)
+God.Size = UDim2.new(0, 98, 0, 50)
+God.Font = Enum.Font.SourceSans
+God.Text = "God"
+God.TextColor3 = Color3.fromRGB(0, 226, 45)
+God.TextSize = 14.000
+God.TextWrapped = true
+God.MouseButton1Down:connect(function()
+	local LocalPlayer = game:GetService("Players").LocalPlayer
+
+	local function Invincibility()
+		if LocalPlayer.Character then
+			for i, v in pairs(LocalPlayer.Character:GetChildren()) do
+				if v.Name == "hitbox" then
+					v:Destroy()
+				end
+			end
+		end
+	end
+
+	while wait(0.5) do
+		Invincibility(LocalPlayer)
+	end
+end)
+
+
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = ScrollingFrame
+Aimbot.BackgroundColor3 = Color3.fromRGB(171, 26, 255)
+Aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Aimbot.Position = UDim2.new(0.060283687, 0, 0.222019717, 0)
+Aimbot.Size = UDim2.new(0, 113, 0, 51)
+Aimbot.Font = Enum.Font.Cartoon
+Aimbot.Text = "Aimbot"
+Aimbot.TextColor3 = Color3.fromRGB(255, 64, 245)
+Aimbot.TextSize = 29.000
+Aimbot.TextWrapped = true
+Aimbot.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Universal%20ESP%20and%20Aimbot.lua"))()
+end)
+
+
+JerkOff.Name = "JerkOff"
+JerkOff.Parent = ScrollingFrame
+JerkOff.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
+JerkOff.Position = UDim2.new(0.0246248599, 0, 0.211712927, 0)
+JerkOff.Size = UDim2.new(0, 98, 0, 50)
+JerkOff.Font = Enum.Font.SourceSans
+JerkOff.Text = "Jerk Off"
+JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
+JerkOff.TextSize = 14.000
+JerkOff.TextWrapped = true
+JerkOff.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+	loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
+end)
+
+
+Fling.Name = "Fling"
+Fling.Parent = ScrollingFrame
+Fling.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Fling.BorderColor3 = Color3.fromRGB(255, 255, 0)
+Fling.Position = UDim2.new(0.350778639, 0, 0.211712927, 0)
+Fling.Size = UDim2.new(0, 98, 0, 50)
+Fling.Font = Enum.Font.SourceSans
+Fling.Text = "Fling"
+Fling.TextColor3 = Color3.fromRGB(0, 226, 45)
+Fling.TextSize = 14.000
+Fling.TextWrapped = true
+Fling.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
+end)
+
+
+Rape.Name = "Rape"
+Rape.Parent = ScrollingFrame
+Rape.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Rape.BorderColor3 = Color3.fromRGB(226, 0, 4)
+Rape.Position = UDim2.new(0.673855603, 0, 0.211712927, 0)
+Rape.Size = UDim2.new(0, 98, 0, 50)
+Rape.Font = Enum.Font.SourceSans
+Rape.Text = "Rape"
+Rape.TextColor3 = Color3.fromRGB(0, 226, 45)
+Rape.TextSize = 14.000
+Rape.TextWrapped = true
+Rape.MouseButton1Down:connect(function()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
+end)
+
+Open.Name = "Open"
+Open.Parent = ScreenGui
+Open.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Open.BorderColor3 = Color3.fromRGB(0, 226, 45)
+Open.BorderSizePixel = 2
+Open.Position = UDim2.new(0.916051567, 0, 0.959843278, 0)
+Open.Size = UDim2.new(0, 82, 0, 19)
+Open.Font = Enum.Font.Cartoon
+Open.Text = "Open "
+Open.TextColor3 = Color3.fromRGB(0, 226, 45)
+Open.TextScaled = true
+Open.TextSize = 14.000
+Open.TextWrapped = true
+Open.Active = true
+local Frame = Frame
+
+Open.MouseButton1Click:Connect(function()
+	Frame.Visible = true
+end)
+
+-- Scripts:
+
+local function CJAC_fake_script() -- Close.Closing 
+	local script = Instance.new('LocalScript', Close)
+
+	local Frame = script.Parent.Parent
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		Frame.Visible = false
+	end)
+end
+coroutine.wrap(CJAC_fake_script)()
+local function CURGV_fake_script() -- Open.Opening 
+	local script = Instance.new('LocalScript', Open)
+
+	local Frame = script.Parent.Parent.Frame
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		Frame.Visible = true
+	end)
+end
+coroutine.wrap(CURGV_fake_script)()
