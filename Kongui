@@ -308,7 +308,7 @@ Gun.TextColor3 = Color3.fromRGB(0, 226, 45)
 Gun.TextSize = 14.000
 Gun.TextWrapped = true
 Gun.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
+loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 end)
 
 invisablke.Name = "invisablke"
