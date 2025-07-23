@@ -2137,7 +2137,7 @@ solar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 solar.Position = UDim2.new(0.5, 0, 0.629263461, 0)
 solar.Size = UDim2.new(0, 109, 0, 51)
 solar.Font = Enum.Font.Cartoon
-solar.Text = "SolarHUB"
+solar.Text = "Rape!"
 solar.TextColor3 = Color3.fromRGB(255, 64, 245)
 solar.TextSize = 29.000
 solar.MouseButton1Down:connect(function()
