@@ -2125,7 +2125,7 @@ jerkr15.Position = UDim2.new(0.5, 0, 0.767180026, 0)
 jerkr15.Size = UDim2.new(0, 109, 0, 51)
 jerkr15.Font = Enum.Font.Cartoon
 jerkr15.Text = "Jerkoff (r15)"
-jerkr15.TextColor3 = Color3.fromRGB(255, 255, 255)
+jerkr15.TextColor3 = Color3.fromRGB(10, 137, 255)
 jerkr15.TextScaled = true
 jerkr15.TextSize = 29.000
 jerkr15.TextWrapped = true
@@ -2136,7 +2136,7 @@ end)
 
 jerkr6.Name = "jerkr6"
 jerkr6.Parent = ScrollingFrame
-jerkr6.BackgroundColor3 = Color3.fromRGB(10, 137, 255)
+jerkr6.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 jerkr6.BorderColor3 = Color3.fromRGB(0, 0, 0)
 jerkr6.Position = UDim2.new(0.060283687, 0, 0.78123188, 0)
 jerkr6.Size = UDim2.new(0, 113, 0, 51)
