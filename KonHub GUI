@@ -2141,7 +2141,7 @@ solar.Text = "SolarHUB"
 solar.TextColor3 = Color3.fromRGB(255, 64, 245)
 solar.TextSize = 29.000
 solar.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://pastefy.app/2tC7nRAK/raw"))()
+ loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 end)
 
 ctrltp.Name = "ctrltp"
