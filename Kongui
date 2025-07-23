@@ -1,6 +1,6 @@
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
-local title = Instance.new("TextButton")
+local title = Instance.new("TextLabel")
 local Brand = Instance.new("ImageButton")
 local Close = Instance.new("TextButton")
 local ScrollingFrame = Instance.new("ScrollingFrame")
@@ -23,8 +23,8 @@ local Open = Instance.new("TextButton")
 
 --Properties:
 game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "KON Hub", -- Required
-	Text = "KON Hub has loaded sucsessfuly!", -- Required
+	Title = "KONgui", -- Required
+	Text = "KON gui has loaded sucsessfuly!", -- Required
 	Icon = "rbxassetid://117043165552834" -- Optional
 })
 
@@ -32,6 +32,7 @@ wait(3)
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
 
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -138,19 +139,30 @@ title.Parent = Frame
 title.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 title.BorderColor3 = Color3.fromRGB(0, 226, 45)
 title.Size = UDim2.new(0, 325, 0, 44)
-title.Font = Enum.Font.Unknown
+title.Font = Enum.Font.Jura
 title.Text = "K0Ngui"
 title.TextColor3 = Color3.fromRGB(0, 226, 45)
 title.TextScaled = true
 title.TextSize = 29.000
 title.TextWrapped = true
-title.MouseButton1Down:connect(function()
-	game:GetService("StarterGui"):SetCore("SendNotification",{
-		Title = "Drag the frame nigger!", -- Required
-		Text = "I hate niggers nigger!!", -- Required
-		Icon = "rbxassetid://117043165552834" -- Optional
-	})
+local textButton = title
+local RunService = game:GetService("RunService")
+
+-- Optional: Make the text glow by using TextStroke
+textButton.TextStrokeTransparency = 0.2 -- Lower value = more visible stroke
+
+local t = 0
+RunService.RenderStepped:Connect(function(dt)
+	t = t + dt
+	-- Cycle through the hue (HSV) for rainbow effect
+	local hue = (t * 0.5) % 1 -- Adjust speed by changing the multiplier
+	local color = Color3.fromHSV(hue, 1, 1)
+	textButton.TextColor3 = color
+	textButton.TextStrokeColor3 = color
 end)
+
+
+
 
 Brand.Name = "Brand"
 Brand.Parent = Frame
@@ -273,12 +285,12 @@ Dex.BorderColor3 = Color3.fromRGB(0, 226, 45)
 Dex.Position = UDim2.new(0.673855603, 0, 0.0640132055, 0)
 Dex.Size = UDim2.new(0, 98, 0, 50)
 Dex.Font = Enum.Font.SourceSans
-Dex.Text = "Dex (studio)"
+Dex.Text = "Inf Yield"
 Dex.TextColor3 = Color3.fromRGB(0, 226, 45)
 Dex.TextSize = 14.000
 Dex.TextWrapped = true
 Dex.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Dex%20Explorer.lua"))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 end)
 
 Gun.Name = "Gun"
@@ -385,22 +397,6 @@ God.MouseButton1Down:connect(function()
 	while wait(0.5) do
 		Invincibility(LocalPlayer)
 	end
-end)
-
-
-Aimbot.Name = "Aimbot"
-Aimbot.Parent = ScrollingFrame
-Aimbot.BackgroundColor3 = Color3.fromRGB(171, 26, 255)
-Aimbot.BorderColor3 = Color3.fromRGB(0, 0, 0)
-Aimbot.Position = UDim2.new(0.060283687, 0, 0.222019717, 0)
-Aimbot.Size = UDim2.new(0, 113, 0, 51)
-Aimbot.Font = Enum.Font.Cartoon
-Aimbot.Text = "Aimbot"
-Aimbot.TextColor3 = Color3.fromRGB(255, 64, 245)
-Aimbot.TextSize = 29.000
-Aimbot.TextWrapped = true
-Aimbot.MouseButton1Down:connect(function()
-	loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Universal%20ESP%20and%20Aimbot.lua"))()
 end)
 
 
