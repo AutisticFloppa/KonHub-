@@ -1,0 +1,267 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local localPlayer = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+local aimbotButton = script.Parent
+
+-- Keybind state
+local currentKeyCode = Enum.KeyCode.E
+local listeningForKey = false
+local enabled = false -- Only true after clicking the button and frame is open
+
+local aimbotActive = false -- Whether aimbot is currently toggled on
+local aimConnection = nil
+
+-- UI Setup
+local gui = nil
+local frame = nil
+local keyLabel = nil
+local changeKeyButton = nil
+local rainbowTitleLabel = nil
+local showHideLabel = nil
+
+-- Removed createGreenBorder and borderFrame logic
+
+-- Create the keybind frame GUI
+local function createKeybindFrame()
+    if gui then return end
+    gui = Instance.new("ScreenGui")
+    gui.Name = "AimbotKeybindGui"
+    gui.ResetOnSpawn = false
+    gui.Parent = localPlayer:WaitForChild("PlayerGui")
+
+    frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 250, 0, 120)
+    frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    frame.BorderSizePixel = 0
+    frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.Visible = false
+    frame.ZIndex = 10
+    frame.Parent = gui
+
+    -- Make frame draggable
+    frame.Active = true
+    frame.Draggable = true
+
+    -- No border
+
+    local title = Instance.new("TextLabel")
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.Position = UDim2.new(0, 0, 0, 0)
+    title.BackgroundTransparency = 1
+    title.Text = "KON Aimbot"
+    title.TextColor3 = Color3.fromRGB(64, 0, 255) -- Set to green for visibility
+    title.Font = Enum.Font.SourceSansBold
+    title.TextSize = 16
+    title.ZIndex = 11
+    title.Parent = frame
+    rainbowTitleLabel = title
+
+    keyLabel = Instance.new("TextLabel")
+    keyLabel.Size = UDim2.new(1, -20, 0, 30)
+    keyLabel.Position = UDim2.new(0, 10, 0, 40)
+    keyLabel.BackgroundTransparency = 1
+    keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+    keyLabel.TextColor3 = Color3.fromRGB(255, 238, 0) -- Green
+    keyLabel.Font = Enum.Font.SourceSans
+    keyLabel.TextSize = 18
+    keyLabel.TextXAlignment = Enum.TextXAlignment.Left
+    keyLabel.ZIndex = 11
+    keyLabel.Parent = frame
+
+    changeKeyButton = Instance.new("TextButton")
+    changeKeyButton.Size = UDim2.new(0, 120, 0, 30)
+    changeKeyButton.Position = UDim2.new(0, 10, 0, 80)
+    changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    changeKeyButton.BorderSizePixel = 0
+    changeKeyButton.Text = "Change Key"
+    changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0) -- Green
+    changeKeyButton.Font = Enum.Font.SourceSans
+    changeKeyButton.TextSize = 18
+    changeKeyButton.ZIndex = 11
+    changeKeyButton.Parent = frame
+
+    -- Remove the close button and add a label instead
+    showHideLabel = Instance.new("TextLabel")
+    showHideLabel.Size = UDim2.new(0, 120, 0, 30)
+    showHideLabel.Position = UDim2.new(1, -130, 0, 80)
+    showHideLabel.BackgroundTransparency = 1
+    showHideLabel.Text = "Press K to show/hide"
+    showHideLabel.TextColor3 = Color3.fromRGB(0, 38, 255) -- Green
+    showHideLabel.Font = Enum.Font.SourceSans
+    showHideLabel.TextSize = 14
+    showHideLabel.ZIndex = 11
+    showHideLabel.Parent = frame
+
+    -- Change key logic
+    changeKeyButton.MouseButton1Click:Connect(function()
+        if not enabled then return end
+        if listeningForKey then return end
+        listeningForKey = true
+        changeKeyButton.Text = "Press any key..."
+        keyLabel.Text = "Current Key: ..."
+        -- Always keep text green
+        changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
+        keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+    end)
+end
+
+-- Returns the closest enemy player's Head or Torso (HumanoidRootPart fallback)
+local function getClosestTarget()
+    local closestPart = nil
+    local closestDist = math.huge
+    for _, player in Players:GetPlayers() do
+        if player ~= localPlayer and player.Character and player.Character.Parent == workspace then
+            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid.Health > 0 then
+                local partsToCheck = {
+                    player.Character:FindFirstChild("Head"),
+                    player.Character:FindFirstChild("Torso"),
+                    player.Character:FindFirstChild("UpperTorso"),
+                    player.Character:FindFirstChild("HumanoidRootPart")
+                }
+                for _, part in partsToCheck do
+                    if part then
+                        local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
+                        if onScreen then
+                            local dist = (camera.CFrame.Position - part.Position).Magnitude
+                            if dist < closestDist then
+                                closestDist = dist
+                                closestPart = part
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return closestPart
+end
+
+-- Smoother aimbot: interpolate camera look direction
+local function startAimbot()
+    if aimConnection then return end
+    aimConnection = RunService.RenderStepped:Connect(function()
+        local targetPart = getClosestTarget()
+        if targetPart then
+            local camPos = camera.CFrame.Position
+            local currentLook = camera.CFrame.LookVector
+            local desiredLook = (targetPart.Position - camPos).Unit
+            -- Interpolate the look vector for smoothness
+            local smoothness = 0.18 -- Lower is smoother/slower, higher is snappier
+            local newLook = currentLook:Lerp(desiredLook, smoothness)
+            -- Prevent zero vector
+            if newLook.Magnitude > 0.01 then
+                camera.CFrame = CFrame.new(camPos, camPos + newLook)
+            end
+        end
+    end)
+end
+
+local function stopAimbot()
+    if aimConnection then
+        aimConnection:Disconnect()
+        aimConnection = nil
+    end
+end
+
+-- Helper to always set non-title label colors to green
+local function setNonTitleLabelColors()
+    if keyLabel then
+        keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+        keyLabel.BackgroundTransparency = 1
+    end
+    if changeKeyButton then
+        changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
+        changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    end
+    if showHideLabel then
+        showHideLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+        showHideLabel.BackgroundTransparency = 1
+    end
+    if rainbowTitleLabel then
+        rainbowTitleLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+		rainbowTitleLabel.BackgroundTransparency = 1
+    end
+end
+
+-- Input handling for aimbot activation and UI show/hide
+UserInputService.InputBegan:Connect(function(input, processed)
+    if gui and frame and input.KeyCode == Enum.KeyCode.K and not processed then
+        frame.Visible = not frame.Visible
+        enabled = frame.Visible
+        stopAimbot()
+        aimbotActive = false
+        listeningForKey = false
+        if keyLabel then
+            keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+        end
+        if changeKeyButton then
+            changeKeyButton.Text = "Change Key"
+        end
+        setNonTitleLabelColors()
+        return
+    end
+
+    if not enabled then return end
+    if processed then return end
+    if listeningForKey then
+        if input.KeyCode ~= Enum.KeyCode.Unknown then
+            currentKeyCode = input.KeyCode
+            if keyLabel then
+                keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+            end
+            if changeKeyButton then
+                changeKeyButton.Text = "Change Key"
+            end
+            setNonTitleLabelColors()
+            listeningForKey = false
+        end
+        return
+    end
+    if input.KeyCode == currentKeyCode then
+        -- Toggle aimbot on/off with key press
+        aimbotActive = not aimbotActive
+        if aimbotActive then
+            startAimbot()
+        else
+            stopAimbot()
+        end
+    end
+end)
+
+-- No longer need InputEnded for toggling, but keep for safety (stop aimbot if script is confused)
+UserInputService.InputEnded:Connect(function(input, processed)
+    -- No action needed for toggle mode
+end)
+
+-- Clean up on script removal
+script.AncestryChanged:Connect(function()
+    if not script:IsDescendantOf(game) then
+        stopAimbot()
+        if gui then
+            gui:Destroy()
+        end
+    end
+end)
+
+-- Show/hide keybind frame when aimbot button is clicked
+aimbotButton.MouseButton1Click:Connect(function()
+    createKeybindFrame()
+    enabled = not enabled
+    frame.Visible = enabled
+    stopAimbot()
+    aimbotActive = false
+    listeningForKey = false
+    if keyLabel then
+        keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+    end
+    if changeKeyButton then
+        changeKeyButton.Text = "Change Key"
+    end
+    setNonTitleLabelColors()
+end)
+
