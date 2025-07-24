@@ -227,7 +227,7 @@ JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
 JerkOff.Position = UDim2.new(0.184624866, 0, 0.769699812, 0)
 JerkOff.Size = UDim2.new(0, 44, 0, 38)
 JerkOff.Font = Enum.Font.SourceSans
-JerkOff.Text = "JerkOff"
+JerkOff.Text = "Jerk Off"
 JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
 JerkOff.TextSize = 14.000
 JerkOff.TextWrapped = true
@@ -287,7 +287,7 @@ TextLabel.BorderSizePixel = 2
 TextLabel.Size = UDim2.new(0, 153, 0, 38)
 TextLabel.ZIndex = 0
 TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "KonGui 2.1"
+TextLabel.Text = "KonGui 2.2"
 TextLabel.TextColor3 = Color3.fromRGB(111, 255, 0)
 TextLabel.TextSize = 14.000
 
@@ -368,19 +368,19 @@ HomoESP.TextWrapped = true
 
 -- Scripts:
 
-local function WGZVSL_fake_script() -- Infjump.LocalScript 
+local function BITAW_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	--Toggles the infinite jump between on or off on every script run
 	_G.infinjump = not _G.infinjump
-	
+
 	if _G.infinJumpStarted == nil then
 		--Ensures this only runs once to save resources
 		_G.infinJumpStarted = true
-	
+
 		--Notifies readiness
 		game.StarterGui:SetCore("SendNotification", {Title="KONgui"; Text="Infinite jump activated"; Duration=2;})
-	
+
 		--The actual infinite jump
 		local plr = game:GetService('Players').LocalPlayer
 		local m = plr:GetMouse()
@@ -396,8 +396,8 @@ local function WGZVSL_fake_script() -- Infjump.LocalScript
 		end)
 	end
 end
-coroutine.wrap(WGZVSL_fake_script)()
-local function PCKTW_fake_script() -- Aimbot.KONAIMBOT 
+coroutine.wrap(BITAW_fake_script)()
+local function OLME_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local Players = game:GetService("Players")
@@ -405,17 +405,17 @@ local function PCKTW_fake_script() -- Aimbot.KONAIMBOT
 	local RunService = game:GetService("RunService")
 	local localPlayer = Players.LocalPlayer
 	local camera = workspace.CurrentCamera
-	
+
 	local aimbotButton = Aimbot
-	
+
 	-- Keybind state
 	local currentKeyCode = Enum.KeyCode.E
 	local listeningForKey = false
 	local enabled = false -- Only true after clicking the button and frame is open
-	
+
 	local aimbotActive = false -- Whether aimbot is currently toggled on
 	local aimConnection = nil
-	
+
 	-- UI Setup
 	local gui = nil
 	local frame = nil
@@ -423,294 +423,301 @@ local function PCKTW_fake_script() -- Aimbot.KONAIMBOT
 	local changeKeyButton = nil
 	local rainbowTitleLabel = nil
 	local showHideLabel = nil
-	
+
 	-- Removed createGreenBorder and borderFrame logic
-	
+
 	-- Create the keybind frame GUI
 	local function createKeybindFrame()
-	    if gui then return end
-	    gui = Instance.new("ScreenGui")
-	    gui.Name = "AimbotKeybindGui"
-	    gui.ResetOnSpawn = false
-	    gui.Parent = localPlayer:WaitForChild("PlayerGui")
-	
-	    frame = Instance.new("Frame")
-	    frame.Size = UDim2.new(0, 250, 0, 120)
-	    frame.Position = UDim2.new(0.5, -125, 0.5, -60)
-	    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	    frame.BorderSizePixel = 0
-	    frame.AnchorPoint = Vector2.new(0.5, 0.5)
-	    frame.Visible = false
-	    frame.ZIndex = 10
-	    frame.Parent = gui
-	
-	    -- Make frame draggable
-	    frame.Active = true
-	    frame.Draggable = true
-	
-	    -- No border
-	
-	    local title = Instance.new("TextLabel")
-	    title.Size = UDim2.new(1, 0, 0, 30)
-	    title.Position = UDim2.new(0, 0, 0, 0)
-	    title.BackgroundTransparency = 1
-	    title.Text = "KON Aimbot"
-	    title.TextColor3 = Color3.fromRGB(64, 0, 255) -- Set to green for visibility
-	    title.Font = Enum.Font.SourceSansBold
-	    title.TextSize = 16
-	    title.ZIndex = 11
-	    title.Parent = frame
-	    rainbowTitleLabel = title
-	
-	    keyLabel = Instance.new("TextLabel")
-	    keyLabel.Size = UDim2.new(1, -20, 0, 30)
-	    keyLabel.Position = UDim2.new(0, 10, 0, 40)
-	    keyLabel.BackgroundTransparency = 1
-	    keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
-	    keyLabel.TextColor3 = Color3.fromRGB(255, 238, 0) -- Green
-	    keyLabel.Font = Enum.Font.SourceSans
-	    keyLabel.TextSize = 18
-	    keyLabel.TextXAlignment = Enum.TextXAlignment.Left
-	    keyLabel.ZIndex = 11
-	    keyLabel.Parent = frame
-	
-	    changeKeyButton = Instance.new("TextButton")
-	    changeKeyButton.Size = UDim2.new(0, 120, 0, 30)
-	    changeKeyButton.Position = UDim2.new(0, 10, 0, 80)
-	    changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	    changeKeyButton.BorderSizePixel = 0
-	    changeKeyButton.Text = "Change Key"
-	    changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0) -- Green
-	    changeKeyButton.Font = Enum.Font.SourceSans
-	    changeKeyButton.TextSize = 18
-	    changeKeyButton.ZIndex = 11
-	    changeKeyButton.Parent = frame
-	
-	    -- Remove the close button and add a label instead
-	    showHideLabel = Instance.new("TextLabel")
-	    showHideLabel.Size = UDim2.new(0, 120, 0, 30)
-	    showHideLabel.Position = UDim2.new(1, -130, 0, 80)
-	    showHideLabel.BackgroundTransparency = 1
-	    showHideLabel.Text = "Press K to show/hide"
-	    showHideLabel.TextColor3 = Color3.fromRGB(0, 38, 255) -- Green
-	    showHideLabel.Font = Enum.Font.SourceSans
-	    showHideLabel.TextSize = 14
-	    showHideLabel.ZIndex = 11
-	    showHideLabel.Parent = frame
-	
-	    -- Change key logic
-	    changeKeyButton.MouseButton1Click:Connect(function()
-	        if not enabled then return end
-	        if listeningForKey then return end
-	        listeningForKey = true
-	        changeKeyButton.Text = "Press any key..."
-	        keyLabel.Text = "Current Key: ..."
-	        -- Always keep text green
-	        changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
-	        keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-	    end)
+		if gui then return end
+		gui = Instance.new("ScreenGui")
+		gui.Name = "AimbotKeybindGui"
+		gui.ResetOnSpawn = false
+		gui.Parent = localPlayer:WaitForChild("PlayerGui")
+
+		frame = Instance.new("Frame")
+		frame.Size = UDim2.new(0, 250, 0, 120)
+		frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+		frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		frame.BorderSizePixel = 0
+		frame.AnchorPoint = Vector2.new(0.5, 0.5)
+		frame.Visible = false
+		frame.ZIndex = 10
+		frame.Parent = gui
+
+		-- Make frame draggable
+		frame.Active = true
+		frame.Draggable = true
+
+		-- No border
+
+		local title = Instance.new("TextLabel")
+		title.Size = UDim2.new(1, 0, 0, 30)
+		title.Position = UDim2.new(0, 0, 0, 0)
+		title.BackgroundTransparency = 1
+		title.Text = "KON Aimbot"
+		title.TextColor3 = Color3.fromRGB(64, 0, 255) -- Set to green for visibility
+		title.Font = Enum.Font.SourceSansBold
+		title.TextSize = 16
+		title.ZIndex = 11
+		title.Parent = frame
+		rainbowTitleLabel = title
+
+		keyLabel = Instance.new("TextLabel")
+		keyLabel.Size = UDim2.new(1, -20, 0, 30)
+		keyLabel.Position = UDim2.new(0, 10, 0, 40)
+		keyLabel.BackgroundTransparency = 1
+		keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+		keyLabel.TextColor3 = Color3.fromRGB(255, 238, 0) -- Green
+		keyLabel.Font = Enum.Font.SourceSans
+		keyLabel.TextSize = 18
+		keyLabel.TextXAlignment = Enum.TextXAlignment.Left
+		keyLabel.ZIndex = 11
+		keyLabel.Parent = frame
+
+		changeKeyButton = Instance.new("TextButton")
+		changeKeyButton.Size = UDim2.new(0, 120, 0, 30)
+		changeKeyButton.Position = UDim2.new(0, 10, 0, 80)
+		changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Always black
+		changeKeyButton.BorderSizePixel = 0
+		changeKeyButton.Text = "Change Key"
+		changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0) -- Green text
+		changeKeyButton.Font = Enum.Font.SourceSans
+		changeKeyButton.TextSize = 18
+		changeKeyButton.ZIndex = 11
+		changeKeyButton.Parent = frame
+
+		-- Remove the close button and add a label instead
+		showHideLabel = Instance.new("TextLabel")
+		showHideLabel.Size = UDim2.new(0, 120, 0, 30)
+		showHideLabel.Position = UDim2.new(1, -130, 0, 80)
+		showHideLabel.BackgroundTransparency = 1
+		showHideLabel.Text = "Press K to show/hide"
+		showHideLabel.TextColor3 = Color3.fromRGB(0, 38, 255) -- Green
+		showHideLabel.Font = Enum.Font.SourceSans
+		showHideLabel.TextSize = 14
+		showHideLabel.ZIndex = 11
+		showHideLabel.Parent = frame
+
+		-- Change key logic
+		changeKeyButton.MouseButton1Click:Connect(function()
+			if not enabled then return end
+			if listeningForKey then return end
+			listeningForKey = true
+			changeKeyButton.Text = "Press any key..."
+			keyLabel.Text = "Current Key: ..."
+			-- Always keep text green, background black
+			changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
+			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+		end)
 	end
-	
+
 	-- Returns the closest enemy player's Head or Torso (HumanoidRootPart fallback)
 	local function getClosestTarget()
-	    local closestPart = nil
-	    local closestDist = math.huge
-	    for _, player in Players:GetPlayers() do
-	        if player ~= localPlayer and player.Character and player.Character.Parent == workspace then
-	            local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-	            if humanoid and humanoid.Health > 0 then
-	                local partsToCheck = {
-	                    player.Character:FindFirstChild("Head"),
-	                    player.Character:FindFirstChild("Torso"),
-	                    player.Character:FindFirstChild("UpperTorso"),
-	                    player.Character:FindFirstChild("HumanoidRootPart")
-	                }
-	                for _, part in partsToCheck do
-	                    if part then
-	                        local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
-	                        if onScreen then
-	                            local dist = (camera.CFrame.Position - part.Position).Magnitude
-	                            if dist < closestDist then
-	                                closestDist = dist
-	                                closestPart = part
-	                            end
-	                        end
-	                    end
-	                end
-	            end
-	        end
-	    end
-	    return closestPart
+		local closestPart = nil
+		local closestDist = math.huge
+		for _, player in Players:GetPlayers() do
+			if player ~= localPlayer and player.Character and player.Character.Parent == workspace then
+				-- Only target if not on the same team (or if teams are not set, Team will be nil)
+				if not player.Team or not localPlayer.Team or player.Team ~= localPlayer.Team then
+					local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+					if humanoid and humanoid.Health > 0 then
+						local partsToCheck = {
+							player.Character:FindFirstChild("Head"),
+							player.Character:FindFirstChild("Torso"),
+							player.Character:FindFirstChild("UpperTorso"),
+							player.Character:FindFirstChild("HumanoidRootPart")
+						}
+						for _, part in partsToCheck do
+							if part then
+								local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
+								if onScreen then
+									local dist = (camera.CFrame.Position - part.Position).Magnitude
+									if dist < closestDist then
+										closestDist = dist
+										closestPart = part
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+		return closestPart
 	end
-	
+
 	-- Smoother aimbot: interpolate camera look direction
 	local function startAimbot()
-	    if aimConnection then return end
-	    aimConnection = RunService.RenderStepped:Connect(function()
-	        local targetPart = getClosestTarget()
-	        if targetPart then
-	            local camPos = camera.CFrame.Position
-	            local currentLook = camera.CFrame.LookVector
-	            local desiredLook = (targetPart.Position - camPos).Unit
-	            -- Interpolate the look vector for smoothness
-	            local smoothness = 0.18 -- Lower is smoother/slower, higher is snappier
-	            local newLook = currentLook:Lerp(desiredLook, smoothness)
-	            -- Prevent zero vector
-	            if newLook.Magnitude > 0.01 then
-	                camera.CFrame = CFrame.new(camPos, camPos + newLook)
-	            end
-	        end
-	    end)
+		if aimConnection then return end
+		aimConnection = RunService.RenderStepped:Connect(function()
+			local targetPart = getClosestTarget()
+			if targetPart then
+				local camPos = camera.CFrame.Position
+				local currentLook = camera.CFrame.LookVector
+				local desiredLook = (targetPart.Position - camPos).Unit
+				-- Interpolate the look vector for smoothness
+				local smoothness = 0.18 -- Lower is smoother/slower, higher is snappier
+				local newLook = currentLook:Lerp(desiredLook, smoothness)
+				-- Prevent zero vector
+				if newLook.Magnitude > 0.01 then
+					camera.CFrame = CFrame.new(camPos, camPos + newLook)
+				end
+			end
+		end)
 	end
-	
+
 	local function stopAimbot()
-	    if aimConnection then
-	        aimConnection:Disconnect()
-	        aimConnection = nil
-	    end
+		if aimConnection then
+			aimConnection:Disconnect()
+			aimConnection = nil
+		end
 	end
-	
-	-- Helper to always set non-title label colors to green
+
+	-- Helper to always set non-title label colors to green, button stays black
 	local function setNonTitleLabelColors()
-	    if keyLabel then
-	        keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-	        keyLabel.BackgroundTransparency = 1
-	    end
-	    if changeKeyButton then
-	        changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
-	        changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	    end
-	    if showHideLabel then
-	        showHideLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-	        showHideLabel.BackgroundTransparency = 1
-	    end
-	    if rainbowTitleLabel then
-	        rainbowTitleLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+		if keyLabel then
+			keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+			keyLabel.BackgroundTransparency = 1
+		end
+		if changeKeyButton then
+			changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
+			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Always black
+		end
+		if showHideLabel then
+			showHideLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
+			showHideLabel.BackgroundTransparency = 1
+		end
+		if rainbowTitleLabel then
+			rainbowTitleLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
 			rainbowTitleLabel.BackgroundTransparency = 1
-	    end
+		end
 	end
-	
+
 	-- Input handling for aimbot activation and UI show/hide
 	UserInputService.InputBegan:Connect(function(input, processed)
-	    if gui and frame and input.KeyCode == Enum.KeyCode.K and not processed then
-	        frame.Visible = not frame.Visible
-	        enabled = frame.Visible
-	        stopAimbot()
-	        aimbotActive = false
-	        listeningForKey = false
-	        if keyLabel then
-	            keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
-	        end
-	        if changeKeyButton then
-	            changeKeyButton.Text = "Change Key"
-	        end
-	        setNonTitleLabelColors()
-	        return
-	    end
-	
-	    if not enabled then return end
-	    if processed then return end
-	    if listeningForKey then
-	        if input.KeyCode ~= Enum.KeyCode.Unknown then
-	            currentKeyCode = input.KeyCode
-	            if keyLabel then
-	                keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
-	            end
-	            if changeKeyButton then
-	                changeKeyButton.Text = "Change Key"
-	            end
-	            setNonTitleLabelColors()
-	            listeningForKey = false
-	        end
-	        return
-	    end
-	    if input.KeyCode == currentKeyCode then
-	        -- Toggle aimbot on/off with key press
-	        aimbotActive = not aimbotActive
-	        if aimbotActive then
-	            startAimbot()
-	        else
-	            stopAimbot()
-	        end
-	    end
+		if gui and frame and input.KeyCode == Enum.KeyCode.K and not processed then
+			frame.Visible = not frame.Visible
+			enabled = frame.Visible
+			stopAimbot()
+			aimbotActive = false
+			listeningForKey = false
+			if keyLabel then
+				keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+			end
+			if changeKeyButton then
+				changeKeyButton.Text = "Change Key"
+				changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Always black
+			end
+			setNonTitleLabelColors()
+			return
+		end
+
+		if not enabled then return end
+		if processed then return end
+		if listeningForKey then
+			if input.KeyCode ~= Enum.KeyCode.Unknown then
+				currentKeyCode = input.KeyCode
+				if keyLabel then
+					keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+				end
+				if changeKeyButton then
+					changeKeyButton.Text = "Change Key"
+					changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Always black
+				end
+				setNonTitleLabelColors()
+				listeningForKey = false
+			end
+			return
+		end
+		if input.KeyCode == currentKeyCode then
+			-- Toggle aimbot on/off with key press
+			aimbotActive = not aimbotActive
+			if aimbotActive then
+				startAimbot()
+			else
+				stopAimbot()
+			end
+		end
 	end)
-	
+
 	-- No longer need InputEnded for toggling, but keep for safety (stop aimbot if script is confused)
 	UserInputService.InputEnded:Connect(function(input, processed)
-	    -- No action needed for toggle mode
+		-- No action needed for toggle mode
 	end)
-	
+
 	-- Clean up on script removal
 	script.AncestryChanged:Connect(function()
-	    if not script:IsDescendantOf(game) then
-	        stopAimbot()
-	        if gui then
-	            gui:Destroy()
-	        end
-	    end
+		if not script:IsDescendantOf(game) then
+			stopAimbot()
+			if gui then
+				gui:Destroy()
+			end
+		end
 	end)
-	
+
 	-- Show/hide keybind frame when aimbot button is clicked
 	aimbotButton.MouseButton1Click:Connect(function()
-	    createKeybindFrame()
-	    enabled = not enabled
-	    frame.Visible = enabled
-	    stopAimbot()
-	    aimbotActive = false
-	    listeningForKey = false
-	    if keyLabel then
-	        keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
-	    end
-	    if changeKeyButton then
-	        changeKeyButton.Text = "Change Key"
-	    end
-	    setNonTitleLabelColors()
+		createKeybindFrame()
+		enabled = not enabled
+		frame.Visible = enabled
+		stopAimbot()
+		aimbotActive = false
+		listeningForKey = false
+		if keyLabel then
+			keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
+		end
+		if changeKeyButton then
+			changeKeyButton.Text = "Change Key"
+			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Always black
+		end
+		setNonTitleLabelColors()
 	end)
-	
-	
+
+
 end
-coroutine.wrap(PCKTW_fake_script)()
-local function QLYM_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(OLME_fake_script)()
+local function PAGCSR_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(QLYM_fake_script)()
-local function YBKP_fake_script() -- Esp.LocalScript 
+coroutine.wrap(PAGCSR_fake_script)()
+local function KLJZBQH_fake_script() -- Esp.LocalScript 
 	local script = Instance.new('LocalScript', Esp)
 
 	Esp.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
 	end)
 end
-coroutine.wrap(YBKP_fake_script)()
-local function WPDBW_fake_script() -- Fling.LocalScript 
+coroutine.wrap(KLJZBQH_fake_script)()
+local function XRZJFOM_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(WPDBW_fake_script)()
-local function TJYJ_fake_script() -- Fly.LocalScript 
+coroutine.wrap(XRZJFOM_fake_script)()
+local function TCKLE_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
 	end)
 end
-coroutine.wrap(TJYJ_fake_script)()
-local function CAPC_fake_script() -- Gun.LocalScript 
+coroutine.wrap(TCKLE_fake_script)()
+local function CFNHBJI_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(CAPC_fake_script)()
-local function QCAPQ_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(CFNHBJI_fake_script)()
+local function PBETTRH_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -718,52 +725,52 @@ local function QCAPQ_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(QCAPQ_fake_script)()
-local function HAPED_fake_script() -- Rape.LocalScript 
+coroutine.wrap(PBETTRH_fake_script)()
+local function CZRXA_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(HAPED_fake_script)()
-local function UYOLF_fake_script() -- invisible.LocalScript 
+coroutine.wrap(CZRXA_fake_script)()
+local function EGCPQKC_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(UYOLF_fake_script)()
-local function AKSWN_fake_script() -- r6NOCLIP.LocalScript 
+coroutine.wrap(EGCPQKC_fake_script)()
+local function JSCRB_fake_script() -- r6NOCLIP.LocalScript 
 	local script = Instance.new('LocalScript', r6NOCLIP)
 
 	r6NOCLIP.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
 	end)
 end
-coroutine.wrap(AKSWN_fake_script)()
-local function NHLBW_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(JSCRB_fake_script)()
+local function BVTN_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
 		-- Gui to Lua
 		-- Version: 3.2
-	
+
 		-- Instances:
-	
+
 		local ScreenGui = Instance.new("ScreenGui")
 		local SA = Instance.new("Frame")
 		local SAText = Instance.new("TextLabel")
 		local PlayerCount = Instance.new("TextLabel")
 		local SilentAim = Instance.new("TextButton")
 		local MadeBy = Instance.new("TextLabel")
-	
+
 		--Properties:
-	
+
 		ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 		ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	
+
 		SA.Name = "SA"
 		SA.Parent = ScreenGui
 		SA.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- pure black
@@ -771,7 +778,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		SA.BorderSizePixel = 2 -- 2 pixel border
 		SA.Position = UDim2.new(0.390139997, 0, 0.307328612, 0)
 		SA.Size = UDim2.new(0, 240, 0, 200) -- made smaller
-	
+
 		-- SAText at the top
 		SAText.Name = "SA Text"
 		SAText.Parent = SA
@@ -785,7 +792,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		SAText.TextColor3 = Color3.fromRGB(0, 226, 45)
 		SAText.TextSize = 18.000
 		SAText.TextXAlignment = Enum.TextXAlignment.Center
-	
+
 		-- PlayerCount directly under SAText
 		PlayerCount.Name = "Player Count"
 		PlayerCount.Parent = SA
@@ -800,7 +807,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		PlayerCount.TextColor3 = Color3.fromRGB(254, 135, 0)
 		PlayerCount.TextSize = 18.000
 		PlayerCount.TextXAlignment = Enum.TextXAlignment.Center
-	
+
 		-- SilentAim directly under PlayerCount
 		SilentAim.Name = "Silent Aim"
 		SilentAim.Parent = SA
@@ -815,7 +822,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		SilentAim.TextSize = 20.000
 		SilentAim.TextStrokeTransparency = 0.000
 		SilentAim.TextXAlignment = Enum.TextXAlignment.Center
-	
+
 		-- MadeBy at the bottom
 		MadeBy.Name = "Made By"
 		MadeBy.Parent = SA
@@ -830,7 +837,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		MadeBy.TextColor3 = Color3.fromRGB(255, 0, 242)
 		MadeBy.TextSize = 18.000
 		MadeBy.TextXAlignment = Enum.TextXAlignment.Center
-	
+
 		-- Rainbow effect for SilentAim button
 		coroutine.wrap(function()
 			while true do
@@ -842,26 +849,26 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 				end
 			end
 		end)()
-	
+
 		-- Scripts:
-	
+
 		local function MCITIJ_fake_script() -- SA.Draggable 
 			local script = Instance.new('LocalScript', SA)
-	
+
 			local UIS = game:GetService('UserInputService')
 			local frame = script.Parent
 			local dragToggle = nil
 			local dragSpeed = 0.25
 			local dragStart = nil
 			local startPos = nil
-	
+
 			local function updateInput(input)
 				local delta = input.Position - dragStart
 				local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
 					startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 				game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
 			end
-	
+
 			frame.InputBegan:Connect(function(input)
 				if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
 					dragToggle = true
@@ -874,7 +881,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 					end)
 				end
 			end)
-	
+
 			UIS.InputChanged:Connect(function(input)
 				if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 					if dragToggle then
@@ -886,32 +893,32 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 		coroutine.wrap(MCITIJ_fake_script)()
 		local function TGYL_fake_script() -- PlayerCount.LocalScript 
 			local script = Instance.new('LocalScript', PlayerCount)
-	
+
 			local playerCountLabel = script.Parent -- Assumes the script is a child of a TextLabel
-	
+
 			-- Function to update the player count
 			local function updatePlayerCount()
 				local players = game.Players:GetPlayers()
 				playerCountLabel.Text = "Player Count: " .. #players
 			end
-	
+
 			-- Initially update the player count
 			updatePlayerCount()
-	
+
 			-- Connect a function to fire whenever a player joins or leaves
 			game.Players.PlayerAdded:Connect(updatePlayerCount)
 			game.Players.PlayerRemoving:Connect(updatePlayerCount)
-	
+
 		end
 		coroutine.wrap(TGYL_fake_script)()
 		local function BNQNGFT_fake_script() -- ScreenGui.Toggle 
 			local script = Instance.new('LocalScript', ScreenGui)
-	
+
 			local Player = game:GetService("Players").LocalPlayer
 			local Mouse = Player:GetMouse()
 			local MainFrame = script.Parent.SA
 			local keybind = "k"
-	
+
 			Mouse.KeyDown:Connect(function(key)
 				if key == keybind then
 					if MainFrame.Visible == false then
@@ -923,11 +930,11 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 			end)
 		end
 		coroutine.wrap(BNQNGFT_fake_script)()
-	
+
 		-- Silent Aim Toggle Logic
 		local silentAimEnabled = false
 		local silentAimCoroutine = nil
-	
+
 		local function getplrsname()
 			for i,v in pairs(game:GetChildren()) do
 				if v.ClassName == "Players" then
@@ -935,7 +942,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 				end
 			end
 		end
-	
+
 		local function startSilentAim()
 			local players = getplrsname()
 			local plr = game[players].LocalPlayer
@@ -969,7 +976,7 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 				end
 			end)
 		end
-	
+
 		SilentAim.MouseButton1Down:Connect(function()
 			silentAimEnabled = not silentAimEnabled
 			if silentAimEnabled then
@@ -985,362 +992,215 @@ local function NHLBW_fake_script() -- arseKON.LocalScript
 				-- The coroutine will stop on next loop since silentAimEnabled is false
 			end
 		end)
-	
-	
+
+
 	end)
 end
-coroutine.wrap(NHLBW_fake_script)()
-local function JAROE_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(BVTN_fake_script)()
+local function PBVAIW_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
-	
+
 	coroutine.wrap(function()
-	    while true do
-	        for i = 0, 100 do
-	            local hue = i / 100
-	            textLabel.TextColor3 = Color3.fromHSV(hue, 1, 1)
-	            task.wait(0.03)
-	        end
-	    end
+		while true do
+			for i = 0, 100 do
+				local hue = i / 100
+				textLabel.TextColor3 = Color3.fromHSV(hue, 1, 1)
+				task.wait(0.03)
+			end
+		end
 	end)()
-	
-	
+
+
 end
-coroutine.wrap(JAROE_fake_script)()
-local function BSWC_fake_script() -- Brand.LocalScript 
+coroutine.wrap(PBVAIW_fake_script)()
+local function WZFDV_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
 	local imageButton = Brand
-	
+
 	coroutine.wrap(function()
-	    while true do
-	        for i = 0, 100 do
-	            local hue = i / 100
-	            imageButton.ImageColor3 = Color3.fromHSV(hue, 1, 1)
-	            task.wait(0.03)
-	        end
-	    end
+		while true do
+			for i = 0, 100 do
+				local hue = i / 100
+				imageButton.ImageColor3 = Color3.fromHSV(hue, 1, 1)
+				task.wait(0.03)
+			end
+		end
 	end)()
-	
-	
+
+
 end
-coroutine.wrap(BSWC_fake_script)()
-local function IBSEH_fake_script() -- Secret.LocalScript 
+coroutine.wrap(WZFDV_fake_script)()
+local function YKLCDY_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("Stupid ass nigger really thought der was a secret")
 	end)
 end
-coroutine.wrap(IBSEH_fake_script)()
-local function ASNOG_fake_script() -- HomoESP.LocalScript 
+coroutine.wrap(YKLCDY_fake_script)()
+local function VWPI_fake_script() -- HomoESP.LocalScript 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
+	local UserInputService = game:GetService("UserInputService")
 	local RunService = game:GetService("RunService")
 	local localPlayer = Players.LocalPlayer
-	
-	local button = script.Parent
-	
-	local espEnabled = false
-	local highlights = {} -- [Player] = Highlight
-	local billboards = {} -- [Player] = BillboardGui
-	local rainbowConnection = nil
-	
-	-- Helper: HSV to RGB
-	local function hsvToRgb(h, s, v)
-		local i = math.floor(h * 6)
-		local f = h * 6 - i
-		local p = v * (1 - s)
-		local q = v * (1 - f * s)
-		local t = v * (1 - (1 - f) * s)
-		i = i % 6
-		if i == 0 then return v, t, p
-		elseif i == 1 then return q, v, p
-		elseif i == 2 then return p, v, t
-		elseif i == 3 then return p, q, v
-		elseif i == 4 then return t, p, v
-		elseif i == 5 then return v, p, q
-		end
+	local camera = workspace.CurrentCamera
+
+	local aimbotButton = Aimbot
+
+	-- Keybind state
+	local currentKeyCode = Enum.KeyCode.E
+	local listeningForKey = false
+	local enabled = false -- Only true after clicking the button and frame is open
+
+	local aimbotActive = false -- Whether aimbot is currently toggled on
+	local aimConnection = nil
+
+	-- UI Setup
+	local gui = nil
+	local frame = nil
+	local keyLabel = nil
+	local changeKeyButton = nil
+	local rainbowTitleLabel = nil
+	local showHideLabel = nil
+
+	-- Removed createGreenBorder and borderFrame logic
+
+	-- Create the keybind frame GUI
+	local function createKeybindFrame()
+		if gui then return end
+		gui = Instance.new("ScreenGui")
+		gui.Name = "AimbotKeybindGui"
+		gui.ResetOnSpawn = false
+		gui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+		frame = Instance.new("Frame")
+		frame.Size = UDim2.new(0, 250, 0, 120)
+		frame.Position = UDim2.new(0.5, -125, 0.5, -60)
+		frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		frame.BorderSizePixel = 0
+		frame.Parent = gui
+
+		rainbowTitleLabel = Instance.new("TextLabel")
+		rainbowTitleLabel.Size = UDim2.new(1, 0, 0, 30)
+		rainbowTitleLabel.BackgroundTransparency = 1
+		rainbowTitleLabel.Text = "Aimbot"
+		rainbowTitleLabel.Font = Enum.Font.GothamBold
+		rainbowTitleLabel.TextSize = 24
+		rainbowTitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		rainbowTitleLabel.Parent = frame
+
+		keyLabel = Instance.new("TextLabel")
+		keyLabel.Size = UDim2.new(1, -20, 0, 30)
+		keyLabel.Position = UDim2.new(0, 10, 0, 40)
+		keyLabel.BackgroundTransparency = 1
+		keyLabel.Text = "Keybind: " .. tostring(currentKeyCode)
+		keyLabel.Font = Enum.Font.Gotham
+		keyLabel.TextSize = 18
+		keyLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+		keyLabel.Parent = frame
+
+		changeKeyButton = Instance.new("TextButton")
+		changeKeyButton.Size = UDim2.new(0, 120, 0, 30)
+		changeKeyButton.Position = UDim2.new(0, 10, 0, 80)
+		changeKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+		changeKeyButton.Text = "Change Key"
+		changeKeyButton.Font = Enum.Font.Gotham
+		changeKeyButton.TextSize = 16
+		changeKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		changeKeyButton.Parent = frame
+
+		showHideLabel = Instance.new("TextLabel")
+		showHideLabel.Size = UDim2.new(0, 100, 0, 20)
+		showHideLabel.Position = UDim2.new(1, -110, 1, -25)
+		showHideLabel.BackgroundTransparency = 1
+		showHideLabel.Text = "[K] Show/Hide"
+		showHideLabel.Font = Enum.Font.Gotham
+		showHideLabel.TextSize = 14
+		showHideLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+		showHideLabel.Parent = frame
 	end
-	
-	local function isValidCharacter(character)
-		-- Only highlight player characters that are in Workspace and have a Humanoid
-		return character and character:IsDescendantOf(workspace) and character:FindFirstChildOfClass("Humanoid")
-	end
-	
-	local function isEnemy(player)
-		-- Returns true if the player is not on the same team as localPlayer
-		-- If Teams are not used, treat all other players as enemies
-		if player.Team ~= nil and localPlayer.Team ~= nil then
-			return player.Team ~= localPlayer.Team
-		else
-			return player ~= localPlayer
+
+	-- Show/hide UI logic (press K)
+	local uiVisible = true
+	UserInputService.InputBegan:Connect(function(input, processed)
+		if processed then return end
+		if input.KeyCode == Enum.KeyCode.K then
+			uiVisible = not uiVisible
+			if gui and frame then
+				frame.Visible = uiVisible
+			end
+			-- DO NOT change aimbotActive or enabled here!
 		end
-	end
-	
-	local function getOrCreateHighlight(character, player)
-		if not isValidCharacter(character) then
-			return nil
-		end
-		-- Remove old highlight if it's not parented to the current character
-		if highlights[player] and highlights[player].Adornee ~= character then
-			highlights[player]:Destroy()
-			highlights[player] = nil
-		end
-		-- Create new highlight if needed
-		if not highlights[player] then
-			local highlight = Instance.new("Highlight")
-			highlight.Adornee = character
-			highlight.FillTransparency = 0.7
-			highlight.OutlineTransparency = 0
-			highlight.OutlineColor = Color3.new(1, 0, 0)
-			highlight.Parent = character
-			highlights[player] = highlight
-		end
-		return highlights[player]
-	end
-	
-	local function removeHighlight(player)
-		if highlights[player] then
-			highlights[player]:Destroy()
-			highlights[player] = nil
-		end
-	end
-	
-	local function getOrCreateBillboard(character, player)
-		if not isValidCharacter(character) then
-			return nil
-		end
-		local head = character:FindFirstChild("Head")
-		if not head then
-			return nil
-		end
-		-- Remove old billboard if not parented to the correct head
-		if billboards[player] and billboards[player].Adornee ~= head then
-			billboards[player]:Destroy()
-			billboards[player] = nil
-		end
-		-- Create new billboard if needed
-		if not billboards[player] then
-			local billboard = Instance.new("BillboardGui")
-			billboard.Name = "ESPStatus"
-			billboard.Adornee = head
-			billboard.Size = UDim2.new(0, 100, 0, 30)
-			billboard.StudsOffset = Vector3.new(0, 2.5, 0)
-			billboard.AlwaysOnTop = true
-			billboard.Parent = head
-	
-			local label = Instance.new("TextLabel")
-			label.Name = "StatusLabel"
-			label.Size = UDim2.new(1, 0, 1, 0)
-			label.BackgroundTransparency = 1
-			label.TextStrokeTransparency = 0.5
-			label.TextScaled = true
-			label.Font = Enum.Font.SourceSansBold
-			label.Parent = billboard
-	
-			billboards[player] = billboard
-		end
-		return billboards[player]
-	end
-	
-	local function removeBillboard(player)
-		if billboards[player] then
-			billboards[player]:Destroy()
-			billboards[player] = nil
-		end
-	end
-	
-	local function updateBillboardText(player)
-		local billboard = billboards[player]
-		if not billboard then return end
-		local label = billboard:FindFirstChild("StatusLabel")
-		if not label then return end
-		if isEnemy(player) then
-			label.Text = "Enemy"
-			label.TextColor3 = Color3.new(1, 0, 0.94902)
-		else
-			label.Text = "Friendly"
-			label.TextColor3 = Color3.new(0, 0.14902, 1)
-		end
-	end
-	
-	local function updateESP()
-		for _, player in Players:GetPlayers() do
-			if player ~= localPlayer and player.Character and isValidCharacter(player.Character) then
-				if espEnabled then
-					getOrCreateHighlight(player.Character, player)
-					getOrCreateBillboard(player.Character, player)
-					updateBillboardText(player)
-				else
-					removeHighlight(player)
-					removeBillboard(player)
+	end)
+
+	-- Aimbot toggle logic (using the keybind)
+	UserInputService.InputBegan:Connect(function(input, processed)
+		if processed then return end
+		if input.KeyCode == currentKeyCode and not listeningForKey then
+			aimbotActive = not aimbotActive
+			if aimbotActive then
+				-- Start aimbot logic
+				if not aimConnection then
+					aimConnection = RunService.RenderStepped:Connect(function()
+						-- Aimbot logic here
+					end)
 				end
 			else
-				removeHighlight(player)
-				removeBillboard(player)
-			end
-		end
-	end
-	
-	local function enableESP()
-		espEnabled = true
-		updateESP()
-		-- Animate rainbow
-		if not rainbowConnection then
-			rainbowConnection = RunService.RenderStepped:Connect(function()
-				local t = (tick() % 6) / 6
-				local r, g, b = hsvToRgb(t, 1, 1)
-				local color = Color3.new(r, g, b)
-				for player, highlight in highlights do
-					if highlight and highlight.Parent and highlight.Adornee and isValidCharacter(highlight.Adornee) then
-						highlight.OutlineColor = color
-					else
-						-- Clean up invalid highlights
-						removeHighlight(player)
-					end
+				-- Stop aimbot logic
+				if aimConnection then
+					aimConnection:Disconnect()
+					aimConnection = nil
 				end
-			end)
-		end
-		-- Visual indicator: change button text
-		if button:IsA("TextButton") then
-			button.Text = "Homosexual ESP (Disable)"
-		end
-	end
-	
-	local function disableESP()
-		espEnabled = false
-		if rainbowConnection then
-			rainbowConnection:Disconnect()
-			rainbowConnection = nil
-		end
-		for _, highlight in highlights do
-			if highlight then
-				highlight:Destroy()
 			end
 		end
-		highlights = {}
-		for _, billboard in billboards do
-			if billboard then
-				billboard:Destroy()
-			end
-		end
-		billboards = {}
-		-- Visual indicator: change button text
-		if button:IsA("TextButton") then
-			button.Text = "Homosexual ESP (Enable)"
-		end
-	end
-	
-	local function onCharacterAdded(player, character)
-		if espEnabled and player ~= localPlayer and isValidCharacter(character) then
-			getOrCreateHighlight(character, player)
-			getOrCreateBillboard(character, player)
-			updateBillboardText(player)
-		else
-			removeHighlight(player)
-			removeBillboard(player)
-		end
-	end
-	
-	local function onPlayerAdded(player)
-		if player == localPlayer then return end
-		player.CharacterAdded:Connect(function(character)
-			onCharacterAdded(player, character)
-		end)
-		-- If the character already exists (player joined before script ran)
-		if player.Character then
-			onCharacterAdded(player, player.Character)
-		end
-	end
-	
-	for _, player in Players:GetPlayers() do
-		onPlayerAdded(player)
-	end
-	Players.PlayerAdded:Connect(onPlayerAdded)
-	Players.PlayerRemoving:Connect(function(player)
-		removeHighlight(player)
-		removeBillboard(player)
 	end)
-	
-	button.MouseButton1Click:Connect(function()
-		if espEnabled then
-			disableESP()
-		else
-			enableESP()
-		end
-	end)
-	
-	-- Set initial button state
-	if button:IsA("TextButton") then
-		button.Text = "Homosexual ESP (Enable)"
-		button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-	end
-	disableESP()
-	
-	-- Clean up on script removal
-	script.AncestryChanged:Connect(function()
-		if not script:IsDescendantOf(game) then
-			disableESP()
-		end
-	end)
-	
-	-- Extra: Update ESP on team change (if teams are used)
-	if localPlayer:GetPropertyChangedSignal("Team") then
-		localPlayer:GetPropertyChangedSignal("Team"):Connect(function()
-			if espEnabled then
-				updateESP()
-			end
+
+	-- Change keybind logic
+	if changeKeyButton then
+		changeKeyButton.MouseButton1Click:Connect(function()
+			listeningForKey = true
+			keyLabel.Text = "Press any key..."
 		end)
 	end
-	Players.PlayerAdded:Connect(function(player)
-		if player:GetPropertyChangedSignal("Team") then
-			player:GetPropertyChangedSignal("Team"):Connect(function()
-				if espEnabled then
-					updateESP()
-				end
-			end)
+
+	UserInputService.InputBegan:Connect(function(input, processed)
+		if listeningForKey and not processed then
+			if input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode ~= Enum.KeyCode.K then
+				currentKeyCode = input.KeyCode
+				keyLabel.Text = "Keybind: " .. tostring(currentKeyCode)
+				listeningForKey = false
+			end
 		end
 	end)
-	
-	-- Update Billboard text if teams change
-	for _, player in Players:GetPlayers() do
-		if player:GetPropertyChangedSignal("Team") then
-			player:GetPropertyChangedSignal("Team"):Connect(function()
-				updateBillboardText(player)
-			end)
-		end
-	end
-	Players.PlayerAdded:Connect(function(player)
-		if player:GetPropertyChangedSignal("Team") then
-			player:GetPropertyChangedSignal("Team"):Connect(function()
-				updateBillboardText(player)
-			end)
-		end
-	end)
-	
-	
+
+	-- Initialize GUI
+	createKeybindFrame()
+
+
 end
-coroutine.wrap(ASNOG_fake_script)()
-local function DEQDI_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(VWPI_fake_script)()
+local function QEHVRI_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
 	local frame = Frame
-	
+
 	local function toggle()
-	    frame.Visible = not frame.Visible
+		frame.Visible = not frame.Visible
 	end
-	
+
 	UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
-	    if gameProcessedEvent then return end
-	    if input.KeyCode == Enum.KeyCode.K then
-	        toggle()
-	    end
+		if gameProcessedEvent then return end
+		if input.KeyCode == Enum.KeyCode.K then
+			toggle()
+		end
 	end)
-	
-	
+
+
 end
-coroutine.wrap(DEQDI_fake_script)()
+coroutine.wrap(QEHVRI_fake_script)()
