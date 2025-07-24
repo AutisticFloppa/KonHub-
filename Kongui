@@ -44,6 +44,7 @@ Frame.BorderSizePixel = 2
 Frame.Position = UDim2.new(0.116740085, 0, 0.10206718, 0)
 Frame.Size = UDim2.new(0, 325, 0, 457)
 Frame.Active = true
+
 local UserInputService = game:GetService('UserInputService')
 
 local frame = Frame
@@ -368,7 +369,7 @@ HomoESP.TextWrapped = true
 
 -- Scripts:
 
-local function QAYFKMQ_fake_script() -- Infjump.LocalScript 
+local function UQOL_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	--Toggles the infinite jump between on or off on every script run
@@ -396,8 +397,8 @@ local function QAYFKMQ_fake_script() -- Infjump.LocalScript
 		end)
 	end
 end
-coroutine.wrap(QAYFKMQ_fake_script)()
-local function QAAZ_fake_script() -- Aimbot.KONAIMBOT 
+coroutine.wrap(UQOL_fake_script)()
+local function VWDXFC_fake_script() -- Aimbot.KONAIMBOT 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local Players = game:GetService("Players")
@@ -406,7 +407,7 @@ local function QAAZ_fake_script() -- Aimbot.KONAIMBOT
 	local localPlayer = Players.LocalPlayer
 	local camera = workspace.CurrentCamera
 	
-	local aimbotButton = script.Parent
+	local aimbotButton = Aimbot
 	
 	-- Keybind state
 	local currentKeyCode = Enum.KeyCode.E
@@ -669,48 +670,48 @@ local function QAAZ_fake_script() -- Aimbot.KONAIMBOT
 	
 	
 end
-coroutine.wrap(QAAZ_fake_script)()
-local function FWLLHV_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(VWDXFC_fake_script)()
+local function NOUZ_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(FWLLHV_fake_script)()
-local function MHDUJX_fake_script() -- Esp.LocalScript 
+coroutine.wrap(NOUZ_fake_script)()
+local function DYPDJGC_fake_script() -- Esp.LocalScript 
 	local script = Instance.new('LocalScript', Esp)
 
 	Esp.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
 	end)
 end
-coroutine.wrap(MHDUJX_fake_script)()
-local function NHSMC_fake_script() -- Fling.LocalScript 
+coroutine.wrap(DYPDJGC_fake_script)()
+local function NJLX_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(NHSMC_fake_script)()
-local function IWDROGS_fake_script() -- Fly.LocalScript 
+coroutine.wrap(NJLX_fake_script)()
+local function ATXQXDT_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
 	end)
 end
-coroutine.wrap(IWDROGS_fake_script)()
-local function WWQIQ_fake_script() -- Gun.LocalScript 
+coroutine.wrap(ATXQXDT_fake_script)()
+local function GZXOZLN_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(WWQIQ_fake_script)()
-local function ALIVSF_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(GZXOZLN_fake_script)()
+local function CWCMJ_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -718,32 +719,32 @@ local function ALIVSF_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(ALIVSF_fake_script)()
-local function MXCYWLF_fake_script() -- Rape.LocalScript 
+coroutine.wrap(CWCMJ_fake_script)()
+local function WQXM_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(MXCYWLF_fake_script)()
-local function ZHCJ_fake_script() -- invisible.LocalScript 
+coroutine.wrap(WQXM_fake_script)()
+local function QISNWK_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(ZHCJ_fake_script)()
-local function EOOZRAP_fake_script() -- r6NOCLIP.LocalScript 
+coroutine.wrap(QISNWK_fake_script)()
+local function UEAYD_fake_script() -- r6NOCLIP.LocalScript 
 	local script = Instance.new('LocalScript', r6NOCLIP)
 
 	r6NOCLIP.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
 	end)
 end
-coroutine.wrap(EOOZRAP_fake_script)()
-local function PZXQ_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(UEAYD_fake_script)()
+local function OHPZW_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -989,8 +990,8 @@ local function PZXQ_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(PZXQ_fake_script)()
-local function HNSI_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(OHPZW_fake_script)()
+local function KXLVOCP_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1007,8 +1008,8 @@ local function HNSI_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(HNSI_fake_script)()
-local function UWSSMW_fake_script() -- Brand.LocalScript 
+coroutine.wrap(KXLVOCP_fake_script)()
+local function PRFMBIE_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
 	local imageButton = Brand
@@ -1025,24 +1026,189 @@ local function UWSSMW_fake_script() -- Brand.LocalScript
 	
 	
 end
-coroutine.wrap(UWSSMW_fake_script)()
-local function OLPM_fake_script() -- Secret.LocalScript 
+coroutine.wrap(PRFMBIE_fake_script)()
+local function YQIN_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("Stupid ass nigger really thought der was a secret")
 	end)
 end
-coroutine.wrap(OLPM_fake_script)()
-local function ZGSN_fake_script() -- HomoESP.LocalScript 
+coroutine.wrap(YQIN_fake_script)()
+local function KKIFZCG_fake_script() -- HomoESP.LocalScript 
 	local script = Instance.new('LocalScript', HomoESP)
 
-	InfYield.MouseButton1Click:Connect(function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/AutisticFloppa/KonHub-/refs/heads/main/homoesp"))()
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local localPlayer = Players.LocalPlayer
+	
+	local button = script.Parent
+	
+	local espEnabled = false
+	local highlights = {} -- [Player] = Highlight
+	local rainbowConnection = nil
+	
+	-- Helper: HSV to RGB
+	local function hsvToRgb(h, s, v)
+		local i = math.floor(h * 6)
+		local f = h * 6 - i
+		local p = v * (1 - s)
+		local q = v * (1 - f * s)
+		local t = v * (1 - (1 - f) * s)
+		i = i % 6
+		if i == 0 then return v, t, p
+		elseif i == 1 then return q, v, p
+		elseif i == 2 then return p, v, t
+		elseif i == 3 then return p, q, v
+		elseif i == 4 then return t, p, v
+		elseif i == 5 then return v, p, q
+		end
+	end
+	
+	local function isValidCharacter(character)
+		-- Only highlight player characters that are in Workspace and have a Humanoid
+		return character and character:IsDescendantOf(workspace) and character:FindFirstChildOfClass("Humanoid")
+	end
+	
+	local function isEnemy(player)
+		-- Returns true if the player is not on the same team as localPlayer
+		return player.Team ~= localPlayer.Team
+	end
+	
+	local function getOrCreateHighlight(character, player)
+		if not isValidCharacter(character) then
+			return nil
+		end
+		if highlights[player] and highlights[player].Adornee == character then
+			return highlights[player]
+		end
+		-- Remove old highlight if exists
+		if highlights[player] then
+			highlights[player]:Destroy()
+		end
+		local highlight = Instance.new("Highlight")
+		highlight.Adornee = character
+		highlight.FillTransparency = 0.7 -- Lower fill transparency for a "thicker" look
+		highlight.OutlineTransparency = 0
+		highlight.OutlineColor = Color3.new(1, 0, 0)
+		-- highlight.OutlineWidth = 0.5 -- Not available in Roblox API as of now
+		highlight.Parent = character
+		highlights[player] = highlight
+		return highlight
+	end
+	
+	local function removeHighlight(player)
+		if highlights[player] then
+			highlights[player]:Destroy()
+			highlights[player] = nil
+		end
+	end
+	
+	local function updateESP()
+		for _, player in Players:GetPlayers() do
+			if player ~= localPlayer and player.Character and isValidCharacter(player.Character) and isEnemy(player) then
+				getOrCreateHighlight(player.Character, player)
+			else
+				removeHighlight(player)
+			end
+		end
+	end
+	
+	local function enableESP()
+		espEnabled = true
+		updateESP()
+		-- Animate rainbow
+		if not rainbowConnection then
+			rainbowConnection = RunService.RenderStepped:Connect(function()
+				local t = tick() % 6 / 6
+				local r, g, b = hsvToRgb(t, 1, 1)
+				local color = Color3.new(r, g, b)
+				for _, highlight in highlights do
+					if highlight and highlight.Parent then
+						highlight.OutlineColor = color
+					end
+				end
+			end)
+		end
+		-- Visual indicator: change button text
+		if button:IsA("TextButton") then
+			button.Text = "Homosexual ESP (Disable)"
+			button.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
+		end
+	end
+	
+	local function disableESP()
+		espEnabled = false
+		if rainbowConnection then
+			rainbowConnection:Disconnect()
+			rainbowConnection = nil
+		end
+		for _, highlight in highlights do
+			if highlight then
+				highlight:Destroy()
+			end
+		end
+		highlights = {}
+		-- Visual indicator: change button text
+		if button:IsA("TextButton") then
+			button.Text = "Homosexual ESP (Enable)"
+			button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+		end
+	end
+	
+	local function onCharacterAdded(player, character)
+		if espEnabled and player ~= localPlayer and isValidCharacter(character) and isEnemy(player) then
+			getOrCreateHighlight(character, player)
+		else
+			removeHighlight(player)
+		end
+	end
+	
+	local function onPlayerAdded(player)
+		if player == localPlayer then return end
+		player.CharacterAdded:Connect(function(character)
+			onCharacterAdded(player, character)
+		end)
+		-- If the character already exists (player joined before script ran)
+		if player.Character then
+			onCharacterAdded(player, player.Character)
+		end
+	end
+	
+	for _, player in Players:GetPlayers() do
+		onPlayerAdded(player)
+	end
+	Players.PlayerAdded:Connect(onPlayerAdded)
+	Players.PlayerRemoving:Connect(function(player)
+		removeHighlight(player)
 	end)
+	
+	button.MouseButton1Click:Connect(function()
+		if espEnabled then
+			disableESP()
+		else
+			enableESP()
+		end
+	end)
+	
+	-- Set initial button state
+	if button:IsA("TextButton") then
+		button.Text = "Homosexual ESP (Enable)"
+		button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+	end
+	disableESP()
+	
+	-- Clean up on script removal
+	script.AncestryChanged:Connect(function()
+		if not script:IsDescendantOf(game) then
+			disableESP()
+		end
+	end)
+	
+	
 end
-coroutine.wrap(ZGSN_fake_script)()
-local function OSNYB_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(KKIFZCG_fake_script)()
+local function WPBN_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -1061,4 +1227,4 @@ local function OSNYB_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(OSNYB_fake_script)()
+coroutine.wrap(WPBN_fake_script)()
