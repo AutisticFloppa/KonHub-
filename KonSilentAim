@@ -1,0 +1,239 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local SA = Instance.new("Frame")
+local SAText = Instance.new("TextLabel")
+local PlayerCount = Instance.new("TextLabel")
+local SilentAim = Instance.new("TextButton")
+local MadeBy = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+SA.Name = "SA"
+SA.Parent = ScreenGui
+SA.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- pure black
+SA.BorderColor3 = Color3.fromRGB(0, 226, 45) -- green border
+SA.BorderSizePixel = 2 -- 2 pixel border
+SA.Position = UDim2.new(0.390139997, 0, 0.307328612, 0)
+SA.Size = UDim2.new(0, 240, 0, 200) -- made smaller
+
+-- SAText at the top
+SAText.Name = "SA Text"
+SAText.Parent = SA
+SAText.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SAText.BorderColor3 = Color3.fromRGB(0, 226, 45)
+SAText.BorderSizePixel = 0
+SAText.Position = UDim2.new(0.5, -120, 0, 0) -- centered horizontally
+SAText.Size = UDim2.new(0, 240, 0, 30)
+SAText.Font = Enum.Font.SourceSans
+SAText.Text = "Arsenal Silent Aim KON"
+SAText.TextColor3 = Color3.fromRGB(0, 226, 45)
+SAText.TextSize = 18.000
+SAText.TextXAlignment = Enum.TextXAlignment.Center
+
+-- PlayerCount directly under SAText
+PlayerCount.Name = "Player Count"
+PlayerCount.Parent = SA
+PlayerCount.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+PlayerCount.BackgroundTransparency = 1.000 -- make background invisible
+PlayerCount.BorderColor3 = Color3.fromRGB(0, 226, 45)
+PlayerCount.BorderSizePixel = 0
+PlayerCount.Position = UDim2.new(0.5, -90, 0, 35) -- centered horizontally, 5px gap below SAText
+PlayerCount.Size = UDim2.new(0, 180, 0, 28)
+PlayerCount.Font = Enum.Font.SourceSans
+PlayerCount.Text = "Player Count:"
+PlayerCount.TextColor3 = Color3.fromRGB(254, 135, 0)
+PlayerCount.TextSize = 18.000
+PlayerCount.TextXAlignment = Enum.TextXAlignment.Center
+
+-- SilentAim directly under PlayerCount
+SilentAim.Name = "Silent Aim"
+SilentAim.Parent = SA
+SilentAim.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+SilentAim.BorderColor3 = Color3.fromRGB(0, 226, 45)
+SilentAim.BorderSizePixel = 2
+SilentAim.Position = UDim2.new(0.5, -90, 0, 68) -- centered horizontally, 5px gap below PlayerCount
+SilentAim.Size = UDim2.new(0, 180, 0, 48)
+SilentAim.Font = Enum.Font.SourceSans
+SilentAim.Text = "Enable Silent Aim"
+SilentAim.TextColor3 = Color3.fromRGB(170, 0, 0)
+SilentAim.TextSize = 20.000
+SilentAim.TextStrokeTransparency = 0.000
+SilentAim.TextXAlignment = Enum.TextXAlignment.Center
+
+-- MadeBy at the bottom
+MadeBy.Name = "Made By"
+MadeBy.Parent = SA
+MadeBy.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MadeBy.BackgroundTransparency = 1.000
+MadeBy.BorderColor3 = Color3.fromRGB(0, 226, 45)
+MadeBy.BorderSizePixel = 0
+MadeBy.Position = UDim2.new(0.5, -120, 1, -33) -- centered horizontally, 5px from bottom
+MadeBy.Size = UDim2.new(0, 240, 0, 28)
+MadeBy.Font = Enum.Font.SourceSans
+MadeBy.Text = "Press K to hide/unhide"
+MadeBy.TextColor3 = Color3.fromRGB(255, 0, 242)
+MadeBy.TextSize = 18.000
+MadeBy.TextXAlignment = Enum.TextXAlignment.Center
+
+-- Rainbow effect for SilentAim button
+coroutine.wrap(function()
+	while true do
+		for i = 0, 100 do
+			local hue = i / 100
+			local color = Color3.fromHSV(hue, 1, 1)
+			SilentAim.TextColor3 = color
+			task.wait(0.03)
+		end
+	end
+end)()
+
+-- Scripts:
+
+local function MCITIJ_fake_script() -- SA.Draggable 
+	local script = Instance.new('LocalScript', SA)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(MCITIJ_fake_script)()
+local function TGYL_fake_script() -- PlayerCount.LocalScript 
+	local script = Instance.new('LocalScript', PlayerCount)
+
+	local playerCountLabel = script.Parent -- Assumes the script is a child of a TextLabel
+
+	-- Function to update the player count
+	local function updatePlayerCount()
+		local players = game.Players:GetPlayers()
+		playerCountLabel.Text = "Player Count: " .. #players
+	end
+
+	-- Initially update the player count
+	updatePlayerCount()
+
+	-- Connect a function to fire whenever a player joins or leaves
+	game.Players.PlayerAdded:Connect(updatePlayerCount)
+	game.Players.PlayerRemoving:Connect(updatePlayerCount)
+
+end
+coroutine.wrap(TGYL_fake_script)()
+local function BNQNGFT_fake_script() -- ScreenGui.Toggle 
+	local script = Instance.new('LocalScript', ScreenGui)
+
+	local Player = game:GetService("Players").LocalPlayer
+	local Mouse = Player:GetMouse()
+	local MainFrame = script.Parent.SA
+	local keybind = "k"
+
+	Mouse.KeyDown:Connect(function(key)
+		if key == keybind then
+			if MainFrame.Visible == false then
+				MainFrame.Visible = true
+			else
+				MainFrame.Visible = false
+			end
+		end
+	end)
+end
+coroutine.wrap(BNQNGFT_fake_script)()
+
+-- Silent Aim Toggle Logic
+local silentAimEnabled = false
+local silentAimCoroutine = nil
+
+local function getplrsname()
+	for i,v in pairs(game:GetChildren()) do
+		if v.ClassName == "Players" then
+			return v.Name
+		end
+	end
+end
+
+local function startSilentAim()
+	local players = getplrsname()
+	local plr = game[players].LocalPlayer
+	return coroutine.create(function()
+		while silentAimEnabled do
+			for _,v in pairs(game[players]:GetPlayers()) do
+				if v.Name ~= plr.Name and v.Character then
+					if v.Character:FindFirstChild("RightUpperLeg") then
+						v.Character.RightUpperLeg.CanCollide = false
+						v.Character.RightUpperLeg.Transparency = 10
+						v.Character.RightUpperLeg.Size = Vector3.new(13,13,13)
+					end
+					if v.Character:FindFirstChild("LeftUpperLeg") then
+						v.Character.LeftUpperLeg.CanCollide = false
+						v.Character.LeftUpperLeg.Transparency = 10
+						v.Character.LeftUpperLeg.Size = Vector3.new(13,13,13)
+					end
+					if v.Character:FindFirstChild("HeadHB") then
+						v.Character.HeadHB.CanCollide = false
+						v.Character.HeadHB.Transparency = 10
+						v.Character.HeadHB.Size = Vector3.new(13,13,13)
+					end
+					if v.Character:FindFirstChild("HumanoidRootPart") then
+						v.Character.HumanoidRootPart.CanCollide = false
+						v.Character.HumanoidRootPart.Transparency = 10
+						v.Character.HumanoidRootPart.Size = Vector3.new(13,13,13)
+					end
+				end
+			end
+			task.wait(1)
+		end
+	end)
+end
+
+SilentAim.MouseButton1Down:Connect(function()
+	silentAimEnabled = not silentAimEnabled
+	if silentAimEnabled then
+		SilentAim.Text = "Disable Silent Aim"
+		SilentAim.TextColor3 = Color3.fromRGB(0, 170, 0)
+		if not silentAimCoroutine or coroutine.status(silentAimCoroutine) == "dead" then
+			silentAimCoroutine = startSilentAim()
+			coroutine.resume(silentAimCoroutine)
+		end
+	else
+		SilentAim.Text = "Enable Silent Aim"
+		SilentAim.TextColor3 = Color3.fromRGB(170, 0, 0)
+		-- The coroutine will stop on next loop since silentAimEnabled is false
+	end
+end)
+
