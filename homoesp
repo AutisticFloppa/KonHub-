@@ -1,1 +1,168 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local localPlayer = Players.LocalPlayer
+
+local button = HomoESP
+
+local espEnabled = false
+local highlights = {} -- [Player] = Highlight
+local rainbowConnection = nil
+
+-- Helper: HSV to RGB
+local function hsvToRgb(h, s, v)
+	local i = math.floor(h * 6)
+	local f = h * 6 - i
+	local p = v * (1 - s)
+	local q = v * (1 - f * s)
+	local t = v * (1 - (1 - f) * s)
+	i = i % 6
+	if i == 0 then return v, t, p
+	elseif i == 1 then return q, v, p
+	elseif i == 2 then return p, v, t
+	elseif i == 3 then return p, q, v
+	elseif i == 4 then return t, p, v
+	elseif i == 5 then return v, p, q
+	end
+end
+
+local function isValidCharacter(character)
+	-- Only highlight player characters that are in Workspace and have a Humanoid
+	return character and character:IsDescendantOf(workspace) and character:FindFirstChildOfClass("Humanoid")
+end
+
+local function isEnemy(player)
+	-- Returns true if the player is not on the same team as localPlayer
+	return player.Team ~= localPlayer.Team
+end
+
+local function getOrCreateHighlight(character, player)
+	if not isValidCharacter(character) then
+		return nil
+	end
+	if highlights[player] and highlights[player].Adornee == character then
+		return highlights[player]
+	end
+	-- Remove old highlight if exists
+	if highlights[player] then
+		highlights[player]:Destroy()
+	end
+	local highlight = Instance.new("Highlight")
+	highlight.Adornee = character
+	highlight.FillTransparency = 0.7 -- Lower fill transparency for a "thicker" look
+	highlight.OutlineTransparency = 0
+	highlight.OutlineColor = Color3.new(1, 0, 0)
+	-- highlight.OutlineWidth = 0.5 -- Not available in Roblox API as of now
+	highlight.Parent = character
+	highlights[player] = highlight
+	return highlight
+end
+
+local function removeHighlight(player)
+	if highlights[player] then
+		highlights[player]:Destroy()
+		highlights[player] = nil
+	end
+end
+
+local function updateESP()
+	for _, player in Players:GetPlayers() do
+		if player ~= localPlayer and player.Character and isValidCharacter(player.Character) and isEnemy(player) then
+			getOrCreateHighlight(player.Character, player)
+		else
+			removeHighlight(player)
+		end
+	end
+end
+
+local function enableESP()
+	espEnabled = true
+	updateESP()
+	-- Animate rainbow
+	if not rainbowConnection then
+		rainbowConnection = RunService.RenderStepped:Connect(function()
+			local t = tick() % 6 / 6
+			local r, g, b = hsvToRgb(t, 1, 1)
+			local color = Color3.new(r, g, b)
+			for _, highlight in highlights do
+				if highlight and highlight.Parent then
+					highlight.OutlineColor = color
+				end
+			end
+		end)
+	end
+	-- Visual indicator: change button text
+	if button:IsA("TextButton") then
+		button.Text = "Homosexual ESP (Disable)"
+		button.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
+	end
+end
+
+local function disableESP()
+	espEnabled = false
+	if rainbowConnection then
+		rainbowConnection:Disconnect()
+		rainbowConnection = nil
+	end
+	for _, highlight in highlights do
+		if highlight then
+			highlight:Destroy()
+		end
+	end
+	highlights = {}
+	-- Visual indicator: change button text
+	if button:IsA("TextButton") then
+		button.Text = "Homosexual ESP (Enable)"
+		button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+	end
+end
+
+local function onCharacterAdded(player, character)
+	if espEnabled and player ~= localPlayer and isValidCharacter(character) and isEnemy(player) then
+		getOrCreateHighlight(character, player)
+	else
+		removeHighlight(player)
+	end
+end
+
+local function onPlayerAdded(player)
+	if player == localPlayer then return end
+	player.CharacterAdded:Connect(function(character)
+		onCharacterAdded(player, character)
+	end)
+	-- If the character already exists (player joined before script ran)
+	if player.Character then
+		onCharacterAdded(player, player.Character)
+	end
+end
+
+for _, player in Players:GetPlayers() do
+	onPlayerAdded(player)
+end
+Players.PlayerAdded:Connect(onPlayerAdded)
+Players.PlayerRemoving:Connect(function(player)
+	removeHighlight(player)
+end)
+
+button.MouseButton1Click:Connect(function()
+	if espEnabled then
+		disableESP()
+	else
+		enableESP()
+	end
+end)
+
+-- Set initial button state
+if button:IsA("TextButton") then
+	button.Text = "Homosexual ESP (Enable)"
+	button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+end
+disableESP()
+
+-- Clean up on script removal
+script.AncestryChanged:Connect(function()
+	if not script:IsDescendantOf(game) then
+		disableESP()
+	end
+end)
+
 
