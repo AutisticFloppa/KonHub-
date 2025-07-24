@@ -227,7 +227,7 @@ JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
 JerkOff.Position = UDim2.new(0.184624866, 0, 0.769699812, 0)
 JerkOff.Size = UDim2.new(0, 44, 0, 38)
 JerkOff.Font = Enum.Font.SourceSans
-JerkOff.Text = "Jerk Off"
+JerkOff.Text = "JerkOff"
 JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
 JerkOff.TextSize = 14.000
 JerkOff.TextWrapped = true
@@ -1160,10 +1160,10 @@ local function ASNOG_fake_script() -- HomoESP.LocalScript
 		if not label then return end
 		if isEnemy(player) then
 			label.Text = "Enemy"
-			label.TextColor3 = Color3.new(1, 0, 0)
+			label.TextColor3 = Color3.new(1, 0, 0.94902)
 		else
 			label.Text = "Friendly"
-			label.TextColor3 = Color3.new(0, 1, 0)
+			label.TextColor3 = Color3.new(0, 0.14902, 1)
 		end
 	end
 	
@@ -1207,7 +1207,6 @@ local function ASNOG_fake_script() -- HomoESP.LocalScript
 		-- Visual indicator: change button text
 		if button:IsA("TextButton") then
 			button.Text = "Homosexual ESP (Disable)"
-			button.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
 		end
 	end
 	
@@ -1232,7 +1231,6 @@ local function ASNOG_fake_script() -- HomoESP.LocalScript
 		-- Visual indicator: change button text
 		if button:IsA("TextButton") then
 			button.Text = "Homosexual ESP (Enable)"
-			button.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
 		end
 	end
 	
