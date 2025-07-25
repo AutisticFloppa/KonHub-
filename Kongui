@@ -24,8 +24,15 @@ local Brand = Instance.new("ImageButton")
 local Secret = Instance.new("TextButton")
 local Date = Instance.new("TextButton")
 local HomoESP = Instance.new("TextButton")
+local OpenAvatarSwapper = Instance.new("TextButton")
 
 --Properties:
+game:GetService("StarterGui"):SetCore("SendNotification",{
+	Title = "KONgui", -- Required
+	Text = "KON gui has loaded sucsessfuly!", -- Required
+	Icon = "rbxassetid://96832072052936" -- Optional
+})
+
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -137,7 +144,7 @@ Infjump.BorderColor3 = Color3.fromRGB(11, 215, 226)
 Infjump.Position = UDim2.new(0.347701699, 0, 0.618845761, 0)
 Infjump.Size = UDim2.new(0, 98, 0, 50)
 Infjump.Font = Enum.Font.SourceSans
-Infjump.Text = "InfJump"
+Infjump.Text = "KON InfJump"
 Infjump.TextColor3 = Color3.fromRGB(0, 226, 45)
 Infjump.TextSize = 14.000
 Infjump.TextWrapped = true
@@ -209,7 +216,7 @@ Gun.BorderColor3 = Color3.fromRGB(255, 213, 0)
 Gun.Position = UDim2.new(0.0184709281, 0, 0.769699812, 0)
 Gun.Size = UDim2.new(0, 44, 0, 38)
 Gun.Font = Enum.Font.SourceSans
-Gun.Text = "Suicide gun (R6)"
+Gun.Text = " gun (R6)"
 Gun.TextColor3 = Color3.fromRGB(0, 226, 45)
 Gun.TextSize = 14.000
 Gun.TextWrapped = true
@@ -221,7 +228,7 @@ JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
 JerkOff.Position = UDim2.new(0.184624866, 0, 0.769699812, 0)
 JerkOff.Size = UDim2.new(0, 44, 0, 38)
 JerkOff.Font = Enum.Font.SourceSans
-JerkOff.Text = "Jerk Off"
+JerkOff.Text = "Funny Tool"
 JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
 JerkOff.TextSize = 14.000
 JerkOff.TextWrapped = true
@@ -233,7 +240,7 @@ Rape.BorderColor3 = Color3.fromRGB(226, 0, 4)
 Rape.Position = UDim2.new(0.0184709281, 0, 0.879108965, 0)
 Rape.Size = UDim2.new(0, 44, 0, 38)
 Rape.Font = Enum.Font.SourceSans
-Rape.Text = "Rape"
+Rape.Text = "Tp spam"
 Rape.TextColor3 = Color3.fromRGB(0, 226, 45)
 Rape.TextSize = 14.000
 Rape.TextWrapped = true
@@ -269,7 +276,7 @@ arseKON.BorderColor3 = Color3.fromRGB(255, 42, 0)
 arseKON.Position = UDim2.new(0.667701721, 0, 0.881044865, 0)
 arseKON.Size = UDim2.new(0, 98, 0, 37)
 arseKON.Font = Enum.Font.SourceSans
-arseKON.Text = "Arsenal SilentAim (KON)"
+arseKON.Text = "KON silent aim"
 arseKON.TextColor3 = Color3.fromRGB(0, 226, 45)
 arseKON.TextSize = 14.000
 arseKON.TextWrapped = true
@@ -281,7 +288,7 @@ TextLabel.BorderSizePixel = 2
 TextLabel.Size = UDim2.new(0, 153, 0, 38)
 TextLabel.ZIndex = 0
 TextLabel.Font = Enum.Font.SourceSans
-TextLabel.Text = "KonGui 2.3"
+TextLabel.Text = "KonGui 2.6"
 TextLabel.TextColor3 = Color3.fromRGB(111, 255, 0)
 TextLabel.TextSize = 14.000
 
@@ -306,8 +313,8 @@ Madeby.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Madeby.BorderSizePixel = 0
 Madeby.Position = UDim2.new(0.184615389, 0, 0.0831509829, 0)
 Madeby.Size = UDim2.new(0, 200, 0, 50)
-Madeby.Font = Enum.Font.SourceSans
-Madeby.Text = "Made by the kon's"
+Madeby.Font = Enum.Font.Nunito
+Madeby.Text = "Made by the wafflez"
 Madeby.TextColor3 = Color3.fromRGB(34, 255, 0)
 Madeby.TextSize = 23.000
 Madeby.TextWrapped = true
@@ -360,11 +367,25 @@ HomoESP.TextColor3 = Color3.fromRGB(0, 226, 45)
 HomoESP.TextSize = 14.000
 HomoESP.TextWrapped = true
 
+OpenAvatarSwapper.Name = "OpenAvatarSwapper"
+OpenAvatarSwapper.Parent = Frame
+OpenAvatarSwapper.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+OpenAvatarSwapper.BorderColor3 = Color3.fromRGB(192, 0, 226)
+OpenAvatarSwapper.Position = UDim2.new(0.347701699, 0, 0.496176809, 0)
+OpenAvatarSwapper.Size = UDim2.new(0, 98, 0, 50)
+OpenAvatarSwapper.Font = Enum.Font.SourceSans
+OpenAvatarSwapper.Text = "KON avatar clone"
+OpenAvatarSwapper.TextColor3 = Color3.fromRGB(0, 226, 45)
+OpenAvatarSwapper.TextSize = 14.000
+OpenAvatarSwapper.TextWrapped = true
+
 -- Scripts:
 
-local function SNPYZ_fake_script() -- Infjump.LocalScript 
+local function HPVPG_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
+	
+	script.Parent.MouseButton1Click:Connect(function()
 	--Toggles the infinite jump between on or off on every script run
 	_G.infinjump = not _G.infinjump
 	
@@ -388,10 +409,11 @@ local function SNPYZ_fake_script() -- Infjump.LocalScript
 				end
 			end
 		end)
-	end
+		end
+	end)
 end
-coroutine.wrap(SNPYZ_fake_script)()
-local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy) 
+coroutine.wrap(HPVPG_fake_script)()
+local function RNRI_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local Players = game:GetService("Players")
@@ -400,7 +422,7 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	local localPlayer = Players.LocalPlayer
 	local camera = workspace.CurrentCamera
 	
-	local aimbotButton = Aimbot
+	local aimbotButton = script.Parent
 	
 	local currentKeyCode = Enum.KeyCode.E
 	local listeningForKey = false
@@ -436,13 +458,12 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		frame = Instance.new("Frame")
 		frame.Size = UDim2.new(0, 250, 0, 120)
 		frame.Position = UDim2.new(0.5, -125, 0.5, -60)
-		frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		frame.BorderSizePixel = 0
+		frame.BackgroundColor3 = Color3.new(0, 0, 0)
+		frame.BorderSizePixel = 1
 		frame.AnchorPoint = Vector2.new(0.5, 0.5)
 		frame.Visible = false
 		frame.ZIndex = 10
 		frame.Parent = gui
-	
 		frame.Active = true
 		frame.Draggable = true
 	
@@ -451,7 +472,6 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		title.Position = UDim2.new(0, 0, 0, 0)
 		title.BackgroundTransparency = 1
 		title.Text = "KON Aimbot"
-		title.TextColor3 = Color3.fromRGB(64, 0, 255)
 		title.Font = Enum.Font.SourceSansBold
 		title.TextSize = 16
 		title.ZIndex = 11
@@ -462,8 +482,6 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		keyLabel.Size = UDim2.new(1, -20, 0, 30)
 		keyLabel.Position = UDim2.new(0, 10, 0, 40)
 		keyLabel.BackgroundTransparency = 1
-		keyLabel.Text = "Current Key: " .. tostring(currentKeyCode.Name)
-		keyLabel.TextColor3 = Color3.fromRGB(255, 238, 0)
 		keyLabel.Font = Enum.Font.SourceSans
 		keyLabel.TextSize = 18
 		keyLabel.TextXAlignment = Enum.TextXAlignment.Left
@@ -473,10 +491,9 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		changeKeyButton = Instance.new("TextButton")
 		changeKeyButton.Size = UDim2.new(0, 120, 0, 30)
 		changeKeyButton.Position = UDim2.new(0, 10, 0, 80)
-		changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		changeKeyButton.BorderSizePixel = 0
+		changeKeyButton.BackgroundColor3 = Color3.new(0, 0, 0)
+		changeKeyButton.BorderSizePixel = 1
 		changeKeyButton.Text = "Change Key"
-		changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
 		changeKeyButton.Font = Enum.Font.SourceSans
 		changeKeyButton.TextSize = 18
 		changeKeyButton.ZIndex = 11
@@ -486,11 +503,10 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		showHideLabel.Size = UDim2.new(0, 120, 0, 30)
 		showHideLabel.Position = UDim2.new(1, -130, 0, 80)
 		showHideLabel.BackgroundTransparency = 1
-		showHideLabel.Text = "Press K to show/hide"
-		showHideLabel.TextColor3 = Color3.fromRGB(0, 38, 255)
 		showHideLabel.Font = Enum.Font.SourceSans
 		showHideLabel.TextSize = 14
 		showHideLabel.ZIndex = 11
+		showHideLabel.Text = "       Press K to show/hide"
 		showHideLabel.Parent = frame
 	
 		changeKeyButton.MouseButton1Click:Connect(function()
@@ -499,15 +515,43 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 			listeningForKey = true
 			changeKeyButton.Text = "Press any key..."
 			keyLabel.Text = "Current Key: ..."
-			changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
-			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-			keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
 		end)
 	end
+	
+	-- Rainbow color animation
+	local function updateRainbowColors()
+		local hue = 0
+		RunService.RenderStepped:Connect(function()
+			hue = (hue + 0.005) % 1
+			local color = Color3.fromHSV(hue, 1, 1)
+			if frame then
+				frame.BorderColor3 = color
+			end
+			if changeKeyButton then
+				changeKeyButton.BorderColor3 = color
+				changeKeyButton.TextColor3 = color
+			end
+			if keyLabel then
+				keyLabel.TextColor3 = color
+			end
+			if rainbowTitleLabel then
+				rainbowTitleLabel.TextColor3 = color
+			end
+			if showHideLabel then
+				showHideLabel.TextColor3 = color
+			end
+		end)
+	end
+	
+	updateRainbowColors()
 	
 	local function getClosestTarget()
 		local closestPart = nil
 		local closestDist = math.huge
+		local rayParams = RaycastParams.new()
+		rayParams.FilterType = Enum.RaycastFilterType.Blacklist
+		rayParams.IgnoreWater = true
+	
 		for _, player in Players:GetPlayers() do
 			if player ~= localPlayer and player.Character and player.Character.Parent == workspace then
 				if not player.Team or not localPlayer.Team or player.Team ~= localPlayer.Team then
@@ -521,6 +565,20 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 						}
 						for _, part in partsToCheck do
 							if part then
+								-- Raycast from camera to part to check visibility
+								rayParams.FilterDescendantsInstances = {localPlayer.Character}
+								local origin = camera.CFrame.Position
+								local direction = (part.Position - origin)
+								local raycastResult = workspace:Raycast(origin, direction, rayParams)
+	
+								-- If raycast hits something not the target character, skip this part
+								if raycastResult and raycastResult.Instance then
+									local hitParent = raycastResult.Instance:FindFirstAncestorOfClass("Model")
+									if hitParent ~= player.Character then
+										continue
+									end
+								end
+	
 								local screenPos, onScreen = camera:WorldToViewportPoint(part.Position)
 								if onScreen then
 									local dist = (camera.CFrame.Position - part.Position).Magnitude
@@ -563,22 +621,7 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	end
 	
 	local function setNonTitleLabelColors()
-		if keyLabel then
-			keyLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-			keyLabel.BackgroundTransparency = 1
-		end
-		if changeKeyButton then
-			changeKeyButton.TextColor3 = Color3.fromRGB(47, 255, 0)
-			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-		end
-		if showHideLabel then
-			showHideLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-			showHideLabel.BackgroundTransparency = 1
-		end
-		if rainbowTitleLabel then
-			rainbowTitleLabel.TextColor3 = Color3.fromRGB(47, 255, 0)
-			rainbowTitleLabel.BackgroundTransparency = 1
-		end
+		-- Intentionally blank, rainbow overrides these
 	end
 	
 	UserInputService.InputBegan:Connect(function(input, processed)
@@ -598,7 +641,6 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 			end
 			if changeKeyButton then
 				changeKeyButton.Text = "Change Key"
-				changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 			end
 			setNonTitleLabelColors()
 			return
@@ -612,7 +654,6 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 				end
 				if changeKeyButton then
 					changeKeyButton.Text = "Change Key"
-					changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 				end
 				setNonTitleLabelColors()
 				listeningForKey = false
@@ -620,7 +661,7 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 			return
 		end
 	
-		if input.KeyCode == currentKeyCode then
+		if enabled and input.KeyCode == currentKeyCode then
 			aimbotActive = not aimbotActive
 			if aimbotActive then
 				startAimbot()
@@ -628,9 +669,6 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 				stopAimbot()
 			end
 		end
-	end)
-	
-	UserInputService.InputEnded:Connect(function(input, processed)
 	end)
 	
 	script.AncestryChanged:Connect(function()
@@ -662,54 +700,53 @@ local function KTDGEM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 		end
 		if changeKeyButton then
 			changeKeyButton.Text = "Change Key"
-			changeKeyButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 		end
 		setNonTitleLabelColors()
 	end)
 	
 end
-coroutine.wrap(KTDGEM_fake_script)()
-local function LQAASOH_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(RNRI_fake_script)()
+local function BWVA_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(LQAASOH_fake_script)()
-local function FNTHLVX_fake_script() -- Esp.LocalScript 
+coroutine.wrap(BWVA_fake_script)()
+local function VKAJP_fake_script() -- Esp.LocalScript 
 	local script = Instance.new('LocalScript', Esp)
 
 	Esp.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
 	end)
 end
-coroutine.wrap(FNTHLVX_fake_script)()
-local function FNSRRNE_fake_script() -- Fling.LocalScript 
+coroutine.wrap(VKAJP_fake_script)()
+local function DZYI_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(FNSRRNE_fake_script)()
-local function CHQRHU_fake_script() -- Fly.LocalScript 
+coroutine.wrap(DZYI_fake_script)()
+local function IQPFAO_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
 	end)
 end
-coroutine.wrap(CHQRHU_fake_script)()
-local function IGBV_fake_script() -- Gun.LocalScript 
+coroutine.wrap(IQPFAO_fake_script)()
+local function DRXV_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(IGBV_fake_script)()
-local function IOLHH_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(DRXV_fake_script)()
+local function CKDC_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -717,32 +754,32 @@ local function IOLHH_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(IOLHH_fake_script)()
-local function ZZYBUM_fake_script() -- Rape.LocalScript 
+coroutine.wrap(CKDC_fake_script)()
+local function YJRDPM_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(ZZYBUM_fake_script)()
-local function BUKFH_fake_script() -- invisible.LocalScript 
+coroutine.wrap(YJRDPM_fake_script)()
+local function AOIIBVJ_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(BUKFH_fake_script)()
-local function PZZBTW_fake_script() -- r6NOCLIP.LocalScript 
+coroutine.wrap(AOIIBVJ_fake_script)()
+local function XWKBD_fake_script() -- r6NOCLIP.LocalScript 
 	local script = Instance.new('LocalScript', r6NOCLIP)
 
 	r6NOCLIP.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
 	end)
 end
-coroutine.wrap(PZZBTW_fake_script)()
-local function JKKANQS_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(XWKBD_fake_script)()
+local function URCTRFY_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -988,8 +1025,8 @@ local function JKKANQS_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(JKKANQS_fake_script)()
-local function EUBD_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(URCTRFY_fake_script)()
+local function EZONNRD_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1006,17 +1043,35 @@ local function EUBD_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(EUBD_fake_script)()
-local function AOBMOU_fake_script() -- Brand.LocalScript 
+coroutine.wrap(EZONNRD_fake_script)()
+local function SOTNAXQ_fake_script() -- PressKToHide.RainbowFrame 
+	local script = Instance.new('LocalScript', PressKToHide)
+
+	local RunService = game:GetService("RunService")
+	
+	-- Change this to the frame you want to rainbow-ify
+	local TargetFrame = script.Parent
+	
+	local hue = 0
+	
+	RunService.RenderStepped:Connect(function()
+		hue = (hue + 0.002) % 1
+		local rainbowColor = Color3.fromHSV(hue, 1, 1)
+		TargetFrame.TextColor3 = rainbowColor
+	end)
+	
+end
+coroutine.wrap(SOTNAXQ_fake_script)()
+local function OVGWG_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
-	local imageButton = Brand
+	local imageButton = script.Parent
 	
 	coroutine.wrap(function()
 	    while true do
 	        for i = 0, 100 do
 	            local hue = i / 100
-	            imageButton.ImageColor3 = Color3.fromHSV(hue, 1, 1)
+				imageButton.ImageColor3= Color3.fromHSV(hue, 1, 1)
 	            task.wait(0.03)
 	        end
 	    end
@@ -1024,16 +1079,16 @@ local function AOBMOU_fake_script() -- Brand.LocalScript
 	
 	
 end
-coroutine.wrap(AOBMOU_fake_script)()
-local function NPEUT_fake_script() -- Secret.LocalScript 
+coroutine.wrap(OVGWG_fake_script)()
+local function ATKT_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("Stupid ass nigger really thought der was a secret")
 	end)
 end
-coroutine.wrap(NPEUT_fake_script)()
-local function PYDNF_fake_script() -- HomoESP.KON esp test 
+coroutine.wrap(ATKT_fake_script)()
+local function IZVHDAQ_fake_script() -- HomoESP.KON esp test 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
@@ -1137,7 +1192,7 @@ local function PYDNF_fake_script() -- HomoESP.KON esp test
 			label.BackgroundTransparency = 1
 			label.TextStrokeTransparency = 0.5
 			label.TextScaled = true
-			label.Font = Enum.Font.SourceSansBold
+			label.Font = Enum.Font.SourceSans
 			label.Parent = billboard
 	
 			billboards[player] = billboard
@@ -1322,8 +1377,8 @@ local function PYDNF_fake_script() -- HomoESP.KON esp test
 	
 	
 end
-coroutine.wrap(PYDNF_fake_script)()
-local function DHHMXI_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(IZVHDAQ_fake_script)()
+local function AZYCA_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -1342,4 +1397,174 @@ local function DHHMXI_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(DHHMXI_fake_script)()
+coroutine.wrap(AZYCA_fake_script)()
+local function GUEFU_fake_script() -- OpenAvatarSwapper.LocalScript 
+	local script = Instance.new('LocalScript', OpenAvatarSwapper)
+
+	local Players = game:GetService("Players")
+	local UserInputService = game:GetService("UserInputService")
+	local RunService = game:GetService("RunService")
+	
+	local localPlayer = Players.LocalPlayer
+	local openButton = script.Parent
+	
+	local guiCreated = false
+	local screenGui, frame
+	
+	-- Utility to set rainbow color based on time and phase offset
+	local function getRainbowColor(offset)
+		local t = (tick() * 0.3 + offset) % 1
+		return Color3.fromHSV(t, 1, 1)
+	end
+	
+	-- Create GUI
+	local function createAvatarSwapperGui()
+		screenGui = Instance.new("ScreenGui")
+		screenGui.Name = "AvatarSwapperGui"
+		screenGui.ResetOnSpawn = false
+		screenGui.Parent = localPlayer:WaitForChild("PlayerGui")
+	
+		frame = Instance.new("Frame")
+		frame.Size = UDim2.new(0, 300, 0, 200)
+		frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+		frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		frame.BorderSizePixel = 2
+		frame.BorderColor3 = Color3.fromRGB(255, 0, 0) -- initial, will be overwritten by rainbow
+		frame.Visible = true
+		frame.Active = true
+		frame.Draggable = true
+		frame.Parent = screenGui
+	
+		local title = Instance.new("TextLabel")
+		title.Text = "KON Avatar Swapper"
+		title.Size = UDim2.new(1, 0, 0, 30)
+		title.BackgroundTransparency = 1
+		title.Font = Enum.Font.SourceSansBold
+		title.TextSize = 22
+		title.TextColor3 = Color3.fromRGB(255, 255, 255)
+		title.Parent = frame
+	
+		local usernameBox = Instance.new("TextBox")
+		usernameBox.PlaceholderText = "Enter username"
+		usernameBox.Size = UDim2.new(0.8, 0, 0, 30)
+		usernameBox.Position = UDim2.new(0.1, 0, 0.4, 0)
+		usernameBox.Text = ""
+		usernameBox.Font = Enum.Font.SourceSans
+		usernameBox.TextSize = 18
+		usernameBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+		usernameBox.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+		usernameBox.BorderSizePixel = 1
+		usernameBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
+		usernameBox.Parent = frame
+	
+		local swapButton = Instance.new("TextButton")
+		swapButton.Text = "Swap"
+		swapButton.Size = UDim2.new(0.4, 0, 0, 30)
+		swapButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+		swapButton.Font = Enum.Font.SourceSansBold
+		swapButton.TextSize = 20
+		swapButton.TextColor3 = Color3.fromRGB(0, 255, 0)
+		swapButton.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		swapButton.BorderSizePixel = 1
+		swapButton.BorderColor3 = Color3.fromRGB(0, 255, 0)
+		swapButton.Parent = frame
+	
+		local rigToggle = Instance.new("TextButton")
+		rigToggle.Text = "Rig: R15"
+		rigToggle.Size = UDim2.new(0.4, 0, 0, 30)
+		rigToggle.Position = UDim2.new(0.5, 0, 0.7, 0)
+		rigToggle.Font = Enum.Font.SourceSansBold
+		rigToggle.TextSize = 20
+		rigToggle.TextColor3 = Color3.fromRGB(0, 170, 255)
+		rigToggle.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+		rigToggle.BorderSizePixel = 1
+		rigToggle.BorderColor3 = Color3.fromRGB(0, 170, 255)
+		rigToggle.Parent = frame
+	
+		local hintLabel = Instance.new("TextLabel")
+		hintLabel.Text = "K to hide/unhide"
+		hintLabel.Size = UDim2.new(1, 0, 0, 20)
+		hintLabel.Position = UDim2.new(0, 0, 1, -20)
+		hintLabel.BackgroundTransparency = 1
+		hintLabel.Font = Enum.Font.SourceSans
+		hintLabel.TextSize = 14
+		hintLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+		hintLabel.Parent = frame
+	
+		-- Track rig type, default R15
+		local isR15 = true
+	
+		rigToggle.MouseButton1Click:Connect(function()
+			isR15 = not isR15
+			rigToggle.Text = isR15 and "Rig: R15" or "Rig: R6"
+		end)
+	
+		-- Username to userId
+		local function getUserId(username)
+			local success, userId = pcall(function()
+				return Players:GetUserIdFromNameAsync(username)
+			end)
+			return success and userId or nil
+		end
+	
+		-- Apply appearance locally with rig type
+		local function applyAvatar(userId)
+			local success, description = pcall(function()
+				return Players:GetHumanoidDescriptionFromUserId(userId)
+			end)
+			if success then
+				-- Load character with selected rig type
+				localPlayer.CharacterAutoLoads = false
+				localPlayer:LoadCharacterWithHumanoidDescription(description, isR15)
+				localPlayer.CharacterAdded:Wait()
+				localPlayer.CharacterAutoLoads = true
+			end
+		end
+	
+		swapButton.MouseButton1Click:Connect(function()
+			local username = usernameBox.Text
+			if username ~= "" then
+				local userId = getUserId(username)
+				if userId then
+					applyAvatar(userId)
+				end
+			end
+		end)
+	
+		-- Rainbow update for frame border and text colors
+		RunService.RenderStepped:Connect(function()
+			local time = tick() * 0.3
+			frame.BorderColor3 = Color3.fromHSV(time % 1, 1, 1)
+			title.TextColor3 = Color3.fromHSV((time + 0.1) % 1, 1, 1)
+			usernameBox.TextColor3 = Color3.fromHSV((time + 0.2) % 1, 1, 1)
+			usernameBox.BorderColor3 = Color3.fromHSV((time + 0.2) % 1, 1, 1)
+			swapButton.TextColor3 = Color3.fromHSV((time + 0.3) % 1, 1, 1)
+			swapButton.BorderColor3 = Color3.fromHSV((time + 0.3) % 1, 1, 1)
+			rigToggle.TextColor3 = Color3.fromHSV((time + 0.4) % 1, 1, 1)
+			rigToggle.BorderColor3 = Color3.fromHSV((time + 0.4) % 1, 1, 1)
+			hintLabel.TextColor3 = Color3.fromHSV((time + 0.5) % 1, 1, 1)
+		end)
+	
+		-- K to toggle visibility
+		UserInputService.InputBegan:Connect(function(input, processed)
+			if processed then return end
+			if input.KeyCode == Enum.KeyCode.K and frame then
+				frame.Visible = not frame.Visible
+			end
+		end)
+	end
+	
+	-- Button to open GUI
+	openButton.MouseButton1Click:Connect(function()
+		if not guiCreated then
+			createAvatarSwapperGui()
+			guiCreated = true
+		else
+			if frame then
+				frame.Visible = true
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(GUEFU_fake_script)()
