@@ -1996,7 +1996,7 @@ local function IVMDTKE_fake_script() -- DONT.kick
 	local script = Instance.new('LocalScript', DONT)
 
 	Secret.MouseButton1Click:Connect(function()
-		wait(12)
+		wait(8)
 		game.Players.LocalPlayer:Kick("Nigga listen to me next time")
 	end)
 end
@@ -2013,7 +2013,7 @@ local function SDPBA_fake_script() -- DONT.LocalScript
 	
 	    -- Create and play the sound
 	    local sound = Instance.new("Sound")
-		sound.SoundId = "rbxassetid://127715183917879" -- Replace with your audio asset id
+		sound.SoundId = "rbxassetid://133863240457927" -- Replace with your audio asset id
 		sound.Volume = 10
 		sound.PlaybackSpeed = 0.6
 	    sound.Parent = playerGui
