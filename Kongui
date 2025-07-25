@@ -368,7 +368,7 @@ HomoESP.TextWrapped = true
 
 -- Scripts:
 
-local function YFACG_fake_script() -- Infjump.LocalScript 
+local function BOFN_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	
@@ -399,8 +399,8 @@ local function YFACG_fake_script() -- Infjump.LocalScript
 		end
 	end)
 end
-coroutine.wrap(YFACG_fake_script)()
-local function ZBEOI_fake_script() -- Aimbot.KONAIMBOT (legacy) 
+coroutine.wrap(BOFN_fake_script)()
+local function BBXWXSW_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	-- [Same setup at top]
@@ -677,48 +677,48 @@ local function ZBEOI_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	end)
 	
 end
-coroutine.wrap(ZBEOI_fake_script)()
-local function CQCB_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(BBXWXSW_fake_script)()
+local function IBABTCT_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(CQCB_fake_script)()
-local function KPCCWW_fake_script() -- Esp.LocalScript 
+coroutine.wrap(IBABTCT_fake_script)()
+local function GOMNPJO_fake_script() -- Esp.LocalScript 
 	local script = Instance.new('LocalScript', Esp)
 
 	Esp.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
 	end)
 end
-coroutine.wrap(KPCCWW_fake_script)()
-local function CRNM_fake_script() -- Fling.LocalScript 
+coroutine.wrap(GOMNPJO_fake_script)()
+local function WRBUMQG_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(CRNM_fake_script)()
-local function GPLIZX_fake_script() -- Fly.LocalScript 
+coroutine.wrap(WRBUMQG_fake_script)()
+local function CQTZT_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
 	end)
 end
-coroutine.wrap(GPLIZX_fake_script)()
-local function VVZID_fake_script() -- Gun.LocalScript 
+coroutine.wrap(CQTZT_fake_script)()
+local function CVZR_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(VVZID_fake_script)()
-local function UQDE_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(CVZR_fake_script)()
+local function QIGMG_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -726,32 +726,32 @@ local function UQDE_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(UQDE_fake_script)()
-local function HVFRHQ_fake_script() -- Rape.LocalScript 
+coroutine.wrap(QIGMG_fake_script)()
+local function HYGNOV_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(HVFRHQ_fake_script)()
-local function WLDMEV_fake_script() -- invisible.LocalScript 
+coroutine.wrap(HYGNOV_fake_script)()
+local function PTQM_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(WLDMEV_fake_script)()
-local function WJID_fake_script() -- r6NOCLIP.LocalScript 
+coroutine.wrap(PTQM_fake_script)()
+local function NWMQ_fake_script() -- r6NOCLIP.LocalScript 
 	local script = Instance.new('LocalScript', r6NOCLIP)
 
 	r6NOCLIP.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
 	end)
 end
-coroutine.wrap(WJID_fake_script)()
-local function KAHKFR_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(NWMQ_fake_script)()
+local function HGMB_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -997,8 +997,8 @@ local function KAHKFR_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(KAHKFR_fake_script)()
-local function LZYCRRD_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(HGMB_fake_script)()
+local function ESJRJFV_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1015,8 +1015,8 @@ local function LZYCRRD_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(LZYCRRD_fake_script)()
-local function RZVBWR_fake_script() -- PressKToHide.RainbowFrame 
+coroutine.wrap(ESJRJFV_fake_script)()
+local function VXGWFL_fake_script() -- PressKToHide.RainbowFrame 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local RunService = game:GetService("RunService")
@@ -1033,8 +1033,8 @@ local function RZVBWR_fake_script() -- PressKToHide.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(RZVBWR_fake_script)()
-local function QKGES_fake_script() -- Brand.LocalScript 
+coroutine.wrap(VXGWFL_fake_script)()
+local function MYPU_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
 	local imageButton = script.Parent
@@ -1051,16 +1051,16 @@ local function QKGES_fake_script() -- Brand.LocalScript
 	
 	
 end
-coroutine.wrap(QKGES_fake_script)()
-local function NBGB_fake_script() -- Secret.LocalScript 
+coroutine.wrap(MYPU_fake_script)()
+local function PKSW_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("User has used the KON emergency exit")
 	end)
 end
-coroutine.wrap(NBGB_fake_script)()
-local function OKFX_fake_script() -- HomoESP.KON esp test 
+coroutine.wrap(PKSW_fake_script)()
+local function DGENGET_fake_script() -- HomoESP.KON esp test 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
@@ -1187,6 +1187,19 @@ local function OKFX_fake_script() -- HomoESP.KON esp test
 		if isEnemy(player) then
 			label.Text = "Enemy"
 			label.TextColor3 = Color3.new(0.701961, 0, 1)
+			local RunService = game:GetService("RunService")
+	
+			-- Change this to the frame you want to rainbow-ify
+			local TargetFrame = script.Parent
+	
+			local hue = 0
+	
+			RunService.RenderStepped:Connect(function()
+				hue = (hue + 0.002) % 1
+				local rainbowColor = Color3.fromHSV(hue, 1, 1)
+				label.TextColor3 = rainbowColor
+			end)
+	
 		else
 			label.Text = "Friendly"
 			label.TextColor3 = Color3.new(0, 0.101961, 1)
@@ -1349,8 +1362,8 @@ local function OKFX_fake_script() -- HomoESP.KON esp test
 	
 	
 end
-coroutine.wrap(OKFX_fake_script)()
-local function VFOYBZ_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(DGENGET_fake_script)()
+local function WNOTYJN_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -1369,4 +1382,4 @@ local function VFOYBZ_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(VFOYBZ_fake_script)()
+coroutine.wrap(WNOTYJN_fake_script)()
