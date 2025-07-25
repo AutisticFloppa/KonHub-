@@ -8,14 +8,13 @@ local Frame = Instance.new("Frame")
 local Infjump = Instance.new("TextButton")
 local Aimbot = Instance.new("TextButton")
 local InfYield = Instance.new("TextButton")
-local Esp = Instance.new("TextButton")
 local Fling = Instance.new("TextButton")
 local Fly = Instance.new("TextButton")
 local Gun = Instance.new("TextButton")
 local JerkOff = Instance.new("TextButton")
 local Rape = Instance.new("TextButton")
 local invisible = Instance.new("TextButton")
-local r6NOCLIP = Instance.new("TextButton")
+local NoclipButton = Instance.new("TextButton")
 local arseKON = Instance.new("TextButton")
 local TextLabel = Instance.new("TextLabel")
 local PressKToHide = Instance.new("TextLabel")
@@ -26,12 +25,6 @@ local Date = Instance.new("TextButton")
 local HomoESP = Instance.new("TextButton")
 
 --Properties:
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "KONgui", -- Required
-	Text = "KON gui has loaded sucsessfuly!", -- Required
-	Icon = "rbxassetid://96832072052936" -- Optional
-})
-
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -41,107 +34,17 @@ Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(0, 226, 45)
 Frame.BorderSizePixel = 2
-Frame.Position = UDim2.new(0.116740085, 0, 0.10206718, 0)
-Frame.Size = UDim2.new(0, 325, 0, 457)
+Frame.Position = UDim2.new(0.116740078, 0, 0.10206718, 0)
+Frame.Size = UDim2.new(0, 316, 0, 457)
 Frame.Active = true
-local UserInputService = game:GetService('UserInputService')
-
-local frame = Frame
-
-local leadFrame = Instance.new('Frame') do
-	leadFrame.AnchorPoint = frame.AnchorPoint
-	leadFrame.Position = frame.Position
-	leadFrame.Size = frame.Size
-	leadFrame.Name = `Lead {frame.Name}`
-	leadFrame.Visible = false
-	leadFrame.Parent = frame.Parent
-end
-
-local screenGui = frame:FindFirstAncestorOfClass('ScreenGui')
-
-local inputChanged = nil
-local inputEnded = nil
-
-local function getBoundsRelations(guiObject : GuiObject)
-	local bounds = screenGui.AbsoluteSize
-	local topLeft = screenGui.IgnoreGuiInset and guiObject.AbsolutePosition + Vector2.new(0, 36) or guiObject.AbsolutePosition
-	local bottomRight = topLeft + guiObject.AbsoluteSize
-
-	local boundRelations = {
-		Top = topLeft.Y < 0 and math.abs(topLeft.Y) or nil,
-		Left = topLeft.X < 0 and math.abs(topLeft.X) or nil,
-		Right = bottomRight.X > bounds.X and math.abs(bottomRight.X - bounds.X) or nil,
-		Bottom = bottomRight.Y > bounds.Y and math.abs(bottomRight.Y - bounds.Y) or nil,
-	}
-
-	return (not boundRelations.Top
-		and not boundRelations.Bottom
-		and not boundRelations.Left
-		and not boundRelations.Right), boundRelations
-end
-
-frame.InputBegan:Connect(function(inputObject : InputObject)
-	if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
-
-		local lastMousePosition = UserInputService:GetMouseLocation()
-		local goalPosition = frame.Position
-
-		inputChanged = UserInputService.InputChanged:Connect(function(input : InputObject, event : boolean)
-			if input.UserInputType == Enum.UserInputType.MouseMovement then
-				local currentMousePosition = UserInputService:GetMouseLocation()
-				local mouseDelta = currentMousePosition - lastMousePosition
-
-				goalPosition += UDim2.fromOffset(mouseDelta.X, mouseDelta.Y)
-
-				leadFrame.Position = goalPosition
-
-				local isInBounds, relations = getBoundsRelations(leadFrame)
-
-				if not isInBounds then
-					local x = (relations.Left or 0) - (relations.Right or 0)
-					local y = (relations.Top or 0) - (relations.Bottom or 0)
-
-					goalPosition += UDim2.fromOffset(x, y)
-				end
-
-				frame.Position = goalPosition
-				lastMousePosition = currentMousePosition
-			end
-		end)
-
-		inputEnded = frame.InputEnded:Connect(function(input : InputObject)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
-				inputChanged:Disconnect()
-				inputChanged = nil
-
-				inputEnded:Disconnect()
-				inputEnded = nil
-			end
-		end)
-	end
-end)
-
-frame.Destroying:Once(function()
-
-	leadFrame = leadFrame:Destroy()
-
-	if inputChanged  then
-		inputChanged:Disconnect()
-		inputChanged = nil
-	end
-
-	if inputEnded then
-		inputEnded:Disconnect()
-		inputEnded = nil
-	end
-end)
+Frame.Draggable = true
 
 Infjump.Name = "Infjump"
 Infjump.Parent = Frame
 Infjump.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Infjump.BorderColor3 = Color3.fromRGB(11, 215, 226)
-Infjump.Position = UDim2.new(0.347701699, 0, 0.618845761, 0)
-Infjump.Size = UDim2.new(0, 98, 0, 50)
+Infjump.Position = UDim2.new(0.344800353, 0, 0.680114865, 0)
+Infjump.Size = UDim2.new(0, 97, 0, 38)
 Infjump.Font = Enum.Font.SourceSans
 Infjump.Text = "KON InfJump"
 Infjump.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -152,7 +55,7 @@ Aimbot.Name = "Aimbot"
 Aimbot.Parent = Frame
 Aimbot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Aimbot.BorderColor3 = Color3.fromRGB(255, 42, 0)
-Aimbot.Position = UDim2.new(0.667701781, 0, 0.664666951, 0)
+Aimbot.Position = UDim2.new(0.66462487, 0, 0.679984272, 0)
 Aimbot.Size = UDim2.new(0, 98, 0, 38)
 Aimbot.Font = Enum.Font.SourceSans
 Aimbot.Text = "KON aimbot"
@@ -164,32 +67,20 @@ InfYield.Name = "InfYield"
 InfYield.Parent = Frame
 InfYield.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 InfYield.BorderColor3 = Color3.fromRGB(255, 213, 0)
-InfYield.Position = UDim2.new(0.18154785, 0, 0.670140088, 0)
-InfYield.Size = UDim2.new(0, 44, 0, 38)
+InfYield.Position = UDim2.new(0.344507903, 0, 0.582612753, 0)
+InfYield.Size = UDim2.new(0, 97, 0, 38)
 InfYield.Font = Enum.Font.SourceSans
 InfYield.Text = "Admin"
 InfYield.TextColor3 = Color3.fromRGB(0, 226, 45)
 InfYield.TextSize = 14.000
 InfYield.TextWrapped = true
 
-Esp.Name = "Esp"
-Esp.Parent = Frame
-Esp.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Esp.BorderColor3 = Color3.fromRGB(30, 0, 255)
-Esp.Position = UDim2.new(0.667701721, 0, 0.771887958, 0)
-Esp.Size = UDim2.new(0, 98, 0, 37)
-Esp.Font = Enum.Font.SourceSans
-Esp.Text = "ESP wearedevs"
-Esp.TextColor3 = Color3.fromRGB(0, 226, 45)
-Esp.TextSize = 14.000
-Esp.TextWrapped = true
-
 Fling.Name = "Fling"
 Fling.Parent = Frame
 Fling.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Fling.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Fling.Position = UDim2.new(0.0184709281, 0, 0.666855156, 0)
-Fling.Size = UDim2.new(0, 44, 0, 38)
+Fling.Position = UDim2.new(0.0153939938, 0, 0.679984272, 0)
+Fling.Size = UDim2.new(0, 98, 0, 38)
 Fling.Font = Enum.Font.SourceSans
 Fling.Text = "Fling"
 Fling.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -200,10 +91,10 @@ Fly.Name = "Fly"
 Fly.Parent = Frame
 Fly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Fly.BorderColor3 = Color3.fromRGB(11, 215, 226)
-Fly.Position = UDim2.new(0.347701788, 0, 0.863922298, 0)
-Fly.Size = UDim2.new(0, 98, 0, 50)
+Fly.Position = UDim2.new(0.341722906, 0, 0.887992322, 0)
+Fly.Size = UDim2.new(0, 98, 0, 38)
 Fly.Font = Enum.Font.SourceSans
-Fly.Text = "Fly"
+Fly.Text = "KON fly"
 Fly.TextColor3 = Color3.fromRGB(0, 226, 45)
 Fly.TextSize = 14.000
 Fly.TextWrapped = true
@@ -212,8 +103,8 @@ Gun.Name = "Gun"
 Gun.Parent = Frame
 Gun.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Gun.BorderColor3 = Color3.fromRGB(255, 213, 0)
-Gun.Position = UDim2.new(0.0184709281, 0, 0.769699812, 0)
-Gun.Size = UDim2.new(0, 44, 0, 38)
+Gun.Position = UDim2.new(0.015199299, 0, 0.581515968, 0)
+Gun.Size = UDim2.new(0, 98, 0, 38)
 Gun.Font = Enum.Font.SourceSans
 Gun.Text = "Suicide Gun (R6)"
 Gun.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -224,8 +115,8 @@ JerkOff.Name = "JerkOff"
 JerkOff.Parent = Frame
 JerkOff.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
-JerkOff.Position = UDim2.new(0.184624866, 0, 0.769699812, 0)
-JerkOff.Size = UDim2.new(0, 44, 0, 38)
+JerkOff.Position = UDim2.new(0.0153940897, 0, 0.887861729, 0)
+JerkOff.Size = UDim2.new(0, 98, 0, 38)
 JerkOff.Font = Enum.Font.SourceSans
 JerkOff.Text = "Jerkoff"
 JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -236,8 +127,8 @@ Rape.Name = "Rape"
 Rape.Parent = Frame
 Rape.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Rape.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Rape.Position = UDim2.new(0.0184709281, 0, 0.879108965, 0)
-Rape.Size = UDim2.new(0, 44, 0, 38)
+Rape.Position = UDim2.new(0.0153939938, 0, 0.789393425, 0)
+Rape.Size = UDim2.new(0, 98, 0, 38)
 Rape.Font = Enum.Font.SourceSans
 Rape.Text = "Rape"
 Rape.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -248,32 +139,32 @@ invisible.Name = "invisible"
 invisible.Parent = Frame
 invisible.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 invisible.BorderColor3 = Color3.fromRGB(255, 213, 0)
-invisible.Position = UDim2.new(0.184624776, 0, 0.878856719, 0)
-invisible.Size = UDim2.new(0, 44, 0, 38)
+invisible.Position = UDim2.new(0.664624751, 0, 0.581263721, 0)
+invisible.Size = UDim2.new(0, 97, 0, 38)
 invisible.Font = Enum.Font.SourceSans
 invisible.Text = "Invisible"
 invisible.TextColor3 = Color3.fromRGB(0, 226, 45)
 invisible.TextSize = 14.000
 invisible.TextWrapped = true
 
-r6NOCLIP.Name = "r6NOCLIP"
-r6NOCLIP.Parent = Frame
-r6NOCLIP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-r6NOCLIP.BorderColor3 = Color3.fromRGB(192, 0, 226)
-r6NOCLIP.Position = UDim2.new(0.347701788, 0, 0.742350161, 0)
-r6NOCLIP.Size = UDim2.new(0, 98, 0, 50)
-r6NOCLIP.Font = Enum.Font.SourceSans
-r6NOCLIP.Text = "Noclip (R6)"
-r6NOCLIP.TextColor3 = Color3.fromRGB(0, 226, 45)
-r6NOCLIP.TextSize = 14.000
-r6NOCLIP.TextWrapped = true
+NoclipButton.Name = "NoclipButton"
+NoclipButton.Parent = Frame
+NoclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NoclipButton.BorderColor3 = Color3.fromRGB(192, 0, 226)
+NoclipButton.Position = UDim2.new(0.344800144, 0, 0.79049021, 0)
+NoclipButton.Size = UDim2.new(0, 97, 0, 38)
+NoclipButton.Font = Enum.Font.SourceSans
+NoclipButton.Text = "KON noclip (Enable)"
+NoclipButton.TextColor3 = Color3.fromRGB(0, 226, 45)
+NoclipButton.TextSize = 14.000
+NoclipButton.TextWrapped = true
 
 arseKON.Name = "arseKON"
 arseKON.Parent = Frame
 arseKON.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 arseKON.BorderColor3 = Color3.fromRGB(255, 42, 0)
-arseKON.Position = UDim2.new(0.667701721, 0, 0.881044865, 0)
-arseKON.Size = UDim2.new(0, 98, 0, 37)
+arseKON.Position = UDim2.new(0.664624929, 0, 0.887609422, 0)
+arseKON.Size = UDim2.new(0, 97, 0, 38)
 arseKON.Font = Enum.Font.SourceSans
 arseKON.Text = "KON silent aim"
 arseKON.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -296,8 +187,8 @@ PressKToHide.Parent = Frame
 PressKToHide.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 PressKToHide.BorderColor3 = Color3.fromRGB(0, 255, 106)
 PressKToHide.BorderSizePixel = 2
-PressKToHide.Position = UDim2.new(0.470769227, 0, 0, 0)
-PressKToHide.Size = UDim2.new(0, 172, 0, 38)
+PressKToHide.Position = UDim2.new(0.470769197, 0, 0, 0)
+PressKToHide.Size = UDim2.new(0, 167, 0, 38)
 PressKToHide.ZIndex = 0
 PressKToHide.Font = Enum.Font.SourceSans
 PressKToHide.Text = "Press K to show/hide GUI"
@@ -358,7 +249,7 @@ HomoESP.Name = "HomoESP"
 HomoESP.Parent = Frame
 HomoESP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 HomoESP.BorderColor3 = Color3.fromRGB(30, 0, 255)
-HomoESP.Position = UDim2.new(0.66462487, 0, 0.553069592, 0)
+HomoESP.Position = UDim2.new(0.66462487, 0, 0.789393425, 0)
 HomoESP.Size = UDim2.new(0, 98, 0, 38)
 HomoESP.Font = Enum.Font.SourceSans
 HomoESP.Text = "Homosexual ESP (Enable)"
@@ -368,7 +259,7 @@ HomoESP.TextWrapped = true
 
 -- Scripts:
 
-local function BOFN_fake_script() -- Infjump.LocalScript 
+local function MZMYUY_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	
@@ -399,8 +290,8 @@ local function BOFN_fake_script() -- Infjump.LocalScript
 		end
 	end)
 end
-coroutine.wrap(BOFN_fake_script)()
-local function BBXWXSW_fake_script() -- Aimbot.KONAIMBOT (legacy) 
+coroutine.wrap(MZMYUY_fake_script)()
+local function BLWA_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	-- [Same setup at top]
@@ -677,48 +568,537 @@ local function BBXWXSW_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	end)
 	
 end
-coroutine.wrap(BBXWXSW_fake_script)()
-local function IBABTCT_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(BLWA_fake_script)()
+local function LEYLQBF_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(IBABTCT_fake_script)()
-local function GOMNPJO_fake_script() -- Esp.LocalScript 
-	local script = Instance.new('LocalScript', Esp)
-
-	Esp.MouseButton1Click:Connect(function()
-		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/WRD%20ESP.lua"))()
-	end)
-end
-coroutine.wrap(GOMNPJO_fake_script)()
-local function WRBUMQG_fake_script() -- Fling.LocalScript 
+coroutine.wrap(LEYLQBF_fake_script)()
+local function ADZJN_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(WRBUMQG_fake_script)()
-local function CQTZT_fake_script() -- Fly.LocalScript 
+coroutine.wrap(ADZJN_fake_script)()
+local function RSQOYS_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+		local main = Instance.new("ScreenGui")
+		local Frame = Instance.new("Frame")
+		local up = Instance.new("TextButton")
+		local down = Instance.new("TextButton")
+		local onof = Instance.new("TextButton")
+		local TextLabel = Instance.new("TextLabel")
+		local plus = Instance.new("TextButton")
+		local speed = Instance.new("TextLabel")
+		local mine = Instance.new("TextButton")
+		local closebutton = Instance.new("TextButton")
+		local mini = Instance.new("TextButton")
+		local mini2 = Instance.new("TextButton")
+		
+		local RunService = game:GetService("RunService")
+	
+		-- Change this to the frame you want to rainbow-ify
+		local TargetFrame = main
+		local TargetFrame = up
+		local TargetFrame = down
+		local TargetFrame = onof
+		local TargetFrame = TextLabel
+		local TargetFrame = plus
+		local TargetFrame = speed
+		local TargetFrame = mine
+		local TargetFrame = mini
+		local TargetFrame = mini2
+		local TargetFrame = Frame
+		local TargetFrame = closebutton
+		
+	
+		local hue = 0
+	
+		RunService.RenderStepped:Connect(function()
+			hue = (hue + 0.004) % 1
+			local rainbowColor = Color3.fromHSV(hue, 1, 1)
+			TargetFrame.TextColor3 = rainbowColor
+			TargetFrame.BorderColor3 = rainbowColor
+		end)
+	
+	
+		main.Name = "main"
+		main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+		main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		main.ResetOnSpawn = false
+	
+		Frame.Parent = main
+		Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+		Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+		Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
+		Frame.Size = UDim2.new(0, 190, 0, 57)
+	
+		up.Name = "up"
+		up.Parent = Frame
+		up.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		up.Size = UDim2.new(0, 44, 0, 28)
+		up.Font = Enum.Font.SourceSans
+		up.Text = "UP"
+		up.TextColor3 = Color3.fromRGB(255, 255, 255)
+		up.TextSize = 14.000
+	
+		down.Name = "down"
+		down.Parent = Frame
+		down.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		down.Position = UDim2.new(0, 0, 0.491228074, 0)
+		down.Size = UDim2.new(0, 44, 0, 28)
+		down.Font = Enum.Font.SourceSans
+		down.Text = "DOWN"
+		down.TextColor3 = Color3.fromRGB(255, 255, 255)
+		down.TextSize = 14.000
+	
+		onof.Name = "onof"
+		onof.Parent = Frame
+		onof.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
+		onof.Size = UDim2.new(0, 56, 0, 28)
+		onof.Font = Enum.Font.SourceSans
+		onof.Text = "fly"
+		onof.TextColor3 = Color3.fromRGB(255, 255, 255)
+		onof.TextSize = 14.000
+	
+		TextLabel.Parent = Frame
+		TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
+		TextLabel.Size = UDim2.new(0, 100, 0, 28)
+		TextLabel.Font = Enum.Font.SourceSans
+		TextLabel.Text = "KON fly"
+		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.TextScaled = true
+		TextLabel.TextSize = 14.000
+		TextLabel.TextWrapped = true
+	
+		plus.Name = "plus"
+		plus.Parent = Frame
+		plus.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		plus.Position = UDim2.new(0.231578946, 0, 0, 0)
+		plus.Size = UDim2.new(0, 45, 0, 28)
+		plus.Font = Enum.Font.SourceSans
+		plus.Text = "+"
+		plus.TextColor3 = Color3.fromRGB(255, 255, 255)
+		plus.TextScaled = true
+		plus.TextSize = 14.000
+		plus.TextWrapped = true
+	
+		speed.Name = "speed"
+		speed.Parent = Frame
+		speed.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
+		speed.Size = UDim2.new(0, 44, 0, 28)
+		speed.Font = Enum.Font.SourceSans
+		speed.Text = "1"
+		speed.TextColor3 = Color3.fromRGB(255, 255, 255)
+		speed.TextScaled = true
+		speed.TextSize = 14.000
+		speed.TextWrapped = true
+	
+		mine.Name = "mine"
+		mine.Parent = Frame
+		mine.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
+		mine.Size = UDim2.new(0, 45, 0, 29)
+		mine.Font = Enum.Font.SourceSans
+		mine.Text = "-"
+		mine.TextColor3 = Color3.fromRGB(255, 255, 255)
+		mine.TextScaled = true
+		mine.TextSize = 14.000
+		mine.TextWrapped = true
+	
+		closebutton.Name = "Close"
+		closebutton.Parent = main.Frame
+		closebutton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		closebutton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		closebutton.Font = "SourceSans"
+		closebutton.Size = UDim2.new(0, 45, 0, 28)
+		closebutton.Text = "X"
+		closebutton.TextSize = 30
+		closebutton.Position =  UDim2.new(0, 0, -1, 27)
+	
+		mini.Name = "minimize"
+		mini.Parent = main.Frame
+		mini.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		mini.TextColor3 = Color3.fromRGB(255, 255, 255)
+		mini.Font = "SourceSans"
+		mini.Size = UDim2.new(0, 45, 0, 28)
+		mini.Text = "-"
+		mini.TextSize = 40
+		mini.Position = UDim2.new(0, 44, -1, 27)
+	
+		mini2.Name = "minimize2"
+		mini2.Parent = main.Frame
+		mini2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		mini2.TextColor3 = Color3.fromRGB(255, 255, 255)
+		mini2.Font = "SourceSans"
+		mini2.Size = UDim2.new(0, 45, 0, 28)
+		mini2.Text = "+"
+		mini2.TextSize = 40
+		mini2.Position = UDim2.new(0, 44, -1, 57)
+		mini2.Visible = false
+	
+		speeds = 1
+	
+		local speaker = game:GetService("Players").LocalPlayer
+	
+		local chr = game.Players.LocalPlayer.Character
+		local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+	
+		nowe = false
+	
+		Frame.Active = true -- main = gui
+		Frame.Draggable = true
+	
+		onof.MouseButton1Down:connect(function()
+	
+			if nowe == true then
+				nowe = false
+	
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,true)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,true)
+				speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.RunningNoPhysics)
+			else 
+				nowe = true
+	
+	
+	
+				for i = 1, speeds do
+					spawn(function()
+	
+						local hb = game:GetService("RunService").Heartbeat	
+	
+	
+						tpwalking = true
+						local chr = game.Players.LocalPlayer.Character
+						local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+						while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+							if hum.MoveDirection.Magnitude > 0 then
+								chr:TranslateBy(hum.MoveDirection)
+							end
+						end
+	
+					end)
+				end
+				game.Players.LocalPlayer.Character.Animate.Disabled = true
+				local Char = game.Players.LocalPlayer.Character
+				local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+	
+				for i,v in next, Hum:GetPlayingAnimationTracks() do
+					v:AdjustSpeed(0)
+				end
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Climbing,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Flying,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Freefall,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.GettingUp,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Landed,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Physics,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Running,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.RunningNoPhysics,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Seated,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.StrafingNoPhysics,false)
+				speaker.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Swimming,false)
+				speaker.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+			end
+	
+	
+	
+	
+			if game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").RigType == Enum.HumanoidRigType.R6 then
+	
+	
+	
+				local plr = game.Players.LocalPlayer
+				local torso = plr.Character.Torso
+				local flying = true
+				local deb = true
+				local ctrl = {f = 0, b = 0, l = 0, r = 0}
+				local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+				local maxspeed = 50
+				local speed = 0
+	
+	
+				local bg = Instance.new("BodyGyro", torso)
+				bg.P = 9e4
+				bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+				bg.cframe = torso.CFrame
+				local bv = Instance.new("BodyVelocity", torso)
+				bv.velocity = Vector3.new(0,0.1,0)
+				bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+				if nowe == true then
+					plr.Character.Humanoid.PlatformStand = true
+				end
+				while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+					game:GetService("RunService").RenderStepped:Wait()
+	
+					if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+						speed = speed+.5+(speed/maxspeed)
+						if speed > maxspeed then
+							speed = maxspeed
+						end
+					elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+						speed = speed-1
+						if speed < 0 then
+							speed = 0
+						end
+					end
+					if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+						lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+					elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+					else
+						bv.velocity = Vector3.new(0,0,0)
+					end
+					--	game.Players.LocalPlayer.Character.Animate.Disabled = true
+					bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+				end
+				ctrl = {f = 0, b = 0, l = 0, r = 0}
+				lastctrl = {f = 0, b = 0, l = 0, r = 0}
+				speed = 0
+				bg:Destroy()
+				bv:Destroy()
+				plr.Character.Humanoid.PlatformStand = false
+				game.Players.LocalPlayer.Character.Animate.Disabled = false
+				tpwalking = false
+	
+	
+	
+	
+			else
+				local plr = game.Players.LocalPlayer
+				local UpperTorso = plr.Character.UpperTorso
+				local flying = true
+				local deb = true
+				local ctrl = {f = 0, b = 0, l = 0, r = 0}
+				local lastctrl = {f = 0, b = 0, l = 0, r = 0}
+				local maxspeed = 50
+				local speed = 0
+	
+	
+				local bg = Instance.new("BodyGyro", UpperTorso)
+				bg.P = 9e4
+				bg.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+				bg.cframe = UpperTorso.CFrame
+				local bv = Instance.new("BodyVelocity", UpperTorso)
+				bv.velocity = Vector3.new(0,0.1,0)
+				bv.maxForce = Vector3.new(9e9, 9e9, 9e9)
+				if nowe == true then
+					plr.Character.Humanoid.PlatformStand = true
+				end
+				while nowe == true or game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 do
+					wait()
+	
+					if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then
+						speed = speed+.5+(speed/maxspeed)
+						if speed > maxspeed then
+							speed = maxspeed
+						end
+					elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then
+						speed = speed-1
+						if speed < 0 then
+							speed = 0
+						end
+					end
+					if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+						lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r}
+					elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then
+						bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed
+					else
+						bv.velocity = Vector3.new(0,0,0)
+					end
+	
+					bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0)
+				end
+				ctrl = {f = 0, b = 0, l = 0, r = 0}
+				lastctrl = {f = 0, b = 0, l = 0, r = 0}
+				speed = 0
+				bg:Destroy()
+				bv:Destroy()
+				plr.Character.Humanoid.PlatformStand = false
+				game.Players.LocalPlayer.Character.Animate.Disabled = false
+				tpwalking = false
+	
+	
+	
+			end
+	
+	
+	
+	
+	
+		end)
+	
+		local tis
+	
+		up.MouseButton1Down:connect(function()
+			tis = up.MouseEnter:connect(function()
+				while tis do
+					wait()
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1,0)
+				end
+			end)
+		end)
+	
+		up.MouseLeave:connect(function()
+			if tis then
+				tis:Disconnect()
+				tis = nil
+			end
+		end)
+	
+		local dis
+	
+		down.MouseButton1Down:connect(function()
+			dis = down.MouseEnter:connect(function()
+				while dis do
+					wait()
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,-1,0)
+				end
+			end)
+		end)
+	
+		down.MouseLeave:connect(function()
+			if dis then
+				dis:Disconnect()
+				dis = nil
+			end
+		end)
+	
+	
+		game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+			wait(0.7)
+			game.Players.LocalPlayer.Character.Humanoid.PlatformStand = false
+			game.Players.LocalPlayer.Character.Animate.Disabled = false
+	
+		end)
+	
+	
+		plus.MouseButton1Down:connect(function()
+			speeds = speeds + 1
+			speed.Text = speeds
+			if nowe == true then
+	
+	
+				tpwalking = false
+				for i = 1, speeds do
+					spawn(function()
+	
+						local hb = game:GetService("RunService").Heartbeat	
+	
+	
+						tpwalking = true
+						local chr = game.Players.LocalPlayer.Character
+						local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+						while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+							if hum.MoveDirection.Magnitude > 0 then
+								chr:TranslateBy(hum.MoveDirection)
+							end
+						end
+	
+					end)
+				end
+			end
+		end)
+		mine.MouseButton1Down:connect(function()
+			if speeds == 1 then
+				speed.Text = 'cannot be less than 1'
+				wait(1)
+				speed.Text = speeds
+			else
+				speeds = speeds - 1
+				speed.Text = speeds
+				if nowe == true then
+					tpwalking = false
+					for i = 1, speeds do
+						spawn(function()
+	
+							local hb = game:GetService("RunService").Heartbeat	
+	
+	
+							tpwalking = true
+							local chr = game.Players.LocalPlayer.Character
+							local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+							while tpwalking and hb:Wait() and chr and hum and hum.Parent do
+								if hum.MoveDirection.Magnitude > 0 then
+									chr:TranslateBy(hum.MoveDirection)
+								end
+							end
+	
+						end)
+					end
+				end
+			end
+		end)
+	
+		closebutton.MouseButton1Click:Connect(function()
+			main:Destroy()
+		end)
+	
+		mini.MouseButton1Click:Connect(function()
+			up.Visible = false
+			down.Visible = false
+			onof.Visible = false
+			plus.Visible = false
+			speed.Visible = false
+			mine.Visible = false
+			mini.Visible = false
+			mini2.Visible = true
+			main.Frame.BackgroundTransparency = 1
+			closebutton.Position =  UDim2.new(0, 0, -1, 57)
+		end)
+	
+		mini2.MouseButton1Click:Connect(function()
+			up.Visible = true
+			down.Visible = true
+			onof.Visible = true
+			plus.Visible = true
+			speed.Visible = true
+			mine.Visible = true
+			mini.Visible = true
+			mini2.Visible = false
+			main.Frame.BackgroundTransparency = 0 
+			closebutton.Position =  UDim2.new(0, 0, -1, 27)
+		end)
 	end)
 end
-coroutine.wrap(CQTZT_fake_script)()
-local function CVZR_fake_script() -- Gun.LocalScript 
+coroutine.wrap(RSQOYS_fake_script)()
+local function JTSFSE_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(CVZR_fake_script)()
-local function QIGMG_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(JTSFSE_fake_script)()
+local function ATUJ_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -726,32 +1106,97 @@ local function QIGMG_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(QIGMG_fake_script)()
-local function HYGNOV_fake_script() -- Rape.LocalScript 
+coroutine.wrap(ATUJ_fake_script)()
+local function UIWZC_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(HYGNOV_fake_script)()
-local function PTQM_fake_script() -- invisible.LocalScript 
+coroutine.wrap(UIWZC_fake_script)()
+local function FAFQG_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(PTQM_fake_script)()
-local function NWMQ_fake_script() -- r6NOCLIP.LocalScript 
-	local script = Instance.new('LocalScript', r6NOCLIP)
+coroutine.wrap(FAFQG_fake_script)()
+local function FKLUKAO_fake_script() -- NoclipButton.LocalScript 
+	local script = Instance.new('LocalScript', NoclipButton)
 
-	r6NOCLIP.MouseButton1Down:connect(function()
-		loadstring(game:HttpGet("https://pastebin.com/raw/g0RDAJgr"), true)()
-	end)
+	local PhysicsService = game:GetService("PhysicsService")
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	
+	local player = Players.LocalPlayer
+	local button = script.Parent:WaitForChild("NoclipButton")
+	
+	local noclipEnabled = false
+	
+	-- Names for groups
+	local PLAYER_GROUP = "Players"
+	local MAP_GROUP = "Map"
+	
+	-- Setup collision groups once (run only once per session)
+	local function setupCollisionGroups()
+		local success1, _ = pcall(function() PhysicsService:GetCollisionGroupId(PLAYER_GROUP) end)
+		if not success1 then
+			PhysicsService:CreateCollisionGroup(PLAYER_GROUP)
+		end
+		local success2, _ = pcall(function() PhysicsService:GetCollisionGroupId(MAP_GROUP) end)
+		if not success2 then
+			PhysicsService:CreateCollisionGroup(MAP_GROUP)
+		end
+	
+		-- By default, enable collision between groups (no noclip)
+		PhysicsService:CollisionGroupSetCollidable(PLAYER_GROUP, MAP_GROUP, true)
+	end
+	
+	-- Assign all character parts to PLAYER_GROUP
+	local function assignCharacterToGroup(character)
+		for _, part in pairs(character:GetChildren()) do
+			if part:IsA("BasePart") then
+				PhysicsService:SetPartCollisionGroup(part, PLAYER_GROUP)
+			end
+		end
+	end
+	
+	-- Assign map parts to MAP_GROUP (one time)
+	local function assignMapToGroup()
+		for _, part in pairs(workspace:GetDescendants()) do
+			if part:IsA("BasePart") and part.Anchored and part.CanCollide then
+				-- You might want to filter here depending on your map
+				PhysicsService:SetPartCollisionGroup(part, MAP_GROUP)
+			end
+		end
+	end
+	
+	-- Noclip toggle by switching collision between groups
+	local function toggleNoclip()
+		noclipEnabled = not noclipEnabled
+	
+		local character = player.Character
+		if not character then return end
+	
+		assignCharacterToGroup(character)
+	
+		-- Toggle collision between groups
+		PhysicsService:CollisionGroupSetCollidable(PLAYER_GROUP, MAP_GROUP, not noclipEnabled)
+	
+		button.Text = noclipEnabled and "KON noclip (Disable)" or "KON noclip (Enable)"
+	end
+	
+	-- Run setup once on script start
+	setupCollisionGroups()
+	assignMapToGroup()
+	
+	button.MouseButton1Click:Connect(toggleNoclip)
+	
 end
-coroutine.wrap(NWMQ_fake_script)()
-local function HGMB_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(FKLUKAO_fake_script)()
+local function ICIRC_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -997,8 +1442,8 @@ local function HGMB_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(HGMB_fake_script)()
-local function ESJRJFV_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(ICIRC_fake_script)()
+local function OWGDXHT_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1015,8 +1460,8 @@ local function ESJRJFV_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(ESJRJFV_fake_script)()
-local function VXGWFL_fake_script() -- PressKToHide.RainbowFrame 
+coroutine.wrap(OWGDXHT_fake_script)()
+local function CLXEMZ_fake_script() -- PressKToHide.RainbowFrame 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local RunService = game:GetService("RunService")
@@ -1033,8 +1478,8 @@ local function VXGWFL_fake_script() -- PressKToHide.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(VXGWFL_fake_script)()
-local function MYPU_fake_script() -- Brand.LocalScript 
+coroutine.wrap(CLXEMZ_fake_script)()
+local function EVDTJL_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
 	local imageButton = script.Parent
@@ -1051,16 +1496,16 @@ local function MYPU_fake_script() -- Brand.LocalScript
 	
 	
 end
-coroutine.wrap(MYPU_fake_script)()
-local function PKSW_fake_script() -- Secret.LocalScript 
+coroutine.wrap(EVDTJL_fake_script)()
+local function ZVJK_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("User has used the KON emergency exit")
 	end)
 end
-coroutine.wrap(PKSW_fake_script)()
-local function DGENGET_fake_script() -- HomoESP.KON esp test 
+coroutine.wrap(ZVJK_fake_script)()
+local function QOZQ_fake_script() -- HomoESP.KON esp test 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
@@ -1195,7 +1640,7 @@ local function DGENGET_fake_script() -- HomoESP.KON esp test
 			local hue = 0
 	
 			RunService.RenderStepped:Connect(function()
-				hue = (hue + 0.002) % 1
+				hue = (hue + 0.005) % 1
 				local rainbowColor = Color3.fromHSV(hue, 1, 1)
 				label.TextColor3 = rainbowColor
 			end)
@@ -1362,8 +1807,8 @@ local function DGENGET_fake_script() -- HomoESP.KON esp test
 	
 	
 end
-coroutine.wrap(DGENGET_fake_script)()
-local function WNOTYJN_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(QOZQ_fake_script)()
+local function OSEBX_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -1382,4 +1827,4 @@ local function WNOTYJN_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(WNOTYJN_fake_script)()
+coroutine.wrap(OSEBX_fake_script)()
