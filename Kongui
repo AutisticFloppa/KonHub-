@@ -154,7 +154,7 @@ NoclipButton.BorderColor3 = Color3.fromRGB(192, 0, 226)
 NoclipButton.Position = UDim2.new(0.344800144, 0, 0.79049021, 0)
 NoclipButton.Size = UDim2.new(0, 97, 0, 38)
 NoclipButton.Font = Enum.Font.SourceSans
-NoclipButton.Text = "KON noclip (Enable)"
+NoclipButton.Text = "KON noclip "
 NoclipButton.TextColor3 = Color3.fromRGB(0, 226, 45)
 NoclipButton.TextSize = 14.000
 NoclipButton.TextWrapped = true
@@ -259,7 +259,7 @@ HomoESP.TextWrapped = true
 
 -- Scripts:
 
-local function MZMYUY_fake_script() -- Infjump.LocalScript 
+local function JPRURY_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	
@@ -290,8 +290,8 @@ local function MZMYUY_fake_script() -- Infjump.LocalScript
 		end
 	end)
 end
-coroutine.wrap(MZMYUY_fake_script)()
-local function BLWA_fake_script() -- Aimbot.KONAIMBOT (legacy) 
+coroutine.wrap(JPRURY_fake_script)()
+local function KYWRRF_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	-- [Same setup at top]
@@ -568,24 +568,24 @@ local function BLWA_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	end)
 	
 end
-coroutine.wrap(BLWA_fake_script)()
-local function LEYLQBF_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(KYWRRF_fake_script)()
+local function ZNNRA_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(LEYLQBF_fake_script)()
-local function ADZJN_fake_script() -- Fling.LocalScript 
+coroutine.wrap(ZNNRA_fake_script)()
+local function GOQHCT_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(ADZJN_fake_script)()
-local function RSQOYS_fake_script() -- Fly.LocalScript 
+coroutine.wrap(GOQHCT_fake_script)()
+local function WYDPB_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
@@ -1089,16 +1089,16 @@ local function RSQOYS_fake_script() -- Fly.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(RSQOYS_fake_script)()
-local function JTSFSE_fake_script() -- Gun.LocalScript 
+coroutine.wrap(WYDPB_fake_script)()
+local function SYUUIDL_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(JTSFSE_fake_script)()
-local function ATUJ_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(SYUUIDL_fake_script)()
+local function OKECHTE_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -1106,97 +1106,66 @@ local function ATUJ_fake_script() -- JerkOff.LocalScript
 		loadstring(game:HttpGet("https://pastefy.app/wa3v2Vgm/raw"))()
 	end)
 end
-coroutine.wrap(ATUJ_fake_script)()
-local function UIWZC_fake_script() -- Rape.LocalScript 
+coroutine.wrap(OKECHTE_fake_script)()
+local function OCPX_fake_script() -- Rape.LocalScript 
 	local script = Instance.new('LocalScript', Rape)
 
 	Rape.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/4gh9/Bang-Script-Gui/main/bang%20gui.lua'))()
 	end)
 end
-coroutine.wrap(UIWZC_fake_script)()
-local function FAFQG_fake_script() -- invisible.LocalScript 
+coroutine.wrap(OCPX_fake_script)()
+local function OVRGZZA_fake_script() -- invisible.LocalScript 
 	local script = Instance.new('LocalScript', invisible)
 
 	invisible.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://obj.wearedevs.net/2/scripts/Invisible%20Character.lua"))()
 	end)
 end
-coroutine.wrap(FAFQG_fake_script)()
-local function FKLUKAO_fake_script() -- NoclipButton.LocalScript 
+coroutine.wrap(OVRGZZA_fake_script)()
+local function IPXB_fake_script() -- NoclipButton.LocalScript 
 	local script = Instance.new('LocalScript', NoclipButton)
 
-	local PhysicsService = game:GetService("PhysicsService")
-	local Players = game:GetService("Players")
-	local RunService = game:GetService("RunService")
+	invisible.MouseButton1Down:connect(function()
+		local Players = game:GetService("Players")
+		local LocalPlayer = Players.LocalPlayer
 	
-	local player = Players.LocalPlayer
-	local button = script.Parent:WaitForChild("NoclipButton")
+		local function onTouched(part)
+			if not part:IsA("BasePart") then return end
+			if not part.Anchored then return end
+			if not part.CanCollide then return end
 	
-	local noclipEnabled = false
+			local character = LocalPlayer.Character
+			if not character then return end
 	
-	-- Names for groups
-	local PLAYER_GROUP = "Players"
-	local MAP_GROUP = "Map"
+			local hrp = character:FindFirstChild("HumanoidRootPart")
+			if not hrp then return end
 	
-	-- Setup collision groups once (run only once per session)
-	local function setupCollisionGroups()
-		local success1, _ = pcall(function() PhysicsService:GetCollisionGroupId(PLAYER_GROUP) end)
-		if not success1 then
-			PhysicsService:CreateCollisionGroup(PLAYER_GROUP)
-		end
-		local success2, _ = pcall(function() PhysicsService:GetCollisionGroupId(MAP_GROUP) end)
-		if not success2 then
-			PhysicsService:CreateCollisionGroup(MAP_GROUP)
+			-- Prevent disabling floors
+			if part.Position.Y < (hrp.Position.Y - hrp.Size.Y) then return end
+	
+			-- Passed all checks
+			part.CanCollide = false
 		end
 	
-		-- By default, enable collision between groups (no noclip)
-		PhysicsService:CollisionGroupSetCollidable(PLAYER_GROUP, MAP_GROUP, true)
-	end
+		-- Wait for character and hook HRP
+		local function setup()
+			local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+			local hrp = char:WaitForChild("HumanoidRootPart")
 	
-	-- Assign all character parts to PLAYER_GROUP
-	local function assignCharacterToGroup(character)
-		for _, part in pairs(character:GetChildren()) do
-			if part:IsA("BasePart") then
-				PhysicsService:SetPartCollisionGroup(part, PLAYER_GROUP)
-			end
+			hrp.Touched:Connect(onTouched)
 		end
-	end
 	
-	-- Assign map parts to MAP_GROUP (one time)
-	local function assignMapToGroup()
-		for _, part in pairs(workspace:GetDescendants()) do
-			if part:IsA("BasePart") and part.Anchored and part.CanCollide then
-				-- You might want to filter here depending on your map
-				PhysicsService:SetPartCollisionGroup(part, MAP_GROUP)
-			end
+		if LocalPlayer.Character then
+			setup()
 		end
-	end
 	
-	-- Noclip toggle by switching collision between groups
-	local function toggleNoclip()
-		noclipEnabled = not noclipEnabled
-	
-		local character = player.Character
-		if not character then return end
-	
-		assignCharacterToGroup(character)
-	
-		-- Toggle collision between groups
-		PhysicsService:CollisionGroupSetCollidable(PLAYER_GROUP, MAP_GROUP, not noclipEnabled)
-	
-		button.Text = noclipEnabled and "KON noclip (Disable)" or "KON noclip (Enable)"
-	end
-	
-	-- Run setup once on script start
-	setupCollisionGroups()
-	assignMapToGroup()
-	
-	button.MouseButton1Click:Connect(toggleNoclip)
+		LocalPlayer.CharacterAdded:Connect(setup)
+	end)
 	
 end
-coroutine.wrap(FKLUKAO_fake_script)()
-local function ICIRC_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(IPXB_fake_script)()
+local function YRHNZQE_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -1442,8 +1411,8 @@ local function ICIRC_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(ICIRC_fake_script)()
-local function OWGDXHT_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(YRHNZQE_fake_script)()
+local function UZXK_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1460,8 +1429,8 @@ local function OWGDXHT_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(OWGDXHT_fake_script)()
-local function CLXEMZ_fake_script() -- PressKToHide.RainbowFrame 
+coroutine.wrap(UZXK_fake_script)()
+local function VHXEDQ_fake_script() -- PressKToHide.RainbowFrame 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local RunService = game:GetService("RunService")
@@ -1478,8 +1447,8 @@ local function CLXEMZ_fake_script() -- PressKToHide.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(CLXEMZ_fake_script)()
-local function EVDTJL_fake_script() -- Brand.LocalScript 
+coroutine.wrap(VHXEDQ_fake_script)()
+local function SFZW_fake_script() -- Brand.LocalScript 
 	local script = Instance.new('LocalScript', Brand)
 
 	local imageButton = script.Parent
@@ -1496,16 +1465,16 @@ local function EVDTJL_fake_script() -- Brand.LocalScript
 	
 	
 end
-coroutine.wrap(EVDTJL_fake_script)()
-local function ZVJK_fake_script() -- Secret.LocalScript 
+coroutine.wrap(SFZW_fake_script)()
+local function LLKTDWA_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("User has used the KON emergency exit")
 	end)
 end
-coroutine.wrap(ZVJK_fake_script)()
-local function QOZQ_fake_script() -- HomoESP.KON esp test 
+coroutine.wrap(LLKTDWA_fake_script)()
+local function BMJFRM_fake_script() -- HomoESP.KON esp test 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
@@ -1807,8 +1776,8 @@ local function QOZQ_fake_script() -- HomoESP.KON esp test
 	
 	
 end
-coroutine.wrap(QOZQ_fake_script)()
-local function OSEBX_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(BMJFRM_fake_script)()
+local function LPHO_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -1827,4 +1796,4 @@ local function OSEBX_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(OSEBX_fake_script)()
+coroutine.wrap(LPHO_fake_script)()
