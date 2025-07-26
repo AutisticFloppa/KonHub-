@@ -3,7 +3,7 @@
 
 -- Instances:
 
-local ScreenGui = Instance.new("ScreenGui")
+local KONGUI = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Infjump = Instance.new("TextButton")
 local Aimbot = Instance.new("TextButton")
@@ -24,127 +24,31 @@ local Secret = Instance.new("TextButton")
 local Date = Instance.new("TextButton")
 local HomoESP = Instance.new("TextButton")
 local DONT = Instance.new("TextButton")
-local Twerkr15 = Instance.new("TextButton")
-local Soon = Instance.new("TextButton")
-local Soon2 = Instance.new("TextButton")
 local TheKON = Instance.new("ImageLabel")
+local NIGGER = Instance.new("TextButton")
+local Twerkr = Instance.new("TextButton")
+local Soon = Instance.new("TextButton")
 
 --Properties:
-game:GetService("StarterGui"):SetCore("SendNotification",{
-	Title = "KONgui", -- Required
-	Text = "KON gui has loaded sucsessfuly!", -- Required
-	Icon = "rbxassetid://96832072052936" -- Optional
-})
 
+KONGUI.Name = "KONGUI"
+KONGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+KONGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+KONGUI.ResetOnSpawn = false
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.ResetOnSpawn = false
-
-Frame.Parent = ScreenGui
+Frame.Parent = KONGUI
 Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderColor3 = Color3.fromRGB(0, 68, 226)
 Frame.BorderSizePixel = 2
 Frame.Position = UDim2.new(0.378788263, 0, 0.20413436, 0)
 Frame.Size = UDim2.new(0, 321, 0, 457)
 Frame.Active = true
-local UserInputService = game:GetService('UserInputService')
-
-local frame = Frame
-
-local leadFrame = Instance.new('Frame') do
-	leadFrame.AnchorPoint = frame.AnchorPoint
-	leadFrame.Position = frame.Position
-	leadFrame.Size = frame.Size
-	leadFrame.Name = `Lead {frame.Name}`
-	leadFrame.Visible = false
-	leadFrame.Parent = frame.Parent
-end
-
-local screenGui = frame:FindFirstAncestorOfClass('ScreenGui')
-
-local inputChanged = nil
-local inputEnded = nil
-
-local function getBoundsRelations(guiObject : GuiObject)
-	local bounds = screenGui.AbsoluteSize
-	local topLeft = screenGui.IgnoreGuiInset and guiObject.AbsolutePosition + Vector2.new(0, 36) or guiObject.AbsolutePosition
-	local bottomRight = topLeft + guiObject.AbsoluteSize
-
-	local boundRelations = {
-		Top = topLeft.Y < 0 and math.abs(topLeft.Y) or nil,
-		Left = topLeft.X < 0 and math.abs(topLeft.X) or nil,
-		Right = bottomRight.X > bounds.X and math.abs(bottomRight.X - bounds.X) or nil,
-		Bottom = bottomRight.Y > bounds.Y and math.abs(bottomRight.Y - bounds.Y) or nil,
-	}
-
-	return (not boundRelations.Top
-		and not boundRelations.Bottom
-		and not boundRelations.Left
-		and not boundRelations.Right), boundRelations
-end
-
-frame.InputBegan:Connect(function(inputObject : InputObject)
-	if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
-
-		local lastMousePosition = UserInputService:GetMouseLocation()
-		local goalPosition = frame.Position
-
-		inputChanged = UserInputService.InputChanged:Connect(function(input : InputObject, event : boolean)
-			if input.UserInputType == Enum.UserInputType.MouseMovement then
-				local currentMousePosition = UserInputService:GetMouseLocation()
-				local mouseDelta = currentMousePosition - lastMousePosition
-
-				goalPosition += UDim2.fromOffset(mouseDelta.X, mouseDelta.Y)
-
-				leadFrame.Position = goalPosition
-
-				local isInBounds, relations = getBoundsRelations(leadFrame)
-
-				if not isInBounds then
-					local x = (relations.Left or 0) - (relations.Right or 0)
-					local y = (relations.Top or 0) - (relations.Bottom or 0)
-
-					goalPosition += UDim2.fromOffset(x, y)
-				end
-
-				frame.Position = goalPosition
-				lastMousePosition = currentMousePosition
-			end
-		end)
-
-		inputEnded = frame.InputEnded:Connect(function(input : InputObject)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 then
-				inputChanged:Disconnect()
-				inputChanged = nil
-
-				inputEnded:Disconnect()
-				inputEnded = nil
-			end
-		end)
-	end
-end)
-
-frame.Destroying:Once(function()
-
-	leadFrame = leadFrame:Destroy()
-
-	if inputChanged  then
-		inputChanged:Disconnect()
-		inputChanged = nil
-	end
-
-	if inputEnded then
-		inputEnded:Disconnect()
-		inputEnded = nil
-	end
-end)
 
 Infjump.Name = "Infjump"
 Infjump.Parent = Frame
 Infjump.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Infjump.BorderColor3 = Color3.fromRGB(11, 215, 226)
-Infjump.Position = UDim2.new(0.344800353, 0, 0.680114865, 0)
+Infjump.Position = UDim2.new(0.34791559, 0, 0.677926719, 0)
 Infjump.Size = UDim2.new(0, 97, 0, 38)
 Infjump.Font = Enum.Font.SourceSans
 Infjump.Text = "KON InfJump (Enable)"
@@ -156,8 +60,8 @@ Aimbot.Name = "Aimbot"
 Aimbot.Parent = Frame
 Aimbot.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Aimbot.BorderColor3 = Color3.fromRGB(255, 42, 0)
-Aimbot.Position = UDim2.new(0.674107015, 0, 0.679984272, 0)
-Aimbot.Size = UDim2.new(0, 98, 0, 38)
+Aimbot.Position = UDim2.new(0.677222311, 0, 0.679984272, 0)
+Aimbot.Size = UDim2.new(0, 97, 0, 38)
 Aimbot.Font = Enum.Font.SourceSans
 Aimbot.Text = "KON aimbot"
 Aimbot.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -168,7 +72,7 @@ InfYield.Name = "InfYield"
 InfYield.Parent = Frame
 InfYield.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 InfYield.BorderColor3 = Color3.fromRGB(255, 213, 0)
-InfYield.Position = UDim2.new(0.344507903, 0, 0.582612753, 0)
+InfYield.Position = UDim2.new(0.347623169, 0, 0.580424547, 0)
 InfYield.Size = UDim2.new(0, 97, 0, 38)
 InfYield.Font = Enum.Font.SourceSans
 InfYield.Text = "Admin"
@@ -180,8 +84,8 @@ Fling.Name = "Fling"
 Fling.Parent = Frame
 Fling.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Fling.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Fling.Position = UDim2.new(0.012229437, 0, 0.679984272, 0)
-Fling.Size = UDim2.new(0, 98, 0, 38)
+Fling.Position = UDim2.new(0.0215752628, 0, 0.679984272, 0)
+Fling.Size = UDim2.new(0, 97, 0, 38)
 Fling.Font = Enum.Font.SourceSans
 Fling.Text = "Fling"
 Fling.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -192,8 +96,8 @@ Fly.Name = "Fly"
 Fly.Parent = Frame
 Fly.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Fly.BorderColor3 = Color3.fromRGB(11, 215, 226)
-Fly.Position = UDim2.new(0.341722906, 0, 0.887992322, 0)
-Fly.Size = UDim2.new(0, 98, 0, 38)
+Fly.Position = UDim2.new(0.347953439, 0, 0.885804176, 0)
+Fly.Size = UDim2.new(0, 97, 0, 38)
 Fly.Font = Enum.Font.SourceSans
 Fly.Text = "KON fly"
 Fly.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -204,8 +108,8 @@ Gun.Name = "Gun"
 Gun.Parent = Frame
 Gun.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Gun.BorderColor3 = Color3.fromRGB(255, 213, 0)
-Gun.Position = UDim2.new(0.015199299, 0, 0.581515968, 0)
-Gun.Size = UDim2.new(0, 98, 0, 38)
+Gun.Position = UDim2.new(0.0214298051, 0, 0.579327822, 0)
+Gun.Size = UDim2.new(0, 97, 0, 38)
 Gun.Font = Enum.Font.SourceSans
 Gun.Text = "Suicide Gun (R6)"
 Gun.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -216,8 +120,8 @@ JerkOff.Name = "JerkOff"
 JerkOff.Parent = Frame
 JerkOff.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 JerkOff.BorderColor3 = Color3.fromRGB(226, 0, 4)
-JerkOff.Position = UDim2.new(0.0153940897, 0, 0.887861729, 0)
-JerkOff.Size = UDim2.new(0, 98, 0, 38)
+JerkOff.Position = UDim2.new(0.0216246042, 0, 0.885673523, 0)
+JerkOff.Size = UDim2.new(0, 97, 0, 38)
 JerkOff.Font = Enum.Font.SourceSans
 JerkOff.Text = "Jerk Off"
 JerkOff.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -228,8 +132,8 @@ Rape.Name = "Rape"
 Rape.Parent = Frame
 Rape.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 Rape.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Rape.Position = UDim2.new(0.0153939938, 0, 0.789393425, 0)
-Rape.Size = UDim2.new(0, 98, 0, 38)
+Rape.Position = UDim2.new(0.0216245092, 0, 0.789393425, 0)
+Rape.Size = UDim2.new(0, 97, 0, 38)
 Rape.Font = Enum.Font.SourceSans
 Rape.Text = "KON Fling"
 Rape.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -252,7 +156,7 @@ NoclipButton.Name = "NoclipButton"
 NoclipButton.Parent = Frame
 NoclipButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 NoclipButton.BorderColor3 = Color3.fromRGB(192, 0, 226)
-NoclipButton.Position = UDim2.new(0.344800144, 0, 0.79049021, 0)
+NoclipButton.Position = UDim2.new(0.347915411, 0, 0.788302004, 0)
 NoclipButton.Size = UDim2.new(0, 97, 0, 38)
 NoclipButton.Font = Enum.Font.SourceSans
 NoclipButton.Text = "KON noclip (Enable)"
@@ -264,7 +168,7 @@ arseKON.Name = "arseKON"
 arseKON.Parent = Frame
 arseKON.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 arseKON.BorderColor3 = Color3.fromRGB(255, 42, 0)
-arseKON.Position = UDim2.new(0.674107015, 0, 0.887609422, 0)
+arseKON.Position = UDim2.new(0.677222311, 0, 0.887609422, 0)
 arseKON.Size = UDim2.new(0, 97, 0, 38)
 arseKON.Font = Enum.Font.SourceSans
 arseKON.Text = "KON silent aim"
@@ -350,8 +254,8 @@ HomoESP.Name = "HomoESP"
 HomoESP.Parent = Frame
 HomoESP.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 HomoESP.BorderColor3 = Color3.fromRGB(30, 0, 255)
-HomoESP.Position = UDim2.new(0.674107015, 0, 0.789393425, 0)
-HomoESP.Size = UDim2.new(0, 98, 0, 38)
+HomoESP.Position = UDim2.new(0.677222311, 0, 0.789393425, 0)
+HomoESP.Size = UDim2.new(0, 97, 0, 38)
 HomoESP.Font = Enum.Font.SourceSans
 HomoESP.Text = "Homosexual ESP (Enable)"
 HomoESP.TextColor3 = Color3.fromRGB(0, 226, 45)
@@ -370,42 +274,6 @@ DONT.TextColor3 = Color3.fromRGB(226, 0, 4)
 DONT.TextSize = 22.000
 DONT.TextWrapped = true
 
-Twerkr15.Name = "Twerkr15"
-Twerkr15.Parent = Frame
-Twerkr15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Twerkr15.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Twerkr15.Position = UDim2.new(0.012229437, 0, 0.480859548, 0)
-Twerkr15.Size = UDim2.new(0, 98, 0, 38)
-Twerkr15.Font = Enum.Font.SourceSans
-Twerkr15.Text = "Twerk (R15)"
-Twerkr15.TextColor3 = Color3.fromRGB(0, 226, 45)
-Twerkr15.TextSize = 14.000
-Twerkr15.TextWrapped = true
-
-Soon.Name = "Soon"
-Soon.Parent = Frame
-Soon.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Soon.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Soon.Position = UDim2.new(0.344507903, 0, 0.480859548, 0)
-Soon.Size = UDim2.new(0, 98, 0, 38)
-Soon.Font = Enum.Font.SourceSans
-Soon.Text = "Coming soon"
-Soon.TextColor3 = Color3.fromRGB(0, 226, 45)
-Soon.TextSize = 14.000
-Soon.TextWrapped = true
-
-Soon2.Name = "Soon2"
-Soon2.Parent = Frame
-Soon2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Soon2.BorderColor3 = Color3.fromRGB(226, 0, 4)
-Soon2.Position = UDim2.new(0.679879844, 0, 0.480859548, 0)
-Soon2.Size = UDim2.new(0, 96, 0, 38)
-Soon2.Font = Enum.Font.SourceSans
-Soon2.Text = "Coming soon"
-Soon2.TextColor3 = Color3.fromRGB(0, 226, 45)
-Soon2.TextSize = 14.000
-Soon2.TextWrapped = true
-
 TheKON.Name = "TheKON"
 TheKON.Parent = Frame
 TheKON.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -416,9 +284,45 @@ TheKON.Position = UDim2.new(0.280373842, 0, 0.260393888, 0)
 TheKON.Size = UDim2.new(0, 136, 0, 100)
 TheKON.Image = "rbxassetid://125098713867955"
 
+NIGGER.Name = "NIGGER"
+NIGGER.Parent = Frame
+NIGGER.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+NIGGER.BorderColor3 = Color3.fromRGB(226, 0, 4)
+NIGGER.Position = UDim2.new(0.346546412, 0, 0.478671342, 0)
+NIGGER.Size = UDim2.new(0, 97, 0, 38)
+NIGGER.Font = Enum.Font.SourceSans
+NIGGER.Text = "Coming soon"
+NIGGER.TextColor3 = Color3.fromRGB(0, 226, 45)
+NIGGER.TextSize = 14.000
+NIGGER.TextWrapped = true
+
+Twerkr.Name = "Twerkr"
+Twerkr.Parent = Frame
+Twerkr.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Twerkr.BorderColor3 = Color3.fromRGB(226, 0, 4)
+Twerkr.Position = UDim2.new(0.0215752628, 0, 0.478671342, 0)
+Twerkr.Size = UDim2.new(0, 97, 0, 38)
+Twerkr.Font = Enum.Font.SourceSans
+Twerkr.Text = "Twerk (R15)"
+Twerkr.TextColor3 = Color3.fromRGB(0, 226, 45)
+Twerkr.TextSize = 14.000
+Twerkr.TextWrapped = true
+
+Soon.Name = "Soon"
+Soon.Parent = Frame
+Soon.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Soon.BorderColor3 = Color3.fromRGB(226, 0, 4)
+Soon.Position = UDim2.new(0.67472595, 0, 0.478671342, 0)
+Soon.Size = UDim2.new(0, 97, 0, 38)
+Soon.Font = Enum.Font.SourceSans
+Soon.Text = "Coming soon"
+Soon.TextColor3 = Color3.fromRGB(0, 226, 45)
+Soon.TextSize = 14.000
+Soon.TextWrapped = true
+
 -- Scripts:
 
-local function TXVYBTO_fake_script() -- Infjump.LocalScript 
+local function JINWA_fake_script() -- Infjump.LocalScript 
 	local script = Instance.new('LocalScript', Infjump)
 
 	
@@ -450,14 +354,14 @@ local function TXVYBTO_fake_script() -- Infjump.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TXVYBTO_fake_script)()
-local function LHKF_fake_script() -- Infjump.RainbowFrame 
+coroutine.wrap(JINWA_fake_script)()
+local function HYYXAVW_fake_script() -- Infjump.RainbowFrame 
 	local script = Instance.new('LocalScript', Infjump)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = Infjump
 	
 	local hue = 0
 	
@@ -468,8 +372,8 @@ local function LHKF_fake_script() -- Infjump.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(LHKF_fake_script)()
-local function MQAYTB_fake_script() -- Infjump.ToggleInfJumpButtonText 
+coroutine.wrap(HYYXAVW_fake_script)()
+local function XKMN_fake_script() -- Infjump.ToggleInfJumpButtonText 
 	local script = Instance.new('LocalScript', Infjump)
 
 	local button = script.Parent
@@ -489,8 +393,8 @@ local function MQAYTB_fake_script() -- Infjump.ToggleInfJumpButtonText
 	
 	
 end
-coroutine.wrap(MQAYTB_fake_script)()
-local function QYPIGM_fake_script() -- Aimbot.KONAIMBOT (legacy) 
+coroutine.wrap(XKMN_fake_script)()
+local function SBZZ_fake_script() -- Aimbot.KONAIMBOT (legacy) 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	-- Scripted by SirWaffles
@@ -767,14 +671,14 @@ local function QYPIGM_fake_script() -- Aimbot.KONAIMBOT (legacy)
 	end)
 	
 end
-coroutine.wrap(QYPIGM_fake_script)()
-local function GTJPQZ_fake_script() -- Aimbot.RainbowFrame 
+coroutine.wrap(SBZZ_fake_script)()
+local function AHYIKAV_fake_script() -- Aimbot.RainbowFrame 
 	local script = Instance.new('LocalScript', Aimbot)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = Aimbot
 	
 	local hue = 0
 	
@@ -785,23 +689,22 @@ local function GTJPQZ_fake_script() -- Aimbot.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(GTJPQZ_fake_script)()
-local function NZKV_fake_script() -- InfYield.LocalScript 
+coroutine.wrap(AHYIKAV_fake_script)()
+local function WMNKRV_fake_script() -- InfYield.LocalScript 
 	local script = Instance.new('LocalScript', InfYield)
 
 	InfYield.MouseButton1Click:Connect(function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end)
 end
-coroutine.wrap(NZKV_fake_script)()
-local function WYTUYI_fake_script() -- InfYield.RainbowFrame 
+coroutine.wrap(WMNKRV_fake_script)()
+local function MUAGYY_fake_script() -- InfYield.RainbowFrame 
 	local script = Instance.new('LocalScript', InfYield)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
-	
+	local TargetFrame = InfYield
 	local hue = 0
 	
 	RunService.RenderStepped:Connect(function()
@@ -811,22 +714,22 @@ local function WYTUYI_fake_script() -- InfYield.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(WYTUYI_fake_script)()
-local function QHUVR_fake_script() -- Fling.LocalScript 
+coroutine.wrap(MUAGYY_fake_script)()
+local function GPYDWFS_fake_script() -- Fling.LocalScript 
 	local script = Instance.new('LocalScript', Fling)
 
 	Fling.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/m2ku2f1V	"), true)()
 	end)
 end
-coroutine.wrap(QHUVR_fake_script)()
-local function PXGI_fake_script() -- Fling.RainbowFrame 
+coroutine.wrap(GPYDWFS_fake_script)()
+local function HZBWDR_fake_script() -- Fling.RainbowFrame 
 	local script = Instance.new('LocalScript', Fling)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = Fling
 	
 	local hue = 0
 	
@@ -837,8 +740,8 @@ local function PXGI_fake_script() -- Fling.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(PXGI_fake_script)()
-local function VKAI_fake_script() -- Fly.LocalScript 
+coroutine.wrap(HZBWDR_fake_script)()
+local function WFVMSQ_fake_script() -- Fly.LocalScript 
 	local script = Instance.new('LocalScript', Fly)
 
 	Fly.MouseButton1Down:connect(function()
@@ -1342,14 +1245,14 @@ local function VKAI_fake_script() -- Fly.LocalScript
 		end)
 	end)
 end
-coroutine.wrap(VKAI_fake_script)()
-local function YDKE_fake_script() -- Fly.RainbowFrame 
+coroutine.wrap(WFVMSQ_fake_script)()
+local function VBEWT_fake_script() -- Fly.RainbowFrame 
 	local script = Instance.new('LocalScript', Fly)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = Fly
 	
 	local hue = 0
 	
@@ -1360,22 +1263,22 @@ local function YDKE_fake_script() -- Fly.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(YDKE_fake_script)()
-local function VBUV_fake_script() -- Gun.LocalScript 
+coroutine.wrap(VBEWT_fake_script)()
+local function XYPAQT_fake_script() -- Gun.LocalScript 
 	local script = Instance.new('LocalScript', Gun)
 
 	Gun.MouseButton1Down:connect(function()
 		loadstring(game:HttpGet("https://pastebin.com/raw/24Nz4phE"), true)()
 	end)
 end
-coroutine.wrap(VBUV_fake_script)()
-local function BLXCV_fake_script() -- Gun.RainbowFrame 
+coroutine.wrap(XYPAQT_fake_script)()
+local function KLQLB_fake_script() -- Gun.RainbowFrame 
 	local script = Instance.new('LocalScript', Gun)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = Gun
 	
 	local hue = 0
 	
@@ -1386,8 +1289,8 @@ local function BLXCV_fake_script() -- Gun.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(BLXCV_fake_script)()
-local function BEIKO_fake_script() -- JerkOff.LocalScript 
+coroutine.wrap(KLQLB_fake_script)()
+local function WHPQ_fake_script() -- JerkOff.LocalScript 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	JerkOff.MouseButton1Down:connect(function()
@@ -1400,14 +1303,14 @@ local function BEIKO_fake_script() -- JerkOff.LocalScript
 	
 	
 end
-coroutine.wrap(BEIKO_fake_script)()
-local function PQNFG_fake_script() -- JerkOff.RainbowFrame 
+coroutine.wrap(WHPQ_fake_script)()
+local function QPHRGP_fake_script() -- JerkOff.RainbowFrame 
 	local script = Instance.new('LocalScript', JerkOff)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = JerkOff
 	
 	local hue = 0
 	
@@ -1418,8 +1321,8 @@ local function PQNFG_fake_script() -- JerkOff.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(PQNFG_fake_script)()
-local function SSKLKB_fake_script() -- Rape.RainbowFrame 
+coroutine.wrap(QPHRGP_fake_script)()
+local function ZCIPFK_fake_script() -- Rape.RainbowFrame 
 	local script = Instance.new('LocalScript', Rape)
 
 	local RunService = game:GetService("RunService")
@@ -1436,14 +1339,14 @@ local function SSKLKB_fake_script() -- Rape.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(SSKLKB_fake_script)()
-local function AXBPLI_fake_script() -- AFKanti.RainbowFrame 
+coroutine.wrap(ZCIPFK_fake_script)()
+local function GXQFXV_fake_script() -- AFKanti.RainbowFrame 
 	local script = Instance.new('LocalScript', AFKanti)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = AFKanti
 	
 	local hue = 0
 	
@@ -1454,8 +1357,8 @@ local function AXBPLI_fake_script() -- AFKanti.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(AXBPLI_fake_script)()
-local function QHYNS_fake_script() -- AFKanti.TEXTchange 
+coroutine.wrap(GXQFXV_fake_script)()
+local function TRABLTT_fake_script() -- AFKanti.TEXTchange 
 	local script = Instance.new('LocalScript', AFKanti)
 
 	local button = script.Parent
@@ -1474,8 +1377,8 @@ local function QHYNS_fake_script() -- AFKanti.TEXTchange
 	
 	
 end
-coroutine.wrap(QHYNS_fake_script)()
-local function RVKU_fake_script() -- AFKanti.AntiAFK 
+coroutine.wrap(TRABLTT_fake_script)()
+local function MBPD_fake_script() -- AFKanti.AntiAFK 
 	local script = Instance.new('LocalScript', AFKanti)
 
 	local Players = game:GetService("Players")
@@ -1512,8 +1415,8 @@ local function RVKU_fake_script() -- AFKanti.AntiAFK
 	
 	
 end
-coroutine.wrap(RVKU_fake_script)()
-local function TIGSHNS_fake_script() -- NoclipButton.LocalScript 
+coroutine.wrap(MBPD_fake_script)()
+local function YATGM_fake_script() -- NoclipButton.LocalScript 
 	local script = Instance.new('LocalScript', NoclipButton)
 
 	local button = script.Parent
@@ -1578,14 +1481,14 @@ local function TIGSHNS_fake_script() -- NoclipButton.LocalScript
 	
 	
 end
-coroutine.wrap(TIGSHNS_fake_script)()
-local function TIHO_fake_script() -- NoclipButton.RainbowFrame 
+coroutine.wrap(YATGM_fake_script)()
+local function XYVQFZ_fake_script() -- NoclipButton.RainbowFrame 
 	local script = Instance.new('LocalScript', NoclipButton)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = NoclipButton
 	
 	local hue = 0
 	
@@ -1596,8 +1499,8 @@ local function TIHO_fake_script() -- NoclipButton.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(TIHO_fake_script)()
-local function BCLLD_fake_script() -- arseKON.LocalScript 
+coroutine.wrap(XYVQFZ_fake_script)()
+local function UTHGP_fake_script() -- arseKON.LocalScript 
 	local script = Instance.new('LocalScript', arseKON)
 
 	arseKON.MouseButton1Click:Connect(function()
@@ -1843,8 +1746,8 @@ local function BCLLD_fake_script() -- arseKON.LocalScript
 	
 	end)
 end
-coroutine.wrap(BCLLD_fake_script)()
-local function NGPJG_fake_script() -- arseKON.RainbowFrame 
+coroutine.wrap(UTHGP_fake_script)()
+local function RXKFHM_fake_script() -- arseKON.RainbowFrame 
 	local script = Instance.new('LocalScript', arseKON)
 
 	local RunService = game:GetService("RunService")
@@ -1861,8 +1764,8 @@ local function NGPJG_fake_script() -- arseKON.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(NGPJG_fake_script)()
-local function LHOHNEG_fake_script() -- PressKToHide.LocalScript 
+coroutine.wrap(RXKFHM_fake_script)()
+local function DQXC_fake_script() -- PressKToHide.LocalScript 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local textLabel = PressKToHide
@@ -1879,8 +1782,8 @@ local function LHOHNEG_fake_script() -- PressKToHide.LocalScript
 	
 	
 end
-coroutine.wrap(LHOHNEG_fake_script)()
-local function OHLHWZS_fake_script() -- PressKToHide.RainbowFrame 
+coroutine.wrap(DQXC_fake_script)()
+local function BHZUYUH_fake_script() -- PressKToHide.RainbowFrame 
 	local script = Instance.new('LocalScript', PressKToHide)
 
 	local RunService = game:GetService("RunService")
@@ -1897,8 +1800,8 @@ local function OHLHWZS_fake_script() -- PressKToHide.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(OHLHWZS_fake_script)()
-local function DYCQQEE_fake_script() -- Madeby.RainbowFrame 
+coroutine.wrap(BHZUYUH_fake_script)()
+local function EQNPX_fake_script() -- Madeby.RainbowFrame 
 	local script = Instance.new('LocalScript', Madeby)
 
 	local RunService = game:GetService("RunService")
@@ -1915,16 +1818,16 @@ local function DYCQQEE_fake_script() -- Madeby.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(DYCQQEE_fake_script)()
-local function UJTGF_fake_script() -- Secret.LocalScript 
+coroutine.wrap(EQNPX_fake_script)()
+local function TXPQ_fake_script() -- Secret.LocalScript 
 	local script = Instance.new('LocalScript', Secret)
 
 	Secret.MouseButton1Click:Connect(function()
 		game.Players.LocalPlayer:Kick("User has used the KON emergency exit")
 	end)
 end
-coroutine.wrap(UJTGF_fake_script)()
-local function MYVXZE_fake_script() -- HomoESP.KON esp test 
+coroutine.wrap(TXPQ_fake_script)()
+local function NUMYO_fake_script() -- HomoESP.KON esp test 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local Players = game:GetService("Players")
@@ -2226,14 +2129,14 @@ local function MYVXZE_fake_script() -- HomoESP.KON esp test
 	
 	
 end
-coroutine.wrap(MYVXZE_fake_script)()
-local function OIJS_fake_script() -- HomoESP.RainbowFrame 
+coroutine.wrap(NUMYO_fake_script)()
+local function TCRAT_fake_script() -- HomoESP.RainbowFrame 
 	local script = Instance.new('LocalScript', HomoESP)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = HomoESP
 	
 	local hue = 0
 	
@@ -2244,8 +2147,8 @@ local function OIJS_fake_script() -- HomoESP.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(OIJS_fake_script)()
-local function HWCIY_fake_script() -- Frame.ToggleGuiWithK 
+coroutine.wrap(TCRAT_fake_script)()
+local function SGHL_fake_script() -- Frame.ToggleGuiWithK 
 	local script = Instance.new('LocalScript', Frame)
 
 	local UserInputService = game:GetService("UserInputService")
@@ -2264,14 +2167,14 @@ local function HWCIY_fake_script() -- Frame.ToggleGuiWithK
 	
 	
 end
-coroutine.wrap(HWCIY_fake_script)()
-local function XCCOCD_fake_script() -- DONT.RainbowFrame 
+coroutine.wrap(SGHL_fake_script)()
+local function DXRURG_fake_script() -- DONT.RainbowFrame 
 	local script = Instance.new('LocalScript', DONT)
 
 	local RunService = game:GetService("RunService")
 	
 	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
+	local TargetFrame = DONT
 	
 	local hue = 0
 	
@@ -2283,8 +2186,8 @@ local function XCCOCD_fake_script() -- DONT.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(XCCOCD_fake_script)()
-local function ESYN_fake_script() -- DONT.monkey 
+coroutine.wrap(DXRURG_fake_script)()
+local function WFRDJL_fake_script() -- DONT.monkey 
 	local script = Instance.new('LocalScript', DONT)
 
 	local button = script.Parent
@@ -2345,8 +2248,8 @@ local function ESYN_fake_script() -- DONT.monkey
 	
 	
 end
-coroutine.wrap(ESYN_fake_script)()
-local function SIXGL_fake_script() -- DONT.LocalScript 
+coroutine.wrap(WFRDJL_fake_script)()
+local function XCDNA_fake_script() -- DONT.LocalScript 
 	local script = Instance.new('LocalScript', DONT)
 
 	local button = script.Parent
@@ -2372,8 +2275,8 @@ local function SIXGL_fake_script() -- DONT.LocalScript
 	
 	
 end
-coroutine.wrap(SIXGL_fake_script)()
-local function OKBX_fake_script() -- DONT.kick 
+coroutine.wrap(XCDNA_fake_script)()
+local function QNSCMNC_fake_script() -- DONT.kick 
 	local script = Instance.new('LocalScript', DONT)
 
 	Secret.MouseButton1Click:Connect(function()
@@ -2381,106 +2284,8 @@ local function OKBX_fake_script() -- DONT.kick
 		game.Players.LocalPlayer:Kick("listen to me next time")
 	end)
 end
-coroutine.wrap(OKBX_fake_script)()
-local function LLKJOL_fake_script() -- Twerkr15.LocalScript 
-	local script = Instance.new('LocalScript', Twerkr15)
-
-	Fling.MouseButton1Down:connect(function()
-		loadstring(game:HttpGet("https://pastebin.com/raw/88ngjvrb"))();
-	end)
-end
-coroutine.wrap(LLKJOL_fake_script)()
-local function OGON_fake_script() -- Twerkr15.RainbowFrame 
-	local script = Instance.new('LocalScript', Twerkr15)
-
-	local RunService = game:GetService("RunService")
-	
-	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
-	
-	local hue = 0
-	
-	RunService.RenderStepped:Connect(function()
-		hue = (hue + 0.002) % 1
-		local rainbowColor = Color3.fromHSV(hue, 1, 1)
-		TargetFrame.TextColor3 = rainbowColor
-	end)
-	
-end
-coroutine.wrap(OGON_fake_script)()
-local function IILI_fake_script() -- Soon.LocalScript 
-	local script = Instance.new('LocalScript', Soon)
-
-	local nigga = script.Parent
-	nigga.MouseButton1Down then 
-		print("Not available yet. sorry")
-	end
-end
-coroutine.wrap(IILI_fake_script)()
-local function BBRMZH_fake_script() -- Soon.RainbowFrame 
-	local script = Instance.new('LocalScript', Soon)
-
-	local RunService = game:GetService("RunService")
-	
-	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
-	
-	local hue = 0
-	
-	RunService.RenderStepped:Connect(function()
-		hue = (hue + 0.002) % 1
-		local rainbowColor = Color3.fromHSV(hue, 1, 1)
-		TargetFrame.TextColor3 = rainbowColor
-	end)
-	
-end
-coroutine.wrap(BBRMZH_fake_script)()
-local function QILKODO_fake_script() -- Soon2.LocalScript 
-	local script = Instance.new('LocalScript', Soon2)
-
-	local nigga = script.Parent
-	nigga.MouseButton1Down then 
-		print("Not available yet. sorry")
-	end
-end
-coroutine.wrap(QILKODO_fake_script)()
-local function KRSICQB_fake_script() -- Soon2.RainbowFrame 
-	local script = Instance.new('LocalScript', Soon2)
-
-	local RunService = game:GetService("RunService")
-	
-	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
-	
-	local hue = 0
-	
-	RunService.RenderStepped:Connect(function()
-		hue = (hue + 0.002) % 1
-		local rainbowColor = Color3.fromHSV(hue, 1, 1)
-		TargetFrame.TextColor3 = rainbowColor
-	end)
-	
-end
-coroutine.wrap(KRSICQB_fake_script)()
-local function ZIMTPU_fake_script() -- Frame.RainbowFrame 
-	local script = Instance.new('LocalScript', Frame)
-
-	local RunService = game:GetService("RunService")
-	
-	-- Change this to the frame you want to rainbow-ify
-	local TargetFrame = script.Parent
-	
-	local hue = 0
-	
-	RunService.RenderStepped:Connect(function()
-		hue = (hue + 0.006) % 1
-		local rainbowColor = Color3.fromHSV(hue, 1, 1)
-		TargetFrame.BorderColor3 = rainbowColor
-	end)
-	
-end
-coroutine.wrap(ZIMTPU_fake_script)()
-local function STCE_fake_script() -- TheKON.RainbowFrame 
+coroutine.wrap(QNSCMNC_fake_script)()
+local function DTEBN_fake_script() -- TheKON.RainbowFrame 
 	local script = Instance.new('LocalScript', TheKON)
 
 	local RunService = game:GetService("RunService")
@@ -2497,4 +2302,180 @@ local function STCE_fake_script() -- TheKON.RainbowFrame
 	end)
 	
 end
-coroutine.wrap(STCE_fake_script)()
+coroutine.wrap(DTEBN_fake_script)()
+local function KYPF_fake_script() -- Frame.RainbowFrame 
+	local script = Instance.new('LocalScript', Frame)
+
+	local RunService = game:GetService("RunService")
+	
+	-- Change this to the frame you want to rainbow-ify
+	local TargetFrame = Frame
+	
+	local hue = 0
+	
+	RunService.RenderStepped:Connect(function()
+		hue = (hue + 0.006) % 1
+		local rainbowColor = Color3.fromHSV(hue, 1, 1)
+		TargetFrame.BorderColor3 = rainbowColor
+	end)
+	
+end
+coroutine.wrap(KYPF_fake_script)()
+local function VQSTEJF_fake_script() -- NIGGER.RainbowFrame 
+	local script = Instance.new('LocalScript', NIGGER)
+
+	local RunService = game:GetService("RunService")
+	
+	-- Change this to the frame you want to rainbow-ify
+	local TargetFrame = script.Parent
+	
+	local hue = 0
+	
+	RunService.RenderStepped:Connect(function()
+		hue = (hue + 0.002) % 1
+		local rainbowColor = Color3.fromHSV(hue, 1, 1)
+		TargetFrame.TextColor3 = rainbowColor
+	end)
+	
+end
+coroutine.wrap(VQSTEJF_fake_script)()
+local function UBLKUA_fake_script() -- Twerkr.LocalScript 
+	local script = Instance.new('LocalScript', Twerkr)
+
+	Fling.MouseButton1Down:connect(function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/88ngjvrb"))();
+	end)
+end
+coroutine.wrap(UBLKUA_fake_script)()
+local function UKAJYYI_fake_script() -- Twerkr.RainbowFrame 
+	local script = Instance.new('LocalScript', Twerkr)
+
+	local RunService = game:GetService("RunService")
+	
+	-- Change this to the frame you want to rainbow-ify
+	local TargetFrame = script.Parent
+	
+	local hue = 0
+	
+	RunService.RenderStepped:Connect(function()
+		hue = (hue + 0.002) % 1
+		local rainbowColor = Color3.fromHSV(hue, 1, 1)
+		TargetFrame.TextColor3 = rainbowColor
+	end)
+	
+end
+coroutine.wrap(UKAJYYI_fake_script)()
+local function PQPDG_fake_script() -- Soon.RainbowFrame 
+	local script = Instance.new('LocalScript', Soon)
+
+	local RunService = game:GetService("RunService")
+	
+	-- Change this to the frame you want to rainbow-ify
+	local TargetFrame = script.Parent
+	
+	local hue = 0
+	
+	RunService.RenderStepped:Connect(function()
+		hue = (hue + 0.002) % 1
+		local rainbowColor = Color3.fromHSV(hue, 1, 1)
+		TargetFrame.TextColor3 = rainbowColor
+	end)
+	
+end
+coroutine.wrap(PQPDG_fake_script)()
+local function LMKNOQ_fake_script() -- Frame.Dragging 
+	local script = Instance.new('LocalScript', Frame)
+
+	local UserInputService = game:GetService('UserInputService')
+	
+	local frame = Frame
+	
+	local leadFrame = Instance.new('Frame') do
+		leadFrame.AnchorPoint = frame.AnchorPoint
+		leadFrame.Position = frame.Position
+		leadFrame.Size = frame.Size
+		leadFrame.Name = `Lead {frame.Name}`
+		leadFrame.Visible = false
+		leadFrame.Parent = frame.Parent
+	end
+	
+	local screenGui = frame:FindFirstAncestorOfClass('ScreenGui')
+	
+	local inputChanged = nil
+	local inputEnded = nil
+	
+	local function getBoundsRelations(guiObject : GuiObject)
+		local bounds = screenGui.AbsoluteSize
+		local topLeft = screenGui.IgnoreGuiInset and guiObject.AbsolutePosition + Vector2.new(0, 36) or guiObject.AbsolutePosition
+		local bottomRight = topLeft + guiObject.AbsoluteSize
+	
+		local boundRelations = {
+			Top = topLeft.Y < 0 and math.abs(topLeft.Y) or nil,
+			Left = topLeft.X < 0 and math.abs(topLeft.X) or nil,
+			Right = bottomRight.X > bounds.X and math.abs(bottomRight.X - bounds.X) or nil,
+			Bottom = bottomRight.Y > bounds.Y and math.abs(bottomRight.Y - bounds.Y) or nil,
+		}
+	
+		return (not boundRelations.Top
+			and not boundRelations.Bottom
+			and not boundRelations.Left
+			and not boundRelations.Right), boundRelations
+	end
+	
+	frame.InputBegan:Connect(function(inputObject : InputObject)
+		if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
+	
+			local lastMousePosition = UserInputService:GetMouseLocation()
+			local goalPosition = frame.Position
+	
+			inputChanged = UserInputService.InputChanged:Connect(function(input : InputObject, event : boolean)
+				if input.UserInputType == Enum.UserInputType.MouseMovement then
+					local currentMousePosition = UserInputService:GetMouseLocation()
+					local mouseDelta = currentMousePosition - lastMousePosition
+	
+					goalPosition += UDim2.fromOffset(mouseDelta.X, mouseDelta.Y)
+	
+					leadFrame.Position = goalPosition
+	
+					local isInBounds, relations = getBoundsRelations(leadFrame)
+	
+					if not isInBounds then
+						local x = (relations.Left or 0) - (relations.Right or 0)
+						local y = (relations.Top or 0) - (relations.Bottom or 0)
+	
+						goalPosition += UDim2.fromOffset(x, y)
+					end
+	
+					frame.Position = goalPosition
+					lastMousePosition = currentMousePosition
+				end
+			end)
+	
+			inputEnded = frame.InputEnded:Connect(function(input : InputObject)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 then
+					inputChanged:Disconnect()
+					inputChanged = nil
+	
+					inputEnded:Disconnect()
+					inputEnded = nil
+				end
+			end)
+		end
+	end)
+	
+	frame.Destroying:Once(function()
+	
+		leadFrame = leadFrame:Destroy()
+	
+		if inputChanged  then
+			inputChanged:Disconnect()
+			inputChanged = nil
+		end
+	
+		if inputEnded then
+			inputEnded:Disconnect()
+			inputEnded = nil
+		end
+	end)
+end
+coroutine.wrap(LMKNOQ_fake_script)()
