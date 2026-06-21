@@ -291,7 +291,7 @@ NIGGER.BorderColor3 = Color3.fromRGB(226, 0, 4)
 NIGGER.Position = UDim2.new(0.346546412, 0, 0.478671342, 0)
 NIGGER.Size = UDim2.new(0, 97, 0, 38)
 NIGGER.Font = Enum.Font.SourceSans
-NIGGER.Text = "Spin Bot (OFF)"
+NIGGER.Text = "Spintbot! (disabled)"
 NIGGER.TextColor3 = Color3.fromRGB(0, 226, 45)
 NIGGER.TextSize = 14.000
 NIGGER.TextWrapped = true
@@ -2364,6 +2364,67 @@ local function IIPKR_fake_script() -- Frame.RainbowFrame
 	end)
 	
 end
+local function NIGGER_fake_script() -- NIGGER.LocalScript
+	local script = Instance.new('LocalScript', NIGGER)
+
+	local Players = game:GetService("Players")
+	local RunService = game:GetService("RunService")
+	local UserInputService = game:GetService("UserInputService")
+
+	local player = Players.LocalPlayer
+	local spinSpeed = 50
+
+	local spinningEnabled = false
+	local enabled = true
+	local spinningConnection
+
+	UserInputService.InputBegan:Connect(function(input)
+		if input.KeyCode == Enum.KeyCode.RightShift then
+			enabled = not enabled
+		end
+	end)
+
+	local function getRoot()
+		local char = player.Character
+		if char then
+			return char:FindFirstChild("HumanoidRootPart")
+		end
+		return nil
+	end
+
+	local function updateButton()
+		if spinningEnabled then
+			script.Parent.Text = "Spinbot! (Disabled)"
+		else
+			script.Parent.Text = "Spinbot! (Enabled)"
+		end
+	end
+
+	script.Parent.MouseButton1Click:Connect(function()
+		spinningEnabled = not spinningEnabled
+		updateButton()
+
+		if spinningEnabled then
+			spinningConnection = RunService.Heartbeat:Connect(function(dt)
+				if not enabled then return end
+
+				local root = getRoot()
+				if root and root.Parent then
+					local rotation = CFrame.Angles(0, math.rad(spinSpeed * dt * 60), 0)
+					root.CFrame = root.CFrame * rotation
+				end
+			end)
+		else
+			if spinningConnection then
+				spinningConnection:Disconnect()
+				spinningConnection = nil
+			end
+		end
+	end)
+
+	updateButton()
+end
+coroutine.wrap(NIGGER_fake_script)()
 coroutine.wrap(IIPKR_fake_script)()
 local function ENCZ_fake_script() -- NIGGER.RainbowFrame 
 	local script = Instance.new('LocalScript', NIGGER)
